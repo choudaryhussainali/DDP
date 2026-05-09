@@ -759,7 +759,7 @@ nav.scrolled {
   /* CRITICAL: Invisible padding forces the browser's bounding box to expand, 
      giving the serif flourishes on the '3' room to fully render without getting sliced. */
   padding-right: 24px; 
-  padding-bottom: 10px; 
+  padding-bottom: 30px; 
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   will-change: transform;
 }
@@ -773,7 +773,7 @@ nav.scrolled {
   /* Elevates beautifully without hitting the bottom bound */
   transform: translateY(-8px) scale(1.02); 
   transform-origin: left bottom;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 }
 /* Typography Illumination */
 .fw-title {
