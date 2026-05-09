@@ -1026,19 +1026,22 @@ nav.scrolled {
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  padding: 22px 56px; /* Generous padding for a commanding, substantial feel */
+  padding: 22px 56px; 
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
-  color: #000000; /* Pure black text for maximum luxury contrast */
-  font-family: 'Syne', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 800;
+  color: #000000; 
+  
+  /* --- Typography Upgrade for Readability --- */
+  font-family: 'DM Sans', sans-serif; /* Clean, modern, highly legible */
+  font-size: 0.95rem; /* Increased slightly for clear reading */
+  font-weight: 700; /* Dropped from 800 so the ink doesn't bleed together */
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  border-radius: 100px; /* Flawless pill shape */
+  letter-spacing: 0.08em; /* Tightened from 0.15em for a smoother read */
+  
+  border-radius: 100px; 
   text-decoration: none;
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  box-shadow: 0 10px 30px -10px rgba(201, 168, 76, 0.4); /* Ambient gold glow */
+  box-shadow: 0 10px 30px -10px rgba(201, 168, 76, 0.4); 
 }
 
 /* The Internal Cinematic Light Sweep */
