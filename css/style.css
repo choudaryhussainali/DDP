@@ -652,11 +652,61 @@ nav.scrolled {
 }
 .fw-card {
   background: var(--bg3);
-  padding: 56px 40px;
   position: relative;
   transition: background 0.5s ease;
   cursor: default;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   FRAMEWORK VISUAL ARCHITECTURE (CINEMATIC IMAGE INTEGRATION)
+============================================================ */
+.fw-visual {
+  position: relative;
+  width: 100%;
+  height: 240px; /* Perfectly calculated proportion for the card */
+  overflow: hidden;
+}
+
+.fw-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Muted, dark, desaturated base state for ultra-premium feel */
+  filter: grayscale(100%) brightness(0.4) contrast(1.2); 
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform, filter;
+}
+
+/* The magic gradient that blends the image seamlessly into the black card */
+.fw-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(17,17,17,0) 0%, var(--bg3) 95%, var(--bg3) 100%);
+  z-index: 1;
+  transition: background 0.5s ease;
+}
+
+/* When the card is hovered, the gradient adjusts to match the lighter surface color */
+.fw-card:hover .fw-visual-overlay {
+  background: linear-gradient(to bottom, rgba(22,22,22,0) 0%, var(--surface) 95%, var(--surface) 100%);
+}
+
+.fw-body {
+  padding: 0 40px 56px 40px;
+  position: relative;
+  z-index: 2;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The Premium Hover Reveal */
+.fw-card:hover .fw-img {
+  transform: scale(1.08); /* Slow cinematic zoom */
+  filter: grayscale(20%) brightness(0.7) contrast(1.1); /* Color bleeds back in */
 }
 /* Internal Spotlight Effect */
 .fw-card::before {
@@ -689,26 +739,42 @@ nav.scrolled {
 }
 
 /* The Number: Hollow to Liquid Gold */
+/* The Number: Hollow to Liquid Gold */
+/* ============================================================
+   FRAMEWORK NUMBERS (ANTI-CLIPPING FIX)
+============================================================ */
 .fw-num {
+  position: absolute;
+  /* We shift the bottom down to absorb the invisible padding */
+  bottom: -10px; 
+  left: 40px;
+  z-index: 2; 
   font-family: 'Playfair Display', serif;
-  font-size: 5.5rem; font-weight: 900;
+  font-size: 5.5rem; 
+  font-weight: 900;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(201,168,76,0.25);
-  line-height: 1; margin-bottom: 28px;
+  -webkit-text-stroke: 1px rgba(201,168,76,0.35); 
+  line-height: 0.8; 
+  margin: 0; 
+  /* CRITICAL: Invisible padding forces the browser's bounding box to expand, 
+     giving the serif flourishes on the '3' room to fully render without getting sliced. */
+  padding-right: 24px; 
+  padding-bottom: 10px; 
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   will-change: transform;
 }
+
 .fw-card:hover .fw-num {
   -webkit-text-stroke-color: transparent;
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
   -webkit-background-clip: text;
-  background-clip: text; /* This line fixes the yellow warning */
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  transform: translateY(-8px) scale(1.02);
+  /* Elevates beautifully without hitting the bottom bound */
+  transform: translateY(-8px) scale(1.02); 
   transform-origin: left bottom;
-  padding-bottom: 6px; /* Prevents the hover transform from clipping the bottom */
+  padding-bottom: 20px;
 }
-
 /* Typography Illumination */
 .fw-title {
   font-family: 'Syne', sans-serif;
@@ -765,24 +831,30 @@ nav.scrolled {
    SERVICES
 ============================================================ */
 /* ============================================================
-   SERVICES LIST (100K UPGRADE)
+   SERVICES LIST (FINAL EDITORIAL MASTER)
 ============================================================ */
 .mt-64 { margin-top: 64px; }
+
 .services-list {
   display: flex;
   flex-direction: column;
   border-top: 1px solid var(--border);
 }
+
+/* --- MASTER ROW LAYOUT --- */
 .svc-row {
   display: grid;
-  grid-template-columns: 80px 1fr 60px;
-  gap: 40px;
-  padding: 56px 0; /* Static padding, no layout shifting */
+  grid-template-columns: 80px 300px 1fr; /* 3-Column Elite Layout (Slightly wider image) */
+  align-items: center; /* CRITICAL: Perfect vertical centering for a tailored look */
+  gap: 64px; /* Increased breathing room (luxury aesthetic) */
+  padding: 64px 0; 
   border-bottom: 1px solid var(--border);
   position: relative;
   transition: background 0.4s ease, border-color 0.4s ease;
   cursor: default;
 }
+
+/* Background Hover Glow */
 .svc-row::before {
   content: '';
   position: absolute;
@@ -793,50 +865,90 @@ nav.scrolled {
   transition: opacity 0.4s ease;
   z-index: 0;
 }
+
 .svc-row:hover::before { opacity: 1; }
 .svc-row:hover {
   background: rgba(255, 255, 255, 0.015);
   border-bottom-color: var(--gold-border);
 }
 
-/* GPU-Accelerated Smooth Slide */
+/* --- THE CINEMATIC IMAGE INTEGRATION --- */
+.svc-image-wrap {
+  width: 100%;
+  height: 200px; /* Adjusted height for better 3:2 ratio */
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.05);
+  z-index: 1;
+}
+
+/* --- THE CINEMATIC IMAGE INTEGRATION (FULL COLOR) --- */
+.svc-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Dark filter removed. Displaying natural image colors. */
+  transform: scale(1.02);
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform;
+}
+
+.svc-row:hover .svc-img {
+  /* Retained only the cinematic zoom for a premium interaction */
+  transform: scale(1.08);
+}
+
+/* --- TYPOGRAPHY & ALIGNMENT --- */
 .svc-row-num, .svc-row-content {
   position: relative;
   z-index: 1;
   transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), color 0.3s ease;
-  will-change: transform; /* Forces the browser to use the GPU */
+  will-change: transform; 
 }
+
+.svc-row-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Ensures text is perfectly balanced within its own column */
+}
+
 .svc-row:hover .svc-row-num,
 .svc-row:hover .svc-row-content {
-  transform: translateX(20px); /* Smooth horizontal slide */
+  transform: translateX(20px); 
 }
 
 .svc-row-num {
   font-family: 'Syne', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.4rem; /* Slightly larger to anchor the left side */
   font-weight: 700;
   color: var(--muted);
 }
 .svc-row:hover .svc-row-num { color: var(--gold); }
+
 .svc-row-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-size: clamp(2rem, 3.5vw, 2.6rem); /* Refined scaling */
   font-weight: 700;
   color: var(--off);
+  margin-top: 0;
   margin-bottom: 16px;
   line-height: 1.1;
   letter-spacing: -0.01em;
   transition: color 0.3s;
 }
 .svc-row:hover .svc-row-title { color: var(--white); }
+
 .svc-row-desc {
-  font-size: 0.95rem;
+  font-size: 1rem; /* Slightly bumped up for readability */
   color: var(--muted2);
   line-height: 1.75;
   max-width: 680px;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   font-weight: 300;
 }
+
+/* --- PILL TAGS --- */
 .svc-row-tags { display: flex; flex-wrap: wrap; gap: 10px; }
 .svc-row-tags span {
   font-family: 'Syne', sans-serif;
@@ -856,39 +968,119 @@ nav.scrolled {
   border-color: var(--gold-border);
   color: var(--gold2);
 }
+
 /* ============================================================
-   MICRO-STAT COLUMN (DATA-DRIVEN UPGRADE)
+   MOBILE RESPONSIVE OVERRIDES
+   (Ensure this stays inside your max-width: 1024px media query)
 ============================================================ */
-.svc-row {
-  grid-template-columns: 80px 1fr auto; /* Changed the right column to 'auto' to let the stats breathe */
+@media (max-width: 1024px) {
+  .svc-row {
+    grid-template-columns: auto 1fr; /* Reverts to 2 columns */
+    align-items: center;
+    gap: 24px; 
+    padding: 48px 0;
+  }
+  
+  .svc-row-num { 
+    grid-column: 1; 
+    grid-row: 1;
+    margin: 0; 
+  }
+  
+  .svc-image-wrap {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    height: 240px; /* Taller on mobile for better impact */
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .svc-row-content { 
+    grid-column: 1 / -1; 
+    grid-row: 3; 
+  }
+
+  /* Disable Hover Shifts on Touch Devices */
+  .svc-row:hover { background: transparent; }
+  .svc-row:hover .svc-row-num, 
+  .svc-row:hover .svc-row-content { 
+    transform: none; 
+  }
 }
 
-.svc-row-stat {
+
+
+/* ============================================================
+   ELITE SERVICES CTA BUTTON
+============================================================ */
+.svc-cta-wrapper {
   display: flex;
-  align-items: flex-end; /* <--- THIS MOVES IT TO THE BOTTOM */
-  justify-content: flex-end;
-  font-family: 'Syne', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  position: relative;
-  z-index: 1;
-  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  padding-bottom: 0.1rem; /* Optical adjustment to perfectly align with the tags on the left */
-  padding-right: 2rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px; /* Expansive negative space to draw the eye */
+  padding-bottom: 20px;
 }
 
-/* The Micro-Interaction */
-.svc-row:hover .svc-row-stat {
-  color: var(--gold);
-  transform: translateX(-12px); /* Slides inward slightly as the main text slides outward, creating a cinematic closing effect */
+.btn-elite {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 56px; /* Generous padding for a commanding, substantial feel */
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  color: #000000; /* Pure black text for maximum luxury contrast */
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border-radius: 100px; /* Flawless pill shape */
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0 10px 30px -10px rgba(201, 168, 76, 0.4); /* Ambient gold glow */
 }
-.svc-row:hover .svc-row-icon svg {
-  stroke: var(--gold);
-  transform: scale(1.15) rotate(-3deg); /* Premium micro-interaction: slight scale and dynamic tilt */
+
+/* The Internal Cinematic Light Sweep */
+.btn-elite::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%; /* Hidden to the left */
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-25deg);
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none; /* Prevents the invisible box from blocking clicks */
 }
+
+/* The Hover Ignition */
+.btn-elite:hover {
+  transform: translateY(-4px); /* Defying gravity slightly */
+  box-shadow: 0 20px 40px -10px rgba(201, 168, 76, 0.6); /* Expanded glow */
+}
+
+.btn-elite:hover::before {
+  left: 200%; /* Sweeps the light across the button instantly */
+}
+
+/* The Snapping Arrow */
+.btn-elite .btn-icon {
+  display: flex;
+  align-items: center;
+}
+
+.btn-elite svg {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-elite:hover svg {
+  transform: translateX(6px); /* Arrow snaps forward, pointing to action */
+}
+
 
 /* ============================================================
    RESULTS GRID (VERIFIED OUTCOMES - HERO SECTION)
@@ -2002,4 +2194,218 @@ footer {
 @media (max-width: 1024px) {
   .insights-grid { grid-template-columns: 1fr; gap: 24px; }
   .insight-image-wrapper { height: 200px; }
+}
+
+
+/* CLIENTS */
+
+
+/* SPOTLIGHT SECTION WRAPPER */
+  .spotlight-section {
+    padding: 120px 40px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ELITE HEADER STYLING */
+  .spotlight-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .premium-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--accent);
+    animation: pulse-glow 2s infinite;
+  }
+  @keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+  }
+  .spotlight-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.04em;
+  }
+  .spotlight-title em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+  }
+
+  /* THE MAGNETIC GRID */
+  .spotlight-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px; /* Creates the ultra-thin border effect */
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* THE SPOTLIGHT EFFECT */
+  .grid-spotlight {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.1), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .spotlight-grid:hover .grid-spotlight {
+    opacity: 1;
+  }
+
+  /* CLIENT CARDS */
+  .client-card {
+    background: var(--surface);
+    padding: 60px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .client-card-inner {
+    position: relative;
+    z-index: 3;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* TYPOGRAPHIC LOGOS */
+  .client-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    font-family: 'Manrope', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.4;
+    transition: all 0.4s ease;
+    filter: grayscale(100%);
+  }
+
+  /* Hover Interaction */
+  .client-card:hover .client-card-inner {
+    transform: scale(1.1);
+  }
+  .client-card:hover .client-name {
+    color: var(--text-main);
+    opacity: 1;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 900px) {
+    .spotlight-grid { grid-template-columns: repeat(2, 1fr); }
+    .client-card { padding: 40px 20px; }
+    .client-name { font-size: 1.2rem; }
+  }
+  @media (max-width: 600px) {
+    .spotlight-grid { grid-template-columns: 1fr; }
+  }
+
+
+
+
+
+
+  /* ============================================================
+   BRAND LOGO INTEGRATION (PRELOADER)
+============================================================ */
+.preloader-img-logo {
+  width: 76px; 
+  height: auto;
+  margin-bottom: 24px;
+  mix-blend-mode: screen; /* Strips the black background invisibly */
+  opacity: 0; 
+  /* Animates in slightly before the text */
+  animation: fade-up 0.8s forwards 0.1s; 
+  filter: drop-shadow(0px 8px 24px rgba(201,168,76,0.25)); /* 3D Ambient Glow */
+}
+
+/* ============================================================
+   BRAND LOGO INTEGRATION (NAVBAR) - BOLD LUXURY LOCKUP
+============================================================ */
+.nav-logo {
+  display: flex;        
+  align-items: center;  
+  gap: 14px; /* Tight, punchy spacing. No vertical lines. */
+  text-decoration: none;
+}
+
+.nav-img-logo {
+  width: 48px; /* Sized up to perfectly combat the heavy font weight */
+  height: auto;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0px 4px 14px rgba(201,168,76,0.25)); /* Deep ambient glow */
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.nav-logo span {
+  font-family: 'Syne', sans-serif; /* Back to your original, aggressive brand font */
+  font-weight: 800; /* Maximum boldness */
+  font-size: 1.3rem; /* Scaled up for dominance */
+  letter-spacing: -0.03em; /* CRITICAL: This tight kerning is what makes heavy fonts look expensive and custom-built */
+  color: var(--off);
+  transition: color 0.4s ease;
+}
+
+/* Premium micro-interactions */
+.nav-logo:hover .nav-img-logo {
+  transform: scale(1.08) rotate(3deg); 
+}
+
+.nav-logo:hover span {
+  color: #ffffff;
+}
+/* ============================================================
+   BRAND LOGO INTEGRATION (FOOTER)
+============================================================ */
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; 
+  font-size: 1rem;
+  color: var(--off); 
+  text-decoration: none;
+  display: flex;        
+  align-items: center;  
+  gap: 10px;            
+}
+
+.footer-img-logo {
+  width: 28px;
+  height: auto;
+  mix-blend-mode: screen;
+  /* Slightly muted resting state for correct visual hierarchy */
+  filter: grayscale(30%) opacity(0.8); 
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.footer-logo:hover .footer-img-logo {
+  /* Ignites full color and size on hover */
+  filter: grayscale(0%) opacity(1) drop-shadow(0px 4px 12px rgba(201,168,76,0.2));
+  transform: scale(1.08);
 }

@@ -257,3 +257,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+
+// Magnetic Spotlight Logic for the Trust Grid
+  const clientGrid = document.getElementById('client-grid');
+  
+  if (clientGrid) {
+    clientGrid.addEventListener('mousemove', (e) => {
+      const rect = clientGrid.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      clientGrid.style.setProperty('--mouse-x', `${x}px`);
+      clientGrid.style.setProperty('--mouse-y', `${y}px`);
+    });
+  }
