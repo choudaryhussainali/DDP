@@ -6,11 +6,14 @@
 <title>Dani Digital Pro — Revenue Growth Architect</title>
 <meta name="description" content="PPC & Paid Ads Growth Expert. Scaling brands with data-driven paid advertising & growth systems." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/insights.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -165,6 +168,389 @@
 </div>
 
 <div class="divider-line"></div>
+
+<section class="ddp-app-section" id="platform-preview">
+  
+  <style>
+    /* Strictly isolated CSS to guarantee flawless loading */
+    .ddp-app-section {
+      width: 100%;
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--bg, #080808);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .ddp-app-container {
+      width: 100%;
+      max-width: 1100px;
+      background: #0f0f11;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,168,76,0.05);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ddp-app-container * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* BROWSER TOP BAR */
+    .ddp-browser-bar {
+      height: 52px;
+      background: #141416;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .ddp-mac-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .ddp-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .ddp-dot.red { background: #ff5f56; }
+    .ddp-dot.yellow { background: #ffbd2e; }
+    .ddp-dot.green { background: #27c93f; }
+
+    .ddp-url-bar {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1c1c1f;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    /* MAIN APP BODY */
+    .ddp-app-body {
+      display: flex;
+      height: 580px; /* Fixed height for preview */
+    }
+
+    /* SIDEBAR */
+    .ddp-sidebar {
+      width: 240px;
+      background: #0f0f11;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ddp-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: #777;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ddp-nav-item:hover { color: #ccc; }
+    .ddp-nav-item svg { width: 18px; height: 18px; opacity: 0.8; }
+    
+    .ddp-nav-item.active {
+      background: rgba(201, 168, 76, 0.08);
+      color: #c9a84c;
+      border: 1px solid rgba(201, 168, 76, 0.15);
+    }
+    
+    .ddp-nav-item.active svg { opacity: 1; stroke: #c9a84c; }
+
+    /* CONTENT AREA */
+    .ddp-content {
+      flex: 1;
+      padding: 32px;
+      background: #121214;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      overflow-y: auto;
+    }
+
+    /* KPI GRID */
+    .ddp-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .ddp-kpi-card {
+      background: #18181b;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .ddp-kpi-card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .ddp-kpi-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ddp-kpi-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #6b6b6b;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .ddp-kpi-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+    }
+
+    .ddp-kpi-icon svg { width: 14px; height: 14px; }
+
+    
+    /* ============================================================
+      PREMIUM KPI TYPOGRAPHY - "THE WEALTH MANAGER"
+    ============================================================ */
+    .ddp-kpi-value {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: 2.8rem !important; /* This font needs to be larger to carry its weight */
+      font-weight: 600 !important; 
+      letter-spacing: -0.01em !important; 
+      color: var(--gold) !important; /* Pure luxury in gold */
+      line-height: 1 !important;
+      transform: none !important; 
+    }
+    .ddp-kpi-trend {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: #6b6b6b;
+    }
+
+    .ddp-trend-up { color: #4ade80; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .ddp-trend-up svg { width: 12px; height: 12px; }
+
+    /* CHART SECTION */
+    .ddp-chart-card {
+      background: #18181b;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ddp-chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .ddp-chart-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #6b6b6b;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .ddp-chart-subtitle {
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    .ddp-chart-live {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #ccc;
+    }
+
+    .ddp-live-dot {
+      width: 6px;
+      height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+      animation: ddpPulse 2s infinite;
+    }
+
+    @keyframes ddpPulse {
+      0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+    }
+
+    .ddp-canvas-wrap {
+      flex: 1;
+      position: relative;
+      min-height: 200px;
+    }
+
+    /* BOTTOM CAPTION */
+    .ddp-preview-caption {
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: #6b6b6b;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ddp-preview-caption span {
+      width: 6px; height: 6px; background: #4ade80; border-radius: 50%;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .ddp-sidebar { display: none; }
+      .ddp-kpi-grid { grid-template-columns: 1fr; }
+      .ddp-app-body { height: auto; }
+      .ddp-canvas-wrap { min-height: 250px; }
+    }
+  </style>
+
+  <div class="ddp-app-container">
+    
+    <div class="ddp-browser-bar">
+      <div class="ddp-mac-dots">
+        <div class="ddp-dot red"></div>
+        <div class="ddp-dot yellow"></div>
+        <div class="ddp-dot green"></div>
+      </div>
+      <div class="ddp-url-bar">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4.5 13.5H11L11 22L19.5 10.5H13L13 2Z"/></svg>
+        app.danidigitalpro.com
+      </div>
+    </div>
+
+    <div class="ddp-app-body">
+      
+      <aside class="ddp-sidebar">
+        <div class="ddp-nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          Dashboard
+        </div>
+        <div class="ddp-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+          Campaigns
+        </div>
+        <div class="ddp-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+          Automations
+        </div>
+        <div class="ddp-nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          Calls
+        </div>
+        <div class="ddp-nav-item" style="color: #4ade80;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          Try AI
+        </div>
+      </aside>
+
+      <main class="ddp-content">
+        
+        <div class="ddp-kpi-grid">
+          
+          <div class="ddp-kpi-card">
+            <div class="ddp-kpi-header">
+              <span class="ddp-kpi-title">Active Calls</span>
+              <div class="ddp-kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+            </div>
+            <div class="ddp-kpi-value" id="count-calls">0</div>
+            <div class="ddp-kpi-trend">
+              <span class="ddp-trend-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg> +42%</span> vs last week
+            </div>
+          </div>
+
+          <div class="ddp-kpi-card">
+            <div class="ddp-kpi-header">
+              <span class="ddp-kpi-title">Leads Today</span>
+              <div class="ddp-kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+            </div>
+            <div class="ddp-kpi-value" id="count-leads">0</div>
+            <div class="ddp-kpi-trend">
+              <span class="ddp-trend-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg> +18%</span> vs last week
+            </div>
+          </div>
+
+          <div class="ddp-kpi-card">
+            <div class="ddp-kpi-header">
+              <span class="ddp-kpi-title">Revenue (MTD)</span>
+              <div class="ddp-kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+            </div>
+            <div class="ddp-kpi-value" id="count-rev">$0</div>
+            <div class="ddp-kpi-trend">
+              <span class="ddp-trend-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg> +35%</span> vs last week
+            </div>
+          </div>
+
+        </div>
+
+        <div class="ddp-chart-card">
+          <div class="ddp-chart-header">
+            <div>
+              <div class="ddp-chart-title">Call Volume</div>
+              <div class="ddp-chart-subtitle">Last 12 hours</div>
+            </div>
+            <div class="ddp-chart-live">
+              <span class="ddp-live-dot"></span> Live
+            </div>
+          </div>
+          <div class="ddp-canvas-wrap">
+            <canvas id="ddpMainChart"></canvas>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+  
+  <div class="ddp-preview-caption">
+    <span></span> Interactive product preview — engineered for elite scaling.
+  </div>
+
+</section>
+
 
 <!-- ============================================================
      FRAMEWORK
@@ -330,6 +716,153 @@
           </svg>
         </span>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="live-operations">
+  <div class="section-inner">
+    
+    <div class="label reveal">Live Operations</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Campaign <em>Command Center</em></h2>
+    <p class="section-p reveal reveal-delay-2">
+      A real-time simulation of the exact omni-channel acquisition engine we deploy for our elite partners. Watch the data compound.
+    </p>
+
+    <div class="ddp-dashboard reveal reveal-delay-3 mt-64">
+      
+      <header class="dash-topbar">
+        <div class="dash-brand">
+        </div>
+        <div class="dash-meta">
+          <span class="dash-live-dot" aria-hidden="true"></span>
+          Live Engine &nbsp;·&nbsp; Tracking Active Pipelines
+        </div>
+      </header>
+
+      <div class="dash-main-grid">
+
+        <aside class="dash-left-panel">
+          <div class="dash-card dash-client-card">
+            <div class="dash-avatar-row">
+              <div class="dash-avatar" style="background:linear-gradient(135deg, var(--gold), var(--gold2)); color:var(--bg);">VB</div>
+              <div>
+                <div class="dash-client-name">Vivant Beauty</div>
+                <div class="dash-client-handle">@vivantbeauty · Pro Partner</div>
+              </div>
+            </div>
+            <div class="dash-info-row">
+              <div class="dash-info-item">
+                <span class="dash-info-label">Active Sequence</span>
+                <span class="dash-info-value">Q3 Growth Architecture</span>
+              </div>
+              <div class="dash-info-item">
+                <span class="dash-info-label">Status</span>
+                <span class="dash-badge dash-badge-active"><span class="dash-badge-dot"></span>Deployed</span>
+              </div>
+              <div class="dash-info-item">
+                <span class="dash-info-label">Monthly Ad Spend</span>
+                <span class="dash-info-value">$12,500 USD</span>
+              </div>
+              <div class="dash-info-item">
+                <span class="dash-info-label">Routing</span>
+                <span class="dash-info-value">Meta · Google · TikTok</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <span class="dash-card-title">Campaign Manager</span>
+            </div>
+            <div class="dash-manager-row">
+              <div class="dash-manager-avatar">
+                <img src="images/about-photo.png" alt="Daniyal Liaqat" />
+              </div>
+              <div>
+                <div class="dash-manager-name">Daniyal Liaqat</div>
+                <div class="dash-manager-role">Growth Architect</div>
+              </div>
+              <span class="dash-manager-badge">Online</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="dash-card dash-center-panel" aria-live="polite">
+          <div class="dash-feed-header">
+            <div class="dash-feed-title-group">
+              <div class="dash-feed-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <span class="dash-feed-title">Real-Time Event Stream</span>
+            </div>
+            <div class="dash-feed-tabs" role="tablist">
+              <button class="dash-feed-tab active" role="tab" onclick="dashSetTab(this,'all')">All</button>
+              <button class="dash-feed-tab" role="tab" onclick="dashSetTab(this,'reviews')">Conversions</button>
+              <button class="dash-feed-tab" role="tab" onclick="dashSetTab(this,'dm')">Lead Flow</button>
+            </div>
+          </div>
+
+          <div class="dash-feed-list" id="dashFeedList" role="log"></div>
+
+          <div class="dash-platform-row" role="group">
+            <span style="font-size:0.7rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Traffic Sources:</span>
+            <button class="dash-platform-chip on" onclick="this.classList.toggle('on')"><span class="dash-platform-dot" style="background:#E1306C"></span>Meta</button>
+            <button class="dash-platform-chip on" onclick="this.classList.toggle('on')"><span class="dash-platform-dot" style="background:var(--gold)"></span>Google</button>
+            <button class="dash-platform-chip on" onclick="this.classList.toggle('on')"><span class="dash-platform-dot" style="background:#69C9D0"></span>TikTok</button>
+          </div>
+        </main>
+
+        <aside class="dash-right-panel">
+          <div class="dash-card dash-kpi-card dash-kpi-gold">
+            <div class="dash-kpi-top">
+              <span class="dash-kpi-label">Funnel CTR</span>
+              <div class="dash-kpi-icon dash-icon-gold">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              </div>
+            </div>
+            <div class="dash-kpi-value" id="dashKpiEngagement">0%</div>
+            <div class="dash-kpi-progress"><div class="dash-kpi-bar dash-bar-gold" id="dashBarEngagement" style="width:0%"></div></div>
+          </div>
+
+          <div class="dash-card dash-kpi-card dash-kpi-teal">
+            <div class="dash-kpi-top">
+              <span class="dash-kpi-label">Market Reach</span>
+              <div class="dash-kpi-icon dash-icon-teal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+            </div>
+            <div class="dash-kpi-value" id="dashKpiImpressions">0</div>
+            <div class="dash-kpi-progress"><div class="dash-kpi-bar dash-bar-teal" id="dashBarImpressions" style="width:0%"></div></div>
+          </div>
+
+          <div class="dash-card dash-kpi-card dash-kpi-rose">
+            <div class="dash-kpi-top">
+              <span class="dash-kpi-label">Qualified Leads</span>
+              <div class="dash-kpi-icon dash-icon-rose">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              </div>
+            </div>
+            <div class="dash-kpi-value" id="dashKpiLeads">0</div>
+            <div class="dash-kpi-progress"><div class="dash-kpi-bar dash-bar-rose" id="dashBarLeads" style="width:0%"></div></div>
+          </div>
+
+          <div class="dash-card dash-kpi-card dash-kpi-lav">
+            <div class="dash-kpi-top">
+              <span class="dash-kpi-label">Conversion Rate</span>
+              <div class="dash-kpi-icon dash-icon-lav">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+            </div>
+            <div class="dash-kpi-value" id="dashKpiConversion">0%</div>
+            <div class="dash-kpi-progress"><div class="dash-kpi-bar dash-bar-lav" id="dashBarConversion" style="width:0%"></div></div>
+          </div>
+        </aside>
+      </div>
+      
+      <div class="dash-toast-container" id="dashToastContainer"></div>
     </div>
   </div>
 </section>
@@ -722,36 +1255,6 @@
 
 <div class="divider-line"></div>
 
-<!-- ============================================================
-     INSIGHTS
-============================================================ -->
-<!-- <section class="section" id="insights">
-  <div class="section-inner">
-    <div class="label reveal">Thought Leadership</div>
-    <h2 class="section-h2 reveal reveal-delay-1">Growth <em>Insights</em></h2>
-    <p class="section-p reveal reveal-delay-2">Tactical, revenue-focused content on paid advertising, funnel strategy, and scaling systems.</p>
-    <div class="insights-grid">
-      <div class="insight-card reveal">
-        <div class="insight-cat">Google Ads</div>
-        <div class="insight-title">How to Structure Google Ads Campaigns for E-Commerce in 2025</div>
-        <p class="insight-desc">A tactical breakdown of Performance Max, Shopping, and Search campaign architecture for online stores generating real revenue.</p>
-      </div>
-      <div class="insight-card reveal reveal-delay-2">
-        <div class="insight-cat">Meta Ads</div>
-        <div class="insight-title">The 3-Stage Meta Funnel That Generates Qualified Leads Consistently</div>
-        <p class="insight-desc">Why most Meta campaigns fail at the awareness stage — and how to fix the entire funnel architecture for consistent output.</p>
-      </div>
-      <div class="insight-card reveal reveal-delay-3">
-        <div class="insight-cat">Scaling Strategy</div>
-        <div class="insight-title">When to Scale Your Ad Spend — The Data Signals That Tell You It's Time</div>
-        <p class="insight-desc">Most brands scale too early or too late. Here's the framework for knowing exactly when conditions are right to push budget.</p>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<div class="divider-line"></div>
-
 <section class="section" id="insights">
   <div class="section-inner">
     
@@ -973,6 +1476,130 @@
     <span class="modal-close">&times;</span>
     <img class="modal-content" id="modal-img" src="" alt="Verified Proof Zoom">
 </div>
+
+<script>
+  // Wait for everything (including preloader scripts) to settle
+  window.addEventListener('load', () => {
+    
+    const dashboardSection = document.getElementById('platform-preview');
+    let engineStarted = false;
+
+    // Failsafe: Check if Chart.js is loaded
+    if (typeof Chart === 'undefined') {
+      console.error("🚨 DDP ERROR: Chart.js is missing! The graph cannot load. Please add the CDN to your <head>.");
+    }
+
+    // 1. The Bulletproof Scroll Tracker
+    function checkScrollPosition() {
+      if (engineStarted || !dashboardSection) return;
+
+      // Calculate exactly where the section is relative to the viewport
+      const rect = dashboardSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      // If the top of the section comes into the bottom 80% of the screen, ignite!
+      if (rect.top <= windowHeight * 0.8) {
+        engineStarted = true;
+        // Remove the scroll listener so it doesn't drain browser memory
+        window.removeEventListener('scroll', checkScrollPosition);
+        
+        console.log("🔥 DDP Dashboard Engine Ignited!");
+        igniteDashboardEngine();
+      }
+    }
+
+    // Attach to scrolling and run once immediately in case they load already scrolled down
+    window.addEventListener('scroll', checkScrollPosition);
+    checkScrollPosition();
+
+
+    // 2. The Core Engine
+    function igniteDashboardEngine() {
+      
+      // --- Number Counters ---
+      function animateValue(id, start, end, duration, formatStr = '') {
+        const obj = document.getElementById(id);
+        if (!obj) return;
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 4);
+          const current = Math.floor(progress * (end - start) + start);
+          
+          if (formatStr === 'money') {
+            obj.innerHTML = '$' + (current / 1000).toFixed(1) + 'K';
+          } else {
+            obj.innerHTML = current.toLocaleString();
+          }
+          
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            if(formatStr === 'money') obj.innerHTML = '$48.5K';
+            else obj.innerHTML = end.toLocaleString();
+          }
+        };
+        window.requestAnimationFrame(step);
+      }
+
+      // Fire Counters
+      animateValue("count-calls", 0, 1247, 2000);
+      animateValue("count-leads", 0, 324, 2000);
+      animateValue("count-rev", 0, 48500, 2000, 'money');
+
+
+      // --- Bar Chart Initialization ---
+      const canvas = document.getElementById('ddpMainChart');
+      if (canvas && typeof Chart !== 'undefined') {
+        const ctx = canvas.getContext('2d');
+        
+        const barGradient = ctx.createLinearGradient(0, 0, 0, 300);
+        barGradient.addColorStop(0, '#c9a84c'); 
+        barGradient.addColorStop(1, 'rgba(201, 168, 76, 0.05)'); 
+
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['1h', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', '11h', '12h'],
+            datasets: [{
+              data: [65, 80, 50, 95, 75, 110, 85, 100, 70, 120, 90, 115],
+              backgroundColor: barGradient,
+              borderRadius: 4, 
+              borderSkipped: false,
+              barPercentage: 0.85, 
+              categoryPercentage: 0.9
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: '#000',
+                titleColor: '#c9a84c',
+                bodyColor: '#fff',
+                borderColor: 'rgba(255,255,255,0.1)',
+                borderWidth: 1,
+                displayColors: false,
+                padding: 10
+              }
+            },
+            scales: {
+              x: { grid: { display: false, drawBorder: false }, ticks: { display: false } },
+              y: { display: false, beginAtZero: true }
+            },
+            animation: {
+              duration: 2500,
+              easing: 'easeOutExpo'
+            }
+          }
+        });
+      }
+    }
+  });
+</script>
 
 </body>
 </html>
