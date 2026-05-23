@@ -58,7 +58,59 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 45); // <-- This is the master speed control. Increase to 60 to make it even slower.
   }
 
-  // ... rest of your main.js code below ...
+ // ============================================================
+  // CERTIFICATIONS 3D MAGNETIC TILT & CURSOR HOVER
+  // ============================================================
+  const certCards = document.querySelectorAll('.ddp-tilt-card');
+  
+  certCards.forEach(card => {
+    const inner = card.querySelector('.cert-card-inner');
+    
+    // 3D Mouse Tracking
+    card.addEventListener('mousemove', (e) => {
+      if (window.innerWidth < 1024) return; // Disable on mobile
+      
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      const xRotate = -(y / 20); 
+      const yRotate = (x / 20);
+      
+      inner.style.transform = `rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
+    });
+    
+    // Snap Back
+    card.addEventListener('mouseleave', () => {
+      inner.style.transform = `rotateX(0deg) rotateY(0deg) translateZ(0)`;
+    });
+  });
+
+  // Bind the existing custom cursor to the new Verify buttons
+  const certBtns = document.querySelectorAll('.cert-verify-btn');
+  const ddpDot = document.getElementById('cursorDot');
+  const ddpRing = document.getElementById('cursorRing');
+
+  certBtns.forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      if(ddpDot && ddpRing) {
+        ddpDot.style.width = '12px';
+        ddpDot.style.height = '12px';
+        ddpRing.style.width = '60px';
+        ddpRing.style.height = '60px';
+        ddpRing.style.borderColor = 'rgba(201,168,76,0.8)';
+      }
+    });
+    btn.addEventListener('mouseleave', () => {
+      if(ddpDot && ddpRing) {
+        ddpDot.style.width = '8px';
+        ddpDot.style.height = '8px';
+        ddpRing.style.width = '40px';
+        ddpRing.style.height = '40px';
+        ddpRing.style.borderColor = 'rgba(201,168,76,0.5)';
+      }
+    });
+  });
 });
 
 /* ============================================================
@@ -446,6 +498,158 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.2 });
     observer.observe(dashSection);
   });
+
+
+  // ============================================================
+  // MILLION DOLLAR 3D TILT GALLERY
+  // ============================================================
+  const tiltGalleries = document.querySelectorAll('.ddp-tilt-gallery');
+  
+  tiltGalleries.forEach(gallery => {
+    gallery.addEventListener('mousemove', (e) => {
+      // Only run 3D effect on desktop
+      if (window.innerWidth < 1024) return; 
+      
+      const rect = gallery.getBoundingClientRect();
+      // Calculate mouse position relative to center of the gallery
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      // Calculate rotation limits (divide by a higher number = less intense rotation)
+      const xRotate = -(y / 25); 
+      const yRotate = (x / 25);
+      
+      gallery.style.transform = `rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
+      // Make the transition instant during mouse movement for crisp responsiveness
+      gallery.style.transition = 'transform 0.1s ease-out';
+    });
+    
+    gallery.addEventListener('mouseleave', () => {
+      // Snap back to 0 with that Apple-smooth cubic bezier when the mouse leaves
+      gallery.style.transform = `rotateX(0deg) rotateY(0deg)`;
+      gallery.style.transition = 'transform 0.8s cubic-bezier(0.19, 1, 0.22, 1)';
+    });
+  });
 })();
 
 
+// ============================================================
+// DYNAMIC SERVICE MODAL ENGINE
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const serviceData = {
+    sem: {
+      badge: "High Intent Capture",
+      title: "AI-Search Engine Marketing",
+      desc: "We don't just bid on keywords; we intercept high-intent buyers exactly when they are searching for a solution. Utilizing AI-driven bid strategies, we engineer Google Ads architectures that consistently output predictable ROI.",
+      deliverables: [
+        "Complete Account Restructure & Audit",
+        "AI Bid Strategy (tROAS & tCPA) Implementation",
+        "Negative Keyword Sculpting & Protection",
+        "Conversion Tracking & GTM Server-Side Setup",
+        "Weekly Performance Engineering & Reporting"
+      ],
+      keywords: ["Performance Max", "Target ROAS", "Search Intent", "RLSA", "Google Ads"]
+    },
+    social: {
+      badge: "Algorithmic Authority",
+      title: "AI-Social Media Funnels",
+      desc: "Stop running random ads to cold audiences. We design multi-stage video and static funnels that guide users from absolute strangers to high-LTV loyalists using machine learning optimization.",
+      deliverables: [
+        "Multi-Stage Funnel Architecture Mapping",
+        "Dynamic Creative Testing & Iteration",
+        "Meta Pixel & Conversions API (CAPI) Integration",
+        "Lookalike Audience Scaling Protocols",
+        "High-Velocity Retargeting Loops"
+      ],
+      keywords: ["Meta Ads", "TikTok Business", "Advantage+", "CPA Optimization", "Dark Posts"]
+    },
+    management: {
+      badge: "Organic Positioning",
+      title: "Elite Brand Management",
+      desc: "True brand authority cannot be bought; it must be engineered. We take over your organic presence to build trust signals at scale, creating an ecosystem that converts followers into buyers.",
+      deliverables: [
+        "360° Brand Strategy & Visual Audit",
+        "High-End Asset Creation & Curation",
+        "Community Management & Response Algorithms",
+        "Engagement Rate Optimization Tactics",
+        "Monthly Analytics & Growth Deep-Dive"
+      ],
+      keywords: ["Organic Reach", "Brand Authority", "Content Calendar", "Viral Engineering", "Trust Signals"]
+    },
+    ecom: {
+      badge: "Revenue Operations",
+      title: "E-Commerce Scaling",
+      desc: "We fix the leaks in your bucket before turning on the traffic firehose. A comprehensive overhaul of your post-click experience to maximize AOV (Average Order Value) and compound your cash flow.",
+      deliverables: [
+        "Shopify Checkout Friction Optimization",
+        "Post-Purchase Upsell Flow Design",
+        "Cart Abandonment Email Architecture",
+        "LTV (Lifetime Value) Maximization Strategy",
+        "Omnichannel Scaling Systems (Google + Meta)"
+      ],
+      keywords: ["CRO", "Klaviyo Flows", "AOV Expansion", "Customer Retention", "Liquid Code"]
+    }
+  };
+
+  const modalOverlay = document.getElementById('serviceModal');
+  const modalBackdrop = document.getElementById('serviceModalBackdrop');
+  const closeBtn = document.getElementById('closeServiceModal');
+  
+  const mBadge = document.getElementById('modalBadge');
+  const mTitle = document.getElementById('modalTitle');
+  const mDesc = document.getElementById('modalDesc');
+  const mDeliverables = document.getElementById('modalDeliverables');
+  const mKeywords = document.getElementById('modalKeywords');
+
+  const triggers = document.querySelectorAll('.btn-service-trigger');
+
+  function openModal(serviceKey) {
+    const data = serviceData[serviceKey];
+    if(!data) return;
+
+    // Inject Text
+    mBadge.textContent = data.badge;
+    mTitle.innerHTML = data.title;
+    mDesc.textContent = data.desc;
+
+    // Inject Deliverables (List)
+    mDeliverables.innerHTML = '';
+    data.deliverables.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      mDeliverables.appendChild(li);
+    });
+
+    // Inject Keywords (Tags)
+    mKeywords.innerHTML = '';
+    data.keywords.forEach(kw => {
+      const span = document.createElement('span');
+      span.textContent = kw;
+      mKeywords.appendChild(span);
+    });
+
+    // Fire Entrance Animation
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Lock background scrolling
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    document.body.style.overflow = ''; // Unlock scrolling
+  }
+
+  // Event Listeners
+  triggers.forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.getAttribute('data-service')));
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+      closeModal();
+    }
+  });
+});
