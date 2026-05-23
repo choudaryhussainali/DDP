@@ -149,6 +149,16 @@ body.loading-lock { overflow: hidden; height: 100vh; }
 body:hover .cursor-dot { opacity: 1; }
 
 /* ============================================================
+   CURSOR Z-INDEX OVERRIDE (Fix for Modal)
+============================================================ */
+.cursor-dot {
+  z-index: 9999999 !important; /* Forces cursor above the 999999 modal */
+}
+.cursor-ring {
+  z-index: 9999998 !important; 
+}
+
+/* ============================================================
    SCROLLBAR
 ============================================================ */
 ::-webkit-scrollbar { width: 3px; }
@@ -2958,4 +2968,980 @@ footer {
 .graph-container {
   height: 250px;
   position: relative;
+}
+
+
+
+/* ============================================================
+   MILLION DOLLAR SERVICES SECTION STYLES
+============================================================ */
+.elite-services-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 180px; /* Massive luxury breathing room */
+}
+
+.elite-service-block {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Alternate row direction for the editorial zigzag look */
+.elite-service-block:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.es-content {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   WATERMARK NUMBERS - ALL LOCKED TO THE RIGHT
+============================================================ */
+.es-num-watermark {
+  position: absolute;
+  top: -90px;
+  left: auto !important;   /* Strips away any left alignment */
+  right: -20px !important; /* Locks EVERY number to the right side of the text */
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(8rem, 12vw, 14rem);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(201, 168, 76, 0.12);
+  z-index: -1;
+  pointer-events: none;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  transition: all 0.8s ease;
+}
+
+/* Force the Even rows (02, 04) to obey the right-side alignment */
+.elite-service-block:nth-child(even) .es-num-watermark {
+  left: auto !important;
+  right: -20px !important;
+}
+
+/* The Hover Effect Adjustment */
+.elite-service-block:hover .es-num-watermark {
+  transform: translateY(-15px);
+  -webkit-text-stroke: 1px rgba(201, 168, 76, 0.3);
+}
+
+/* ============================================================
+   MOBILE OVERRIDE FIX FOR UNIFORM ALIGNMENT
+============================================================ */
+@media (max-width: 1024px) {
+  .es-num-watermark,
+  .elite-service-block:nth-child(even) .es-num-watermark { 
+    top: -60px; 
+    left: auto !important; 
+    right: -20px !important; 
+    font-size: 8rem; 
+  }
+}
+.es-badge {
+  display: inline-block;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  border: 1px solid var(--gold-border);
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: var(--gold-dim);
+}
+
+.es-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--off);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
+
+.es-title span {
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.es-desc {
+  font-size: 1.05rem;
+  color: var(--muted2);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  font-weight: 300;
+  max-width: 95%;
+}
+
+/* Ultra-Premium Data Metrics */
+.es-metrics-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 28px;
+  backdrop-filter: blur(10px);
+}
+
+.es-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.es-m-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--off);
+  line-height: 1;
+}
+
+.es-m-lbl {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.es-metric-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--border2);
+}
+
+/* Service Tags */
+.es-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.es-tags span {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  transition: all 0.4s ease;
+}
+
+.elite-service-block:hover .es-tags span {
+  border-color: var(--gold-border);
+  color: var(--off);
+}
+
+/* ============================================================
+   3D HOVER GALLERY ARCHITECTURE
+============================================================ */
+.es-gallery {
+  flex: 1.1;
+  height: 550px;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1500px; /* Deep perspective for the 3D effect */
+  z-index: 5;
+}
+
+.es-img {
+  position: absolute;
+  border-radius: 12px;
+  background: var(--bg2);
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.8s ease, filter 0.8s ease;
+}
+
+.es-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(60%) contrast(1.1) brightness(0.8);
+  transition: filter 0.8s cubic-bezier(0.19, 1, 0.22, 1), transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Hovering the block restores color and zooms */
+.elite-service-block:hover .es-img img {
+  filter: grayscale(0%) contrast(1) brightness(1);
+  transform: scale(1.08);
+}
+
+/* Positioning the 4 Images */
+.es-img-main {
+  width: 65%;
+  height: 80%;
+  top: 10%;
+  left: 17.5%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 2;
+  transform: translateZ(0);
+}
+
+.es-img-2 {
+  width: 35%;
+  height: 40%;
+  top: -5%;
+  right: 5%;
+  border: 1px solid var(--gold-border);
+  z-index: 4;
+  transform: translateZ(40px);
+}
+
+.es-img-3 {
+  width: 40%;
+  height: 35%;
+  bottom: -5%;
+  left: 5%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 3;
+  transform: translateZ(70px);
+}
+
+.es-img-4 {
+  width: 25%;
+  height: 30%;
+  bottom: 15%;
+  right: -2%;
+  border: 1px solid var(--gold-border);
+  z-index: 1;
+  filter: brightness(0.5);
+  transform: translateZ(-40px);
+}
+
+/* The Explosion / Fanning Out Hover Effect */
+.elite-service-block:hover .es-img-main {
+  box-shadow: 0 40px 80px rgba(201, 168, 76, 0.15);
+}
+
+.elite-service-block:hover .es-img-2 {
+  transform: translateZ(80px) translate(25px, -25px) rotate(4deg);
+  box-shadow: -20px 30px 60px rgba(0, 0, 0, 0.9);
+}
+
+.elite-service-block:hover .es-img-3 {
+  transform: translateZ(100px) translate(-25px, 20px) rotate(-3deg);
+  box-shadow: 20px -20px 60px rgba(0, 0, 0, 0.9);
+}
+
+.elite-service-block:hover .es-img-4 {
+  transform: translateZ(-20px) translate(20px, 15px);
+  filter: brightness(0.9);
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .elite-services-wrapper { gap: 120px; }
+  .elite-service-block, .elite-service-block:nth-child(even) { 
+    flex-direction: column; 
+    gap: 60px; 
+  }
+  .es-num-watermark { top: -60px; left: -20px; font-size: 8rem; }
+  .elite-service-block:nth-child(even) .es-num-watermark { right: auto; left: -20px; }
+  .es-gallery { width: 100%; height: 450px; }
+  .es-metrics-row { flex-wrap: wrap; }
+}
+@media (max-width: 600px) {
+  .es-gallery { height: 350px; }
+  .es-img-2, .es-img-3, .es-img-4 { display: none; } /* Focus entirely on main image for mobile speeds */
+  .es-img-main { width: 100%; height: 100%; top: 0; left: 0; }
+  .es-metrics-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .es-metric-divider { width: 100%; height: 1px; }
+}
+
+
+/* ============================================================
+   SERVICE TRIGGER BUTTONS
+============================================================ */
+.btn-service-trigger {
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 16px 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-service-trigger::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(201,168,76,0), rgba(201,168,76,0.1), rgba(201,168,76,0));
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-service-trigger:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-service-trigger:hover {
+  border-color: var(--gold-border);
+  background: rgba(255, 255, 255, 0.02);
+  transform: translateY(-2px);
+}
+
+.btn-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--off);
+  transition: color 0.3s;
+}
+
+.btn-arrow {
+  color: var(--gold);
+  font-size: 1.1rem;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-service-trigger:hover .btn-text { color: var(--gold2); }
+.btn-service-trigger:hover .btn-arrow { transform: translateX(6px); }
+
+
+/* ============================================================
+   DYNAMIC MODAL ARCHITECTURE
+============================================================ */
+.ddp-service-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.ddp-service-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ddp-service-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.ddp-service-modal {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  background: #0f0f11;
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 40px 100px -10px rgba(0,0,0,0.9), 0 0 40px rgba(201, 168, 76, 0.05);
+  z-index: 2;
+  overflow: hidden;
+  
+  /* The Entrance Animation Start State */
+  transform: scale(0.95) translateY(20px);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s ease;
+}
+
+.ddp-service-modal-overlay.active .ddp-service-modal {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Close Button */
+.ddp-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s;
+}
+
+.ddp-modal-close:hover {
+  color: var(--gold);
+  transform: scale(1.1) rotate(90deg);
+}
+
+/* Grid Layout */
+.ddp-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+}
+
+.ddp-modal-left {
+  padding: 64px 48px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.03) 0%, transparent 100%);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ddp-modal-right {
+  padding: 64px 48px;
+  background: #121214;
+}
+
+/* Left Content */
+.ddp-modal-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-border);
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: var(--gold-dim);
+  margin-bottom: 24px;
+}
+
+.ddp-modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--off);
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.ddp-modal-desc {
+  font-size: 0.95rem;
+  color: var(--muted2);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.ddp-modal-cta {
+  align-self: flex-start;
+  padding: 18px 40px;
+  font-size: 0.85rem;
+}
+
+/* Right Content */
+.ddp-modal-section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--off);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pulse-dot-small {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--gold);
+}
+
+.ddp-modal-deliverables {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ddp-modal-deliverables li {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted2);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 1.5;
+}
+
+.ddp-modal-deliverables li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 900;
+  font-size: 0.8rem;
+  margin-top: 2px;
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.2);
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ddp-modal-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ddp-modal-keywords span {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+}
+
+.mt-40 { margin-top: 40px; }
+
+/* Responsive Modal */
+@media (max-width: 900px) {
+  .ddp-modal-grid { grid-template-columns: 1fr; }
+  .ddp-modal-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 40px 32px; }
+  .ddp-modal-right { padding: 40px 32px; }
+  .ddp-service-modal { max-height: 90vh; overflow-y: auto; }
+}
+
+
+/* ============================================================
+   TRUST SECTION: MILLION DOLLAR MARQUEE
+============================================================ */
+.elite-trust-section {
+  padding: 140px 0;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Background Atmospheric Glow */
+.elite-trust-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.04) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.trust-header {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.trust-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: var(--off);
+  letter-spacing: -0.02em;
+}
+
+.trust-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+/* ============================================================
+   MARQUEE TRACK ARCHITECTURE
+============================================================ */
+.marquee-master-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  
+  /* The Cinematic Fade Edges - Makes logos materialize out of darkness */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+}
+
+.marquee-track-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.mt-24 { margin-top: 24px; }
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  /* Hardware Acceleration for Butter Smooth 60fps */
+  will-change: transform;
+}
+
+/* The Left & Right Animations */
+.track-left {
+  animation: scroll-left 30s linear infinite;
+}
+
+.track-right {
+  animation: scroll-right 30s linear infinite;
+}
+
+/* Pause the massive engine when the user hovers */
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  gap: 24px;
+  padding-right: 24px; /* Matches the gap so the loop is mathematically seamless */
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* ============================================================
+   PREMIUM TRUST CARDS
+============================================================ */
+.trust-card {
+  width: 320px; /* Forces exactly 4 cards into view on most desktop screens */
+  height: 200px;
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* The Internal Glow Sweep */
+.trust-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.1), transparent);
+  transform: skewX(-20deg);
+  transition: all 0.6s ease;
+}
+
+.trust-card:hover::before {
+  left: 200%;
+}
+
+/* Card Hover Physics */
+.trust-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(201, 168, 76, 0.4);
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(201, 168, 76, 0.1);
+}
+
+/* ============================================================
+   PREMIUM LOGO IMAGE INTEGRATION
+============================================================ */
+/* ============================================================
+   PREMIUM LOGO IMAGE INTEGRATION (FULL COLOR & EXPANDED)
+============================================================ */
+.brand-logo-img {
+  max-width: 85%;      /* Expanded from 65% for maximum authority */
+  max-height: 70%;     /* Expanded from 50% for maximum visibility */
+  object-fit: contain; /* Ensures they never stretch or distort */
+  
+  /* Removed grayscale & dimming — displaying full original colors */
+  filter: none;
+  opacity: 1;
+  
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform;
+}
+
+/* The Clean, Normalized Hover Effect */
+.trust-card:hover .brand-logo-img {
+  /* Only a very subtle, premium zoom. No crazy color flashing. */
+  transform: scale(1.04); 
+}
+.brand-accent {
+  color: var(--gold);
+}
+
+.trust-card:hover .brand-text {
+  color: var(--off);
+  filter: grayscale(0%);
+  transform: scale(1.05);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .trust-card { width: 280px; height: 100px; }
+  .brand-text { font-size: 1.1rem; }
+}
+@media (max-width: 600px) {
+  .trust-card { width: 240px; height: 90px; }
+  .brand-text { font-size: 0.95rem; }
+  /* Speed it up slightly on mobile so it doesn't feel stagnant */
+  .track-left { animation-duration: 20s; }
+  .track-right { animation-duration: 20s; }
+}
+
+
+
+
+/* ============================================================
+   ELITE CERTIFICATIONS - MILLION DOLLAR CSS
+============================================================ */
+.elite-cert-section {
+  position: relative;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.cert-ambient-glow {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: 80vw;
+  height: 80vh;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(201, 168, 76, 0.05) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  position: relative;
+  z-index: 2;
+}
+
+/* 3D Perspective Wrapper */
+.cert-card {
+  perspective: 1500px;
+  transform-style: preserve-3d;
+}
+
+.cert-card-inner {
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.6s ease, border-color 0.6s ease;
+  transform: translateZ(0); /* Hardware acceleration */
+}
+
+/* ============================================================
+   THE HOLOGRAPHIC FOIL EFFECT
+============================================================ */
+.cert-foil-overlay {
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(
+    115deg, 
+    transparent 20%, 
+    rgba(255, 255, 255, 0.05) 30%, 
+    rgba(201, 168, 76, 0.2) 45%, 
+    rgba(255, 255, 255, 0.4) 50%, 
+    rgba(201, 168, 76, 0.2) 55%, 
+    rgba(255, 255, 255, 0.05) 70%, 
+    transparent 80%
+  );
+  background-size: 200% 200%;
+  mix-blend-mode: color-dodge;
+  opacity: 0;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  transform: translateZ(50px); /* Makes the shine float ABOVE the card */
+}
+
+/* Hover Ignitions */
+.cert-card:hover .cert-card-inner {
+  border-color: rgba(201, 168, 76, 0.3);
+  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(201, 168, 76, 0.1);
+}
+
+.cert-card:hover .cert-foil-overlay {
+  opacity: 1;
+  animation: foil-sweep 2.5s infinite linear;
+}
+
+@keyframes foil-sweep {
+  0% { background-position: 200% 50%; }
+  100% { background-position: -200% 50%; }
+}
+
+/* Badge Levitation */
+.cert-badge-wrapper {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.cert-card:hover .cert-badge-wrapper {
+  transform: translateY(-8px) translateZ(40px) scale(1.05); /* Lifts out of the screen */
+}
+
+.cert-svg-badge {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+}
+
+.cert-badge-glow {
+  position: absolute;
+  inset: 0;
+  background: rgba(201, 168, 76, 0.3);
+  filter: blur(20px);
+  z-index: 1;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: opacity 0.5s ease;
+}
+
+.cert-card:hover .cert-badge-glow { opacity: 1; }
+
+/* Typography */
+.cert-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 3;
+  transform: translateZ(20px);
+}
+
+.cert-issuer {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.cert-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--off);
+  line-height: 1.2;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.cert-meta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  color: var(--muted2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.cert-dot { color: var(--gold); }
+
+/* Verify Button */
+.cert-verify-btn {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+  align-self: flex-start;
+}
+
+.cert-verify-btn .arrow {
+  color: var(--gold);
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.cert-card:hover .cert-verify-btn { color: var(--off); }
+.cert-card:hover .cert-verify-btn .arrow { transform: translateX(5px); color: var(--gold2); }
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .cert-grid { grid-template-columns: 1fr; gap: 24px; }
+  .cert-card-inner { padding: 32px 24px; gap: 24px; }
+  .cert-badge-wrapper { width: 70px; height: 70px; }
+  .cert-title { font-size: 1.3rem; }
 }
