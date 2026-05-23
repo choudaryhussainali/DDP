@@ -49,9 +49,11 @@
   </div>
 </div>
 
-<!-- Cursor -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- ============================================================
+     BULLETPROOF CUSTOM CURSOR
+============================================================ -->
+<div class="cursor-dot" id="cursorDot" style="z-index: 2147483647 !important; opacity: 1 !important;"></div>
+<div class="cursor-ring" id="cursorRing" style="z-index: 2147483646 !important; opacity: 1 !important;"></div>
 
 <!-- Particles Canvas -->
 <canvas id="particles"></canvas>
@@ -626,89 +628,163 @@
 <div class="divider-line"></div>
 
 <!-- ============================================================
-     SERVICES
+     SERVICES (MILLION DOLLAR ARCHITECTURE)
 ============================================================ -->
-<section class="section" id="services">
-  <div class="section-inner">
-    <div class="label reveal">Expertise</div>
-    <h2 class="section-h2 reveal reveal-delay-1">Growth Services, <em>Precisely Engineered</em></h2>
-    <p class="section-p reveal reveal-delay-2">
-      We don't rely on random tricks or guesswork. Instead, we build <strong>custom growth systems</strong> — proven strategies designed to maximize your ad spend, drive consistent profit, and scale your brand with <em>total certainty.</em>
+<section class="section" id="services" style="overflow: hidden; padding-top: 140px;">
+  <div class="section-inner" style="max-width: 1400px;">
+    
+    <div class="label reveal">Elite Expertise</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Growth Systems,<br><em>Precisely Engineered</em></h2>
+    <p class="section-p reveal reveal-delay-2" style="margin-bottom: 120px; max-width: 600px;">
+      We don't rely on random tricks or guesswork. We build <strong>custom growth architecture</strong> designed to maximize ad spend, drive consistent profit, and scale your brand with <em>total certainty.</em>
     </p>
 
-    <div class="services-list mt-64">
+    <div class="elite-services-wrapper">
       
-      <div class="svc-row reveal">
-        <div class="svc-row-num">01</div>
-        <div class="svc-image-wrap">
-          <img src="https://images.unsplash.com/photo-1674027326254-88c960d8e561?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2VhcmNoJTIwZW5naW5lJTIwb3B0aW1pemF0aW9ufGVufDB8fDB8fHww?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bWFya2V0aW5nfGVufDB8fDB8fHww" alt="Search Engine Architecture" class="svc-img">
-        </div>
-        <div class="svc-row-content">
-          <h3 class="svc-row-title">AI-Search Engine Marketing & PPC</h3>
-          <p class="svc-row-desc">Signal-driven search campaigns. Capturing high-intent traffic and turning queries into predictable revenue using advanced AI bidding structures and search architecture.</p>
-          <div class="svc-row-tags">
-            <span>Google Ads</span>
-            <span>Bing Ads</span>
-            <span>AI Bidding</span>
-            <span>Search Intent</span>
+      <!-- SERVICE 01: AI SEM -->
+      <div class="elite-service-block reveal">
+        <div class="es-content">
+          <div class="es-num-watermark">01</div>
+          <div class="es-badge">High Intent Capture</div>
+          <h3 class="es-title">AI-Search Engine<br><span>Marketing & PPC</span></h3>
+          <p class="es-desc">Signal-driven search campaigns. Capturing high-intent traffic and turning queries into predictable revenue using advanced AI bidding structures and search architecture.</p>
+          
+          <div class="es-metrics-row">
+            <div class="es-metric"><span class="es-m-val">18.2×</span><span class="es-m-lbl">Avg Yield</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">AI</span><span class="es-m-lbl">Bidding</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">99%</span><span class="es-m-lbl">Intent Match</span></div>
           </div>
+
+          <div class="es-tags">
+            <span>Google Ads</span><span>Bing Ads</span><span>Search Intent</span><span>CRO</span>
+          </div>
+          <!-- Add this to Service 01 (SEM) -->
+          <div class="es-action" style="margin-top: 40px;">
+            <button class="btn-service-trigger" data-service="sem">
+              <span class="btn-text">View Architecture</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="es-gallery ddp-tilt-gallery">
+          <div class="es-img es-img-main"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80" alt="Data Architecture"></div>
+          <div class="es-img es-img-2"><img src="https://images.unsplash.com/photo-1661956602116-aa6865609028?w=600&auto=format&fit=crop&q=80" alt="AI Algorithm"></div>
+          <div class="es-img es-img-3"><img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&auto=format&fit=crop&q=80" alt="Code Bidding"></div>
+          <div class="es-img es-img-4"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&auto=format&fit=crop&q=80" alt="Metrics Zoom"></div>
         </div>
       </div>
 
-      <div class="svc-row reveal reveal-delay-1">
-        <div class="svc-row-num">02</div>
-        <div class="svc-image-wrap">
-          <img src="https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzN8fG1hcmtldGluZ3xlbnwwfHwwfHx8MA%3D%3D" alt="Social Media Engineering" class="svc-img">
-        </div>
-        <div class="svc-row-content">
-          <h3 class="svc-row-title">AI-Social Media Marketing</h3>
-          <p class="svc-row-desc">Algorithmic authority. Engineering high-converting paid social funnels across all major platforms to capture attention, stop the scroll, and scale customer acquisition ruthlessly.</p>
-          <div class="svc-row-tags">
-            <span>Meta Ads</span>
-            <span>TikTok Ads</span>
-            <span>Snapchat Ads</span>
-            <span>X / Twitter</span>
+      <!-- SERVICE 02: META & SOCIAL -->
+      <div class="elite-service-block reveal">
+        <div class="es-content">
+          <div class="es-num-watermark">02</div>
+          <div class="es-badge">Algorithmic Authority</div>
+          <h3 class="es-title">AI-Social Media<br><span>Marketing Funnels</span></h3>
+          <p class="es-desc">Engineering high-converting paid social funnels across all major platforms to capture attention, stop the scroll, and scale customer acquisition ruthlessly.</p>
+          
+          <div class="es-metrics-row">
+            <div class="es-metric"><span class="es-m-val">-40%</span><span class="es-m-lbl">Target CPA</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">LTV</span><span class="es-m-lbl">Optimized</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">A/B</span><span class="es-m-lbl">Testing</span></div>
           </div>
+
+          <div class="es-tags">
+            <span>Meta Ads</span><span>TikTok Ads</span><span>Snapchat</span><span>X / Twitter</span>
+          </div>
+          <!-- Add this to Service 02 (Meta/Social) -->
+          <div class="es-action" style="margin-top: 40px;">
+            <button class="btn-service-trigger" data-service="social">
+              <span class="btn-text">View Architecture</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="es-gallery ddp-tilt-gallery">
+          <div class="es-img es-img-main"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&auto=format&fit=crop&q=80" alt="Social Media Scroll"></div>
+          <div class="es-img es-img-2"><img src="https://images.unsplash.com/photo-1557838923-2985c318be48?w=600&auto=format&fit=crop&q=80" alt="Target Audience"></div>
+          <div class="es-img es-img-3"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&auto=format&fit=crop&q=80" alt="Engagement Data"></div>
+          <div class="es-img es-img-4"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&auto=format&fit=crop&q=80" alt="Creative Studio"></div>
         </div>
       </div>
 
-      <div class="svc-row reveal reveal-delay-2">
-        <div class="svc-row-num">03</div>
-        <div class="svc-image-wrap">
-          <img src="https://images.unsplash.com/photo-1683721003111-070bcc053d8b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzd8fG1hcmtldGluZ3xlbnwwfHwwfHx8MA%3D%3D" alt="Brand Authority" class="svc-img">
-        </div>
-        <div class="svc-row-content">
-          <h3 class="svc-row-title">Social Media Management</h3>
-          <p class="svc-row-desc">Building brands that command attention. Strategic organic positioning that earns trust at scale, turning casual followers into loyal, high-LTV buyers.</p>
-          <div class="svc-row-tags">
-            <span>Content Strategy</span>
-            <span>Community Growth</span>
-            <span>Brand Authority</span>
+      <!-- SERVICE 03: BRAND MANAGEMENT -->
+      <div class="elite-service-block reveal">
+        <div class="es-content">
+          <div class="es-num-watermark">03</div>
+          <div class="es-badge">Organic Positioning</div>
+          <h3 class="es-title">Elite Social Media<br><span>Management</span></h3>
+          <p class="es-desc">Building brands that command attention. Strategic organic positioning that earns trust at scale, turning casual followers into loyal, high-LTV buyers.</p>
+          
+          <div class="es-metrics-row">
+            <div class="es-metric"><span class="es-m-val">Trust</span><span class="es-m-lbl">Building</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">100k+</span><span class="es-m-lbl">Reach</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">360°</span><span class="es-m-lbl">Strategy</span></div>
           </div>
+
+          <div class="es-tags">
+            <span>Content Architecture</span><span>Community Growth</span><span>Brand Authority</span>
+          </div>
+          <div class="es-action" style="margin-top: 40px;">
+            <button class="btn-service-trigger" data-service="management">
+              <span class="btn-text">View Architecture</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="es-gallery ddp-tilt-gallery">
+          <div class="es-img es-img-main"><img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2?w=800&auto=format&fit=crop&q=80" alt="Brand Aesthetics"></div>
+          <div class="es-img es-img-2"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&auto=format&fit=crop&q=80" alt="Team Strategy"></div>
+          <div class="es-img es-img-3"><img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=600&auto=format&fit=crop&q=80" alt="Content Creation"></div>
+          <div class="es-img es-img-4"><img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&auto=format&fit=crop&q=80" alt="Editorial View"></div>
         </div>
       </div>
 
-      <div class="svc-row reveal reveal-delay-3">
-        <div class="svc-row-num">04</div>
-        <div class="svc-image-wrap">
-          <img src="https://plus.unsplash.com/premium_photo-1681488262364-8aeb1b6aac56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZSUyMGNvbW1lcmNlfGVufDB8fDB8fHww" alt="E-Commerce Scaling" class="svc-img">
-        </div>
-        <div class="svc-row-content">
-          <h3 class="svc-row-title">E-Commerce Growth</h3>
-          <p class="svc-row-desc">Full-funnel revenue operations. Turning store traffic into consistent, compounding cash flow through systematic funnel design, retargeting, and conversion rate optimization.</p>
-          <div class="svc-row-tags">
-            <span>Funnel Architecture</span>
-            <span>Retargeting</span>
-            <span>CRO</span>
-            <span>Email Ops</span>
+      <!-- SERVICE 04: E-COMMERCE -->
+      <div class="elite-service-block reveal">
+        <div class="es-content">
+          <div class="es-num-watermark">04</div>
+          <div class="es-badge">Revenue Operations</div>
+          <h3 class="es-title">E-Commerce<br><span>Scaling & Growth</span></h3>
+          <p class="es-desc">Full-funnel revenue operations. Turning store traffic into consistent, compounding cash flow through systematic funnel design, retargeting, and CRO.</p>
+          
+          <div class="es-metrics-row">
+            <div class="es-metric"><span class="es-m-val">Full</span><span class="es-m-lbl">Funnel</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">+380%</span><span class="es-m-lbl">Rev Target</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">Ops</span><span class="es-m-lbl">Automated</span></div>
           </div>
+
+          <div class="es-tags">
+            <span>Shopify</span><span>Retargeting</span><span>CRO Systems</span><span>Email Ops</span>
+          </div>
+          <div class="es-action" style="margin-top: 40px;">
+            <button class="btn-service-trigger" data-service="ecommerce">
+              <span class="btn-text">View Architecture</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="es-gallery ddp-tilt-gallery">
+          <div class="es-img es-img-main"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop&q=80" alt="Ecom Checkout"></div>
+          <div class="es-img es-img-2"><img src="https://images.unsplash.com/photo-1586880244406-556ebe35f282?w=600&auto=format&fit=crop&q=80" alt="Premium Packaging"></div>
+          <div class="es-img es-img-3"><img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=600&auto=format&fit=crop&q=80" alt="Digital Storefront"></div>
+          <div class="es-img es-img-4"><img src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?w=400&auto=format&fit=crop&q=80" alt="Tracking Logistics"></div>
         </div>
       </div>
 
     </div>
-    <div class="svc-cta-wrapper reveal">
+
+    <!-- CTA Wrapper -->
+    <div class="svc-cta-wrapper reveal" style="margin-top: 120px;">
       <a href="#apply" class="btn-elite">
-        <span class="btn-text">Hire DDP</span>
+        <span class="btn-text">Initiate Growth System</span>
         <span class="btn-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -717,6 +793,7 @@
         </span>
       </a>
     </div>
+
   </div>
 </section>
 
@@ -950,51 +1027,58 @@
     </div>
   </div>
 </section>
-
-<section id="trust" class="spotlight-section">
-  
-  <div class="spotlight-header reveal">
+<!-- ============================================================
+     TRUSTED BRANDS - MILLION DOLLAR DOUBLE MARQUEE
+============================================================ -->
+<section id="trust" class="elite-trust-section">
+  <div class="trust-header reveal">
     <div class="premium-eyebrow">
-      <span class="pulse-dot"></span> Trusted By Industry Leaders
+      <span class="pulse-dot"></span> Elite Partnerships
     </div>
-    <h3 class="spotlight-title">Architecting Revenue for <em>Elite Brands</em>.</h3>
+    <h3 class="trust-title">Architecting Revenue for <em>Industry Leaders</em>.</h3>
   </div>
 
-  <div class="spotlight-grid" id="client-grid">
-    <div class="grid-spotlight"></div>
+  <div class="marquee-master-wrapper reveal reveal-delay-1">
     
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name">Jugnu's Salon</span>
+    <div class="marquee-track-container">
+      <div class="marquee-track track-left">
+        <div class="marquee-group">
+          <div class="trust-card"><img src="Logos/butterfly.png" alt="Butterfly Taxi" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/colorplus.jpeg" alt="Colorplus" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/community.jpeg" alt="Community Residential" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/dunes.jpeg" alt="Dunes Med Spa" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/furniture.jpeg" alt="Furniture" class="brand-logo-img"></div>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <div class="trust-card"><img src="Logos/butterfly.png" alt="Butterfly Taxi" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/colorplus.jpeg" alt="Colorplus" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/community.jpeg" alt="Community Residential" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/dunes.jpeg" alt="Dunes Med Spa" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/furniture.jpeg" alt="Furniture" class="brand-logo-img"></div>
+        </div>
       </div>
     </div>
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name">Kulfa Station</span>
+
+    <div class="marquee-track-container mt-24">
+      <div class="marquee-track track-right">
+        <div class="marquee-group">
+          <div class="trust-card"><img src="Logos/gift.jpeg" alt="Gift" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/home.jpeg" alt="Home" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/pili.jpeg" alt="Pili" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/star.jpeg" alt="Star" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/trux.jpeg" alt="Trux" class="brand-logo-img"></div>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <div class="trust-card"><img src="Logos/gift.jpeg" alt="Gift" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/home.jpeg" alt="Home" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/pili.jpeg" alt="Pili" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/star.jpeg" alt="Star" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/trux.jpeg" alt="Trux" class="brand-logo-img"></div>
+        </div>
       </div>
     </div>
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name" style="letter-spacing: 2px;">TurkishFurnitureByRF</span>
-      </div>
-    </div>
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name" style="font-weight: 800;">Root<span style="color: var(--accent);">4</span>Tech</span>
-      </div>
-    </div>
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name">NexusBridge</span>
-      </div>
-    </div>
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name">Aqsa Danish Spa</span>
-      </div>
-    </div>
+
   </div>
-  
 </section>
 
 <!-- ============================================================
@@ -1254,6 +1338,119 @@
 </section>
 
 <div class="divider-line"></div>
+
+<section class="section elite-cert-section" id="certifications">
+  <div class="cert-ambient-glow"></div>
+  
+  <div class="section-inner">
+    <div class="label reveal">Verified Authority</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Official <em>Credentials</em>.</h2>
+    <p class="section-p reveal reveal-delay-2" style="max-width: 600px;">
+      In an industry full of guesswork, we rely on certified engineering. Officially vetted and recognized by the platforms that control the global attention economy.
+    </p>
+
+    <div class="cert-grid mt-64">
+      
+      <div class="cert-card ddp-tilt-card reveal">
+        <div class="cert-foil-overlay"></div>
+        <div class="cert-card-inner">
+          <div class="cert-badge-wrapper">
+            <div class="cert-badge-glow"></div>
+            <svg class="cert-svg-badge" viewBox="0 0 100 100">
+              <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="rgba(201,168,76,0.1)" stroke="var(--gold)" stroke-width="2"/>
+              <path d="M50,30 L70,50 L50,70 L30,50 Z" fill="var(--gold)"/>
+            </svg>
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer">Google Ads Certified</div>
+            <h3 class="cert-title">Search Architecture<br>& AI Bidding</h3>
+            <div class="cert-meta">
+              <span>ID: GOOG-88392A</span>
+              <span class="cert-dot">•</span>
+              <span>Active Status</span>
+            </div>
+            <a href="#" class="cert-verify-btn">Verify Credential <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-card ddp-tilt-card reveal reveal-delay-1">
+        <div class="cert-foil-overlay"></div>
+        <div class="cert-card-inner">
+          <div class="cert-badge-wrapper">
+            <div class="cert-badge-glow" style="background: rgba(6, 104, 225, 0.3);"></div>
+            <svg class="cert-svg-badge" viewBox="0 0 100 100">
+              <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="rgba(6, 104, 225, 0.05)" stroke="#0668E1" stroke-width="2"/>
+              <circle cx="50" cy="50" r="18" fill="none" stroke="#0668E1" stroke-width="4"/>
+              <circle cx="35" cy="50" r="6" fill="#0668E1"/>
+              <circle cx="65" cy="50" r="6" fill="#0668E1"/>
+            </svg>
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer" style="color: #0668E1;">Meta Blueprint Certified</div>
+            <h3 class="cert-title">Media Buying<br>Professional</h3>
+            <div class="cert-meta">
+              <span>ID: META-PRO-492</span>
+              <span class="cert-dot">•</span>
+              <span>Active Status</span>
+            </div>
+            <a href="#" class="cert-verify-btn">Verify Credential <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-card ddp-tilt-card reveal">
+        <div class="cert-foil-overlay"></div>
+        <div class="cert-card-inner">
+          <div class="cert-badge-wrapper">
+            <div class="cert-badge-glow" style="background: rgba(244, 180, 0, 0.3);"></div>
+            <svg class="cert-svg-badge" viewBox="0 0 100 100">
+              <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="rgba(244, 180, 0, 0.05)" stroke="#F4B400" stroke-width="2"/>
+              <rect x="35" y="55" width="8" height="15" fill="#F4B400"/>
+              <rect x="46" y="40" width="8" height="30" fill="#F4B400"/>
+              <rect x="57" y="25" width="8" height="45" fill="#F4B400"/>
+            </svg>
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer" style="color: #F4B400;">Google Certified</div>
+            <h3 class="cert-title">Analytics (GA4)<br>Individual Qualification</h3>
+            <div class="cert-meta">
+              <span>ID: GAIQ-7721X</span>
+              <span class="cert-dot">•</span>
+              <span>Active Status</span>
+            </div>
+            <a href="#" class="cert-verify-btn">Verify Credential <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-card ddp-tilt-card reveal reveal-delay-1">
+        <div class="cert-foil-overlay"></div>
+        <div class="cert-card-inner">
+          <div class="cert-badge-wrapper">
+            <div class="cert-badge-glow" style="background: rgba(149, 193, 31, 0.3);"></div>
+            <svg class="cert-svg-badge" viewBox="0 0 100 100">
+              <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="rgba(149, 193, 31, 0.05)" stroke="#95C11F" stroke-width="2"/>
+              <path d="M30,40 L70,40 L60,70 L40,70 Z" fill="none" stroke="#95C11F" stroke-width="3"/>
+              <circle cx="50" cy="55" r="5" fill="#95C11F"/>
+            </svg>
+          </div>
+          <div class="cert-content">
+            <div class="cert-issuer" style="color: #95C11F;">Shopify Partner</div>
+            <h3 class="cert-title">E-Commerce Growth<br>& CRO Specialist</h3>
+            <div class="cert-meta">
+              <span>ID: SHP-991AOP</span>
+              <span class="cert-dot">•</span>
+              <span>Active Status</span>
+            </div>
+            <a href="#" class="cert-verify-btn">Verify Credential <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <section class="section" id="insights">
   <div class="section-inner">
@@ -1600,6 +1797,51 @@
     }
   });
 </script>
+<!-- ============================================================
+     MILLION DOLLAR DYNAMIC SERVICE MODAL
+============================================================ -->
+<div class="ddp-service-modal-overlay" id="serviceModal">
+  <div class="ddp-service-modal-backdrop" id="serviceModalBackdrop"></div>
+  
+  <div class="ddp-service-modal">
+    <button class="ddp-modal-close" id="closeServiceModal">&times;</button>
+    
+    <div class="ddp-modal-grid">
+      
+      <!-- Left: Context & CTA -->
+      <div class="ddp-modal-left">
+        <div class="ddp-modal-badge" id="modalBadge">...</div>
+        <h2 class="ddp-modal-title" id="modalTitle">...</h2>
+        <p class="ddp-modal-desc" id="modalDesc">...</p>
+        
+        <!-- CALENDLY CTA -->
+        <!-- CALENDLY CTA -->
+        <a href="https://calendly.com/danidigitalpro/30min" target="_blank" rel="noopener noreferrer" class="btn-gold ddp-modal-cta">
+          Schedule Strategy Call <span style="margin-left:8px;">→</span>
+        </a>
+      </div>
 
+      <!-- Right: Deliverables & Tech Stack -->
+      <div class="ddp-modal-right">
+        
+        <div class="ddp-modal-section-title">
+          <span class="pulse-dot-small"></span> Engineering Deliverables
+        </div>
+        <ul class="ddp-modal-deliverables" id="modalDeliverables">
+          <!-- JS will inject <li> items here -->
+        </ul>
+
+        <div class="ddp-modal-section-title mt-40">
+          <span class="pulse-dot-small"></span> Technology & Architecture
+        </div>
+        <div class="ddp-modal-keywords" id="modalKeywords">
+          <!-- JS will inject <span> tags here -->
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
 </body>
 </html>
