@@ -1,61 +1,72 @@
 document.addEventListener("DOMContentLoaded", () => {
   
   // ============================================================
-  // ENTERPRISE GRAPH PRELOADER
+  // APEX BRAND PRELOADER (PURE VECTOR IGNITION)
   // ============================================================
   const preloader = document.getElementById('premium-preloader');
   const countEl = document.getElementById('loader-count');
-  const growthLine = document.getElementById('growth-line');
-  const graphFill = document.getElementById('graph-fill');
+  const paths = document.querySelectorAll('.ddp-path');
+  const svgCanvas = document.querySelector('.ddp-vector-logo');
   
-  if (preloader && countEl && growthLine && graphFill) {
-    document.body.classList.add('loading-lock'); // Lock scroll
+  if (preloader && countEl && paths.length > 0) {
+    document.body.classList.add('loading-lock'); 
     
-    let progress = 0;
-    const totalPathLength = 400; // Matches CSS stroke-dasharray
+    // Trigger typography fade-in
+    setTimeout(() => {
+      preloader.classList.add('text-active');
+    }, 100);
     
-    growthLine.style.strokeDashoffset = totalPathLength;
-    graphFill.style.width = '0%';
+    // 1. Calculate Exact Mathematical Length of Each Complex Shape
+    const pathData = Array.from(paths).map(path => {
+      const length = path.getTotalLength();
+      path.style.strokeDasharray = length;
+      path.style.strokeDashoffset = length; // Hide initially
+      return { el: path, length: length };
+    });
 
-    // SLOWED DOWN: Changed interval from 25ms to 45ms
+    let progress = 0;
+
     const interval = setInterval(() => {
-      
-      // SLOWED DOWN: Now it only jumps by 1% or 2% at a time (used to be up to 3%)
+      // Steady data compounding
       progress += Math.floor(Math.random() * 2) + 1; 
-      
       if (progress > 100) progress = 100;
 
-      // 1. Update the huge gold number
+      // Update the gold counter
       countEl.innerText = progress;
 
-      // 2. Draw the SVG curve
-      const offset = totalPathLength - ((progress / 100) * totalPathLength);
-      growthLine.style.strokeDashoffset = offset;
+      // 2. Draw lines dynamically
+      const progressDecimal = progress / 100;
+      
+      pathData.forEach(item => {
+        // Offset hits 0 perfectly at 100%
+        item.el.style.strokeDashoffset = item.length - (item.length * progressDecimal);
+      });
 
-      // 3. Expand the glowing gradient box beneath the line
-      graphFill.style.width = progress + '%';
-
+      // 3. The Solid Ignition Sequence
       if (progress === 100) {
         clearInterval(interval);
         
-        // LINGER EFFECT: Waits slightly longer at 100% so the user can absorb the visual
+        // Ignite the solid metallic fill and glow
+        if (svgCanvas) {
+          svgCanvas.classList.add('filled');
+        }
+        
+        // Linger to show the final solid 3D logo, then slide the curtain
         setTimeout(() => {
           preloader.classList.add('loaded');
-          // ==========================================
-          // TRIGGER HERO ANIMATION HERE
-          // ==========================================
+          
+          // Trigger Hero Entrance Animations
           const heroElements = document.querySelectorAll('.hero-elem');
           heroElements.forEach(el => el.classList.add('animate'));
-          // ==========================================
           
-          // Unlock the scroll once the preloader slides away
+          // Restore Scroll
           setTimeout(() => {
             document.body.classList.remove('loading-lock');
           }, 800); 
           
-        }, 800); // Increased from 600ms to 800ms
+        }, 1100); // Linger for over a second so the user registers the logo assembly
       }
-    }, 45); // <-- This is the master speed control. Increase to 60 to make it even slower.
+    }, 35); 
   }
 
  // ============================================================
@@ -260,10 +271,17 @@ bars.forEach(b => barObs.observe(b));
 /* ============================================================
    SMOOTH ANCHOR LINKS
 ============================================================ */
+/* ============================================================
+   SMOOTH ANCHOR LINKS (MODAL BYPASS UPGRADE)
+============================================================ */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const id = a.getAttribute('href');
-    if (id === '#') return;
+    
+    // CRITICAL FIX: If the link is '#' or '#apply', do NOT scroll.
+    // This allows our Modal Engine to hijack the click without the page jumping.
+    if (id === '#' || id === '#apply') return; 
+    
     const target = document.querySelector(id);
     if (target) {
       e.preventDefault();
@@ -272,44 +290,60 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-
-// ============================================================
-// IMAGE ZOOM LIGHTBOX LOGIC
-// ============================================================
+/* ============================================================
+   MILLION DOLLAR UNIVERSAL LIGHTBOX ENGINE
+============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('image-modal');
   const modalImg = document.getElementById('modal-img');
   const closeBtn = document.querySelector('.modal-close');
-  const images = document.querySelectorAll('.result-image img');
 
-  // 1. Open modal on image click
-  images.forEach(img => {
-    img.addEventListener('click', () => {
-      modalImg.src = img.src; // Copies the high-res image source
-      modal.classList.add('active'); // Fades in the modal
+  if (!modal || !modalImg) {
+    console.warn("DDP Engine: Lightbox elements missing from DOM.");
+    return;
+  }
+
+  // 1. THE UNIVERSAL INTERCEPTOR
+  // By listening on the body, we bypass all CSS z-index and pointer-event bugs.
+  document.body.addEventListener('click', (e) => {
+    
+    // Look for a click anywhere inside our Result Cards or Certificate Stacks
+    const clickTarget = e.target.closest('.result-image, .cert-stack-image, .cert-stack-card');
+    
+    if (clickTarget) {
+      e.preventDefault(); // Stop default browser behaviors
+      
+      // Extract the image source hiding inside the clicked container
+      const targetImage = clickTarget.querySelector('img');
+      
+      if (targetImage && targetImage.src) {
+        modalImg.src = targetImage.src; 
+        modal.classList.add('active'); // Fire the modal
+      }
+    }
+  });
+
+  // 2. CLOSE LOGIC: The 'X' Button
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
     });
-  });
+  }
 
-  // 2. Close modal when clicking the 'X'
-  closeBtn.addEventListener('click', () => {
-    modal.classList.remove('active');
-  });
-
-  // 3. Close modal when clicking anywhere on the dark background
+  // 3. CLOSE LOGIC: Clicking the dark background
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       modal.classList.remove('active');
     }
   });
 
-  // 4. Professional touch: Close modal when pressing the 'Escape' key
+  // 4. CLOSE LOGIC: The Escape Key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
       modal.classList.remove('active');
     }
   });
 });
-
 
 // Magnetic Spotlight Logic for the Trust Grid
   const clientGrid = document.getElementById('client-grid');
@@ -652,4 +686,89 @@ document.addEventListener('DOMContentLoaded', () => {
       closeModal();
     }
   });
+});
+
+
+// ============================================================
+// MILLION DOLLAR CTA & FORMSPREE ENGINE
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const contactModal = document.getElementById('contactModal');
+  const closeContactModal = document.getElementById('closeContactModal');
+  const form = document.getElementById('ddpStrategyForm');
+  const successState = document.getElementById('formSuccessState');
+  const submitBtn = document.getElementById('frmSubmitBtn');
+
+  if (!contactModal) return;
+
+  // 1. CTA HIJACKER: Find all buttons meant to trigger contact
+  const ctaButtons = document.querySelectorAll('a[href="#apply"], a[href^="mailto:daniidigitalpro"]');
+  
+  ctaButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault(); // Stop page jump or email client open
+      contactModal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Lock background scrolling
+    });
+  });
+
+  // 2. MODAL CLOSING LOGIC
+  const closePortal = () => {
+    contactModal.classList.remove('active');
+    document.body.style.overflow = ''; 
+    
+    // Optional: Reset form and hide success state after modal closes
+    setTimeout(() => {
+      if(form) form.reset();
+      if(successState) successState.classList.remove('active');
+    }, 500);
+  };
+
+  closeContactModal.addEventListener('click', closePortal);
+  document.getElementById('contactModalBackdrop').addEventListener('click', closePortal);
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && contactModal.classList.contains('active')) {
+      closePortal();
+    }
+  });
+
+  // 3. ASYNCHRONOUS FORMSPREE SUBMISSION
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // Prevent standard page reload
+      
+      // UI Update: Sending state
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'Transmission in progress...';
+      submitBtn.style.opacity = '0.7';
+      submitBtn.style.pointerEvents = 'none';
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: new FormData(form),
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // Success! Trigger the glassmorphism success screen
+          successState.classList.add('active');
+        } else {
+          // API error
+          alert("Network Error: Could not verify transmission. Please email us directly.");
+        }
+      } catch (error) {
+        // Network/CORS error
+        alert("System Error: Could not connect to endpoints. Please email us directly.");
+      } finally {
+        // Reset button state
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.pointerEvents = 'auto';
+      }
+    });
+  }
 });
