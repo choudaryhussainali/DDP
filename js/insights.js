@@ -186,3 +186,85 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+// Append to insights.js
+
+// ============================================================
+// MILLION DOLLAR CTA & FORMSPREE ENGINE
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const contactModal = document.getElementById('contactModal');
+  const closeContactModal = document.getElementById('closeContactModal');
+  const form = document.getElementById('ddpStrategyForm');
+  const successState = document.getElementById('formSuccessState');
+  const submitBtn = document.getElementById('frmSubmitBtn');
+
+  if (!contactModal) return;
+
+  // 1. CTA HIJACKER: Aggressive targeting to prevent redirects
+  const ctaButtons = document.querySelectorAll('a[href="#apply"], a[href="index.html#apply"], a[href^="mailto:"]');
+  
+  ctaButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault(); // Kills the default jump/redirect dead
+      contactModal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Lock background scrolling
+    });
+  });
+
+  // 2. MODAL CLOSING LOGIC
+  const closePortal = () => {
+    contactModal.classList.remove('active');
+    document.body.style.overflow = ''; 
+    
+    // Reset form and hide success state silently after modal slides away
+    setTimeout(() => {
+      if(form) form.reset();
+      if(successState) successState.classList.remove('active');
+    }, 500);
+  };
+
+  closeContactModal.addEventListener('click', closePortal);
+  document.getElementById('contactModalBackdrop').addEventListener('click', closePortal);
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && contactModal.classList.contains('active')) {
+      closePortal();
+    }
+  });
+
+  // 3. ASYNCHRONOUS FORMSPREE SUBMISSION
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); 
+      
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'Transmission in progress...';
+      submitBtn.style.opacity = '0.7';
+      submitBtn.style.pointerEvents = 'none';
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: new FormData(form),
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          successState.classList.add('active');
+        } else {
+          alert("Network Error: Could not verify transmission. Please email us directly.");
+        }
+      } catch (error) {
+        alert("System Error: Could not connect to endpoints. Please email us directly.");
+      } finally {
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.pointerEvents = 'auto';
+      }
+    });
+  }
+});

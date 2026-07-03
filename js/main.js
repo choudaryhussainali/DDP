@@ -1,217 +1,251 @@
 document.addEventListener("DOMContentLoaded", () => {
   
   // ============================================================
-  // ENTERPRISE GRAPH PRELOADER
+  // APEX BRAND PRELOADER
   // ============================================================
   const preloader = document.getElementById('premium-preloader');
   const countEl = document.getElementById('loader-count');
-  const growthLine = document.getElementById('growth-line');
-  const graphFill = document.getElementById('graph-fill');
+  const paths = document.querySelectorAll('.ddp-path');
+  const svgCanvas = document.querySelector('.ddp-vector-logo');
   
-  if (preloader && countEl && growthLine && graphFill) {
-    document.body.classList.add('loading-lock'); // Lock scroll
+  if (preloader && countEl && paths.length > 0) {
+    document.body.classList.add('loading-lock'); 
     
-    let progress = 0;
-    const totalPathLength = 400; // Matches CSS stroke-dasharray
+    setTimeout(() => { preloader.classList.add('text-active'); }, 100);
     
-    growthLine.style.strokeDashoffset = totalPathLength;
-    graphFill.style.width = '0%';
+    const pathData = Array.from(paths).map(path => {
+      const length = path.getTotalLength();
+      path.style.strokeDasharray = length;
+      path.style.strokeDashoffset = length; 
+      return { el: path, length: length };
+    });
 
-    // SLOWED DOWN: Changed interval from 25ms to 45ms
+    let progress = 0;
+
     const interval = setInterval(() => {
-      
-      // SLOWED DOWN: Now it only jumps by 1% or 2% at a time (used to be up to 3%)
       progress += Math.floor(Math.random() * 2) + 1; 
-      
       if (progress > 100) progress = 100;
 
-      // 1. Update the huge gold number
       countEl.innerText = progress;
 
-      // 2. Draw the SVG curve
-      const offset = totalPathLength - ((progress / 100) * totalPathLength);
-      growthLine.style.strokeDashoffset = offset;
-
-      // 3. Expand the glowing gradient box beneath the line
-      graphFill.style.width = progress + '%';
+      const drawProgress = Math.min(progress / 86, 1);
+      
+      pathData.forEach(item => {
+        item.el.style.strokeDashoffset = item.length - (item.length * drawProgress);
+      });
 
       if (progress === 100) {
         clearInterval(interval);
         
-        // LINGER EFFECT: Waits slightly longer at 100% so the user can absorb the visual
+        if (svgCanvas) { svgCanvas.classList.add('filled'); }
+        
         setTimeout(() => {
           preloader.classList.add('loaded');
-          // ==========================================
-          // TRIGGER HERO ANIMATION HERE
-          // ==========================================
+          
           const heroElements = document.querySelectorAll('.hero-elem');
           heroElements.forEach(el => el.classList.add('animate'));
-          // ==========================================
           
-          // Unlock the scroll once the preloader slides away
           setTimeout(() => {
             document.body.classList.remove('loading-lock');
           }, 800); 
           
-        }, 800); // Increased from 600ms to 800ms
+        }, 1100); 
       }
-    }, 45); // <-- This is the master speed control. Increase to 60 to make it even slower.
+    }, 35); 
   }
 
-  // ... rest of your main.js code below ...
+  // ============================================================
+  // 3D MAGNETIC TILT GALLERIES
+  // ============================================================
+  const tiltGalleries = document.querySelectorAll('.ddp-tilt-gallery, .ddp-tilt-card');
+  tiltGalleries.forEach(gallery => {
+    gallery.addEventListener('mousemove', (e) => {
+      if (window.innerWidth < 1024) return; 
+      const rect = gallery.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const xRotate = -(y / 25); 
+      const yRotate = (x / 25);
+      
+      let target = gallery.querySelector('.cert-card-inner');
+      if (!target) target = gallery; // Fallback if it's the main gallery
+      
+      target.style.transform = `rotateX(${xRotate}deg) rotateY(${yRotate}deg)`;
+      target.style.transition = 'transform 0.1s ease-out';
+    });
+    
+    gallery.addEventListener('mouseleave', () => {
+      let target = gallery.querySelector('.cert-card-inner');
+      if (!target) target = gallery;
+      target.style.transform = `rotateX(0deg) rotateY(0deg)`;
+      target.style.transition = 'transform 0.8s cubic-bezier(0.19, 1, 0.22, 1)';
+    });
+  });
 });
 
-/* ============================================================
-   CURSOR
-============================================================ */
+// ============================================================
+// BULLETPROOF CURSOR ENGINE
+// ============================================================
 const dot = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
 let mx = 0, my = 0, rx = 0, ry = 0;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  dot.style.left = mx + 'px';
-  dot.style.top = my + 'px';
-});
+if (dot && ring) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top = my + 'px';
+  });
 
-function animateRing() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
-  requestAnimationFrame(animateRing);
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .svc-card, .insight-card, .testi-card, .cert-verify-btn').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      dot.style.width = '12px';
+      dot.style.height = '12px';
+      ring.style.width = '60px';
+      ring.style.height = '60px';
+      ring.style.borderColor = 'rgba(201,168,76,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      dot.style.width = '8px';
+      dot.style.height = '8px';
+      ring.style.width = '40px';
+      ring.style.height = '40px';
+      ring.style.borderColor = 'rgba(201,168,76,0.5)';
+    });
+  });
 }
-animateRing();
 
-document.querySelectorAll('a, button, .svc-card, .insight-card, .testi-card').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    dot.style.width = '12px';
-    dot.style.height = '12px';
-    ring.style.width = '60px';
-    ring.style.height = '60px';
-    ring.style.borderColor = 'rgba(201,168,76,0.8)';
-  });
-  el.addEventListener('mouseleave', () => {
-    dot.style.width = '8px';
-    dot.style.height = '8px';
-    ring.style.width = '40px';
-    ring.style.height = '40px';
-    ring.style.borderColor = 'rgba(201,168,76,0.5)';
-  });
-});
-
-/* ============================================================
-   NAVBAR SCROLL
-============================================================ */
+// ============================================================
+// NAVBAR SCROLL
+// ============================================================
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 40);
-});
+if (navbar) {
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+}
 
-/* ============================================================
-   PARTICLES
-============================================================ */
+// ============================================================
+// PARTICLES
+// ============================================================
 const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let W, H, particles = [];
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
 
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 1.5 + 0.3,
+      dx: (Math.random() - 0.5) * 0.3,
+      dy: (Math.random() - 0.5) * 0.3,
+      o: Math.random() * 0.5 + 0.1,
+    });
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,168,76,${p.o})`;
+      ctx.fill();
+      p.x += p.dx; p.y += p.dy;
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
 }
-resize();
-window.addEventListener('resize', resize);
 
-for (let i = 0; i < 60; i++) {
-  particles.push({
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    r: Math.random() * 1.5 + 0.3,
-    dx: (Math.random() - 0.5) * 0.3,
-    dy: (Math.random() - 0.5) * 0.3,
-    o: Math.random() * 0.5 + 0.1,
-  });
-}
-
-function drawParticles() {
-  ctx.clearRect(0, 0, W, H);
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(201,168,76,${p.o})`;
-    ctx.fill();
-    p.x += p.dx; p.y += p.dy;
-    if (p.x < 0) p.x = W;
-    if (p.x > W) p.x = 0;
-    if (p.y < 0) p.y = H;
-    if (p.y > H) p.y = 0;
-  });
-  requestAnimationFrame(drawParticles);
-}
-drawParticles();
-
-/* ============================================================
-   SCROLL REVEAL
-============================================================ */
+// ============================================================
+// SCROLL REVEAL
+// ============================================================
 const revealEls = document.querySelectorAll('.reveal');
-const revObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in-view');
-    }
-  });
-}, { threshold: 0.08 });
-revealEls.forEach(el => revObs.observe(el));
+if (revealEls.length > 0) {
+  const revObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.08 });
+  revealEls.forEach(el => revObs.observe(el));
+}
 
-/* ============================================================
-   COUNTER ANIMATION (UPGRADED FOR ANY SPAN)
-============================================================ */
+// ============================================================
+// COUNTER ANIMATION
+// ============================================================
 const counters = document.querySelectorAll('.metric-num[data-count]');
-const cntObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el = e.target;
-      const target = parseInt(el.getAttribute('data-count'));
-      const prefix = el.getAttribute('data-prefix') || ''; 
-      const span = el.querySelector('span'); // Now grabs ANY span style
-      let current = 0;
-      const step = target / 40;
-      
-      const t = setInterval(() => {
-        current += step;
-        if (current >= target) {
-          current = target;
-          clearInterval(t);
-        }
-        el.innerHTML = prefix + Math.floor(current) + (span ? span.outerHTML : '');
-      }, 40);
-      
-      cntObs.unobserve(el);
-    }
-  });
-}, { threshold: 0.3 });
-counters.forEach(el => cntObs.observe(el));
+if (counters.length > 0) {
+  const cntObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = parseInt(el.getAttribute('data-count'));
+        const prefix = el.getAttribute('data-prefix') || ''; 
+        const span = el.querySelector('span'); 
+        let current = 0;
+        const step = target / 40;
+        
+        const t = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(t);
+          }
+          el.innerHTML = prefix + Math.floor(current) + (span ? span.outerHTML : '');
+        }, 40);
+        
+        cntObs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+  counters.forEach(el => cntObs.observe(el));
+}
 
-/* ============================================================
-   METRIC BAR ANIMATION
-============================================================ */
+// ============================================================
+// METRIC BAR ANIMATION
+// ============================================================
 const bars = document.querySelectorAll('.metric-bar-fill');
-const barObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.animation = 'barFill 1.5s ease forwards';
-    }
-  });
-}, { threshold: 0.3 });
-bars.forEach(b => barObs.observe(b));
+if (bars.length > 0) {
+  const barObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'barFill 1.5s ease forwards';
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b => barObs.observe(b));
+}
 
-/* ============================================================
-   SMOOTH ANCHOR LINKS
-============================================================ */
+// ============================================================
+// SMOOTH ANCHOR LINKS
+// ============================================================
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const id = a.getAttribute('href');
-    if (id === '#') return;
+    if (id === '#' || id === '#apply') return; 
     const target = document.querySelector(id);
     if (target) {
       e.preventDefault();
@@ -220,37 +254,40 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-
 // ============================================================
-// IMAGE ZOOM LIGHTBOX LOGIC
+// LIGHTBOX ENGINE
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('image-modal');
   const modalImg = document.getElementById('modal-img');
   const closeBtn = document.querySelector('.modal-close');
-  const images = document.querySelectorAll('.result-image img');
 
-  // 1. Open modal on image click
-  images.forEach(img => {
-    img.addEventListener('click', () => {
-      modalImg.src = img.src; // Copies the high-res image source
-      modal.classList.add('active'); // Fades in the modal
+  if (!modal || !modalImg) return;
+
+  document.body.addEventListener('click', (e) => {
+    const clickTarget = e.target.closest('.result-image, .cert-stack-image, .cert-stack-card');
+    if (clickTarget) {
+      e.preventDefault(); 
+      const targetImage = clickTarget.querySelector('img');
+      if (targetImage && targetImage.src) {
+        modalImg.src = targetImage.src; 
+        modal.classList.add('active'); 
+      }
+    }
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
     });
-  });
+  }
 
-  // 2. Close modal when clicking the 'X'
-  closeBtn.addEventListener('click', () => {
-    modal.classList.remove('active');
-  });
-
-  // 3. Close modal when clicking anywhere on the dark background
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       modal.classList.remove('active');
     }
   });
 
-  // 4. Professional touch: Close modal when pressing the 'Escape' key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
       modal.classList.remove('active');
@@ -258,40 +295,36 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// ============================================================
+// MAGNETIC SPOTLIGHT
+// ============================================================
+const clientGrid = document.getElementById('client-grid');
+if (clientGrid) {
+  clientGrid.addEventListener('mousemove', (e) => {
+    const rect = clientGrid.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    clientGrid.style.setProperty('--mouse-x', `${x}px`);
+    clientGrid.style.setProperty('--mouse-y', `${y}px`);
+  });
+}
 
-// Magnetic Spotlight Logic for the Trust Grid
-  const clientGrid = document.getElementById('client-grid');
-  
-  if (clientGrid) {
-    clientGrid.addEventListener('mousemove', (e) => {
-      const rect = clientGrid.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      clientGrid.style.setProperty('--mouse-x', `${x}px`);
-      clientGrid.style.setProperty('--mouse-y', `${y}px`);
-    });
-  }
-
-
-
-  /* ============================================================
-   LIVE DASHBOARD SIMULATION ENGINE (DDP)
-   Encapsulated to protect global scope
-============================================================ */
+// ============================================================
+// LIVE DASHBOARD SIMULATION ENGINE (DDP)
+// ============================================================
 (() => {
   const dashFeedData = [
-    { type:'review',  user:'@verified_Buyer',  avatar:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Shopify',   text:'"The conversion rate on this new landing page is unprecedented. My ROAS just hit 4.5x this week." ', time:'just now' },
-    { type:'dm',      user:'@founder_Alex',    avatar:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop', color:'var(--dash-lav)', platform:'Instagram', text:'Just saw the new analytics dashboard. Can we scale ad spend by 20% next week?', time:'1m ago' },
-    { type:'review',  user:'@Sarah_Style',     avatar:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop', color:'var(--gold)', platform:'TrustPilot',text:'"Best agency experience. They completely overhauled our UI/UX and sales are up 40% YoY." ', time:'3m ago' },
-    { type:'comment', user:'@glowgirl_Mia',    avatar:'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'Instagram', text:'Absolutely obsessed with this new campaign sequence.', time:'4m ago' },
-    { type:'dm',      user:'@retailer_Pia',    avatar:'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop', color:'var(--dash-lav)', platform:'TikTok',    text:'Hi. We would love to stock your product in our 12 stores. Can we connect?', time:'22m ago' }
+    { type:'optimization', user:'Cold Traffic Launched — Meta Advantage+', avatar:'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'Meta', text:'New video creatives live to a fresh audience.', time:'just now' },
+    { type:'optimization', user:'Retargeting Funnel Active — 14-day window', avatar:'https://images.unsplash.com/photo-1557838923-2985c318be48?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'Meta', text:'Re-engaging website visitors and add-to-cart drop-offs.', time:'just now' },
+    { type:'optimization', user:'Budget Scaled +20% — winning ad set', avatar:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'Google', text:'Shifted spend to the top-performing campaign.', time:'just now' },
+    { type:'optimization', user:'Lookalike Audience Added — Google', avatar:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&h=100&fit=crop', color:'var(--dash-lav)', platform:'Google', text:'1% lookalike built from past buyers.', time:'1m ago' },
+    { type:'result', user:'Landing Page Test Live — Variant B winning', avatar:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Landing Page', text:'Higher conversion rate on the new page layout.', time:'3m ago' },
+    { type:'result', user:'ROAS Target Hit — 8.6× this week', avatar:'https://images.unsplash.com/photo-1661956602116-aa6865609028?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Google', text:'Target exceeded this week. Engine scaling.', time:'5m ago' }
   ];
 
   const dashLiveUpdates = [
-    { type:'review',  user:'@Ecom_Giant',      avatar:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Shopify',   text:'"The Speed-to-Lead strategy implemented here is flawless. Closing 3x more high-ticket clients." ', time:'just now' },
-    { type:'dm',      user:'@luxeretail_HQ',   avatar:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop', color:'var(--dash-lav)', platform:'Instagram', text:'Interested in a brand collab — are you open to a $50k retainer discussion?', time:'just now' },
-    { type:'review',  user:'@B2B_Partner',     avatar:'https://images.unsplash.com/photo-1552058544-f2b08422138a?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Google',text:'"The custom API integrations saved our team 20 hours a week. Masterful." ', time:'just now' },
+    { type:'optimization', user:'Creative Refresh — TikTok', avatar:'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'TikTok', text:'Injected 3 new UGC hooks into top of funnel.', time:'just now' },
+    { type:'result', user:'CPA Dropped by 14%', avatar:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Meta', text:'Algorithm stabilized. Acquisition cost dropping.', time:'just now' }
   ];
 
   const icons = {
@@ -304,9 +337,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let feedItems = [...dashFeedData];
 
   const typeConfig = {
-    review:  { label:'Conversion', cls:'dash-chip-review' },
-    comment: { label:'Engagement', cls:'dash-chip-comment' },
-    dm:      { label:'Lead',       cls:'dash-chip-dm' },
+    result:       { label:'Performance', cls:'dash-chip-review' },
+    optimization: { label:'Targeting',   cls:'dash-chip-comment' },
+    dm:           { label:'Lead',        cls:'dash-chip-dm' },
   };
 
   window.dashSetTab = function(btn, tab) {
@@ -322,8 +355,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!prependNew) list.innerHTML = '';
 
     const filtered = currentTab === 'all' ? items
-      : currentTab === 'reviews' ? items.filter(i => i.type === 'review')
-      : items.filter(i => i.type === 'dm');
+      : currentTab === 'optimizations' ? items.filter(i => i.type === 'optimization')
+      : items.filter(i => i.type === 'result');
 
     if (prependNew) {
       const item = filtered[0];
@@ -342,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function dashBuildFeedItem(item, isNew) {
-    const cfg = typeConfig[item.type] || typeConfig.comment;
+    const cfg = typeConfig[item.type] || typeConfig.optimization;
     const div = document.createElement('div');
     div.className = 'dash-feed-item' + (isNew ? ' new-item' : '');
 
@@ -403,9 +436,15 @@ document.addEventListener('DOMContentLoaded', () => {
   function initDash() {
     dashRenderFeed(feedItems);
     dashAnimateCounter('dashKpiEngagement', 'dashBarEngagement', 12.4, '%', 88);
-    dashAnimateCounter('dashKpiImpressions', 'dashBarImpressions', 312800, '', 78, dashFormatNum);
-    dashAnimateCounter('dashKpiLeads', 'dashBarLeads', 1582, '', 68);
+    dashAnimateCounter('dashKpiImpressions', 'dashBarImpressions', 358000, '', 78, dashFormatNum);
+    dashAnimateCounter('dashKpiLeads', 'dashBarLeads', 1625, '', 68);
     dashAnimateCounter('dashKpiConversion', 'dashBarConversion', 5.8, '%', 52);
+    
+    // Safety check for the new ROAS tile (won't crash if HTML isn't added yet)
+    const roasTile = document.getElementById('dashKpiRoasRight');
+    if(roasTile) {
+        dashAnimateCounter('dashKpiRoasRight', 'dashBarRoasRight', 8.6, '×', 86);
+    }
 
     setInterval(() => {
       const newItem = dashLiveUpdates[liveIdx % dashLiveUpdates.length];
@@ -414,10 +453,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (feedItems.length > 30) feedItems.pop(); 
       dashRenderFeed([newItem], true);
 
-      if (newItem.type === 'dm') {
-        dashShowToast(icons.msg, 'High-Ticket Lead Captured', `${newItem.user} entered the pipeline.`, 'var(--dash-lav)');
-      } else if (newItem.type === 'review') {
-        dashShowToast(icons.star, 'Conversion Logged', `High-ROAS event tracked from ${newItem.user}.`, 'var(--gold)');
+      if (newItem.type === 'result') {
+        dashShowToast(icons.star, 'Conversion Logged', 'New conversion tracked — Meta retargeting campaign', 'var(--gold)');
       }
     }, 7000);
 
@@ -434,13 +471,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 8500);
   }
 
-  // Use Intersection Observer to trigger dashboard animations only when it scrolls into view
   window.addEventListener('DOMContentLoaded', () => {
     const dashSection = document.getElementById('live-operations');
     if (!dashSection) return;
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        setTimeout(initDash, 400); // slight delay to align with scroll reveal
+        setTimeout(initDash, 400); 
         observer.disconnect();
       }
     }, { threshold: 0.2 });
@@ -448,4 +484,199 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
+// ============================================================
+// DYNAMIC SERVICE MODAL ENGINE
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const serviceData = {
+    sem: {
+      badge: "High Intent Capture",
+      title: "AI-Search Engine Marketing",
+      desc: "We don't just bid on keywords; we intercept high-intent buyers exactly when they are searching for a solution. Utilizing AI-driven bid strategies, we engineer Google Ads architectures that consistently output predictable ROI.",
+      deliverables: [
+        "Complete Account Restructure & Audit",
+        "AI Bid Strategy (tROAS & tCPA) Implementation",
+        "Negative Keyword Sculpting & Protection",
+        "Conversion Tracking & GTM Server-Side Setup",
+        "Weekly Performance Engineering & Reporting"
+      ],
+      keywords: ["Performance Max", "Target ROAS", "Search Intent", "RLSA", "Google Ads"]
+    },
+    social: {
+      badge: "Algorithmic Authority",
+      title: "AI-Social Media Funnels",
+      desc: "Stop running random ads to cold audiences. We design multi-stage video and static funnels that guide users from absolute strangers to high-LTV loyalists using machine learning optimization.",
+      deliverables: [
+        "Multi-Stage Funnel Architecture Mapping",
+        "Dynamic Creative Testing & Iteration",
+        "Meta Pixel & Conversions API (CAPI) Integration",
+        "Lookalike Audience Scaling Protocols",
+        "High-Velocity Retargeting Loops"
+      ],
+      keywords: ["Meta Ads", "TikTok Business", "Advantage+", "CPA Optimization", "Dark Posts"]
+    },
+    management: {
+      badge: "Organic Positioning",
+      title: "Elite Brand Management",
+      desc: "True brand authority cannot be bought; it must be engineered. We take over your organic presence to build trust signals at scale, creating an ecosystem that converts followers into buyers.",
+      deliverables: [
+        "360° Brand Strategy & Visual Audit",
+        "High-End Asset Creation & Curation",
+        "Community Management & Response Algorithms",
+        "Engagement Rate Optimization Tactics",
+        "Monthly Analytics & Growth Deep-Dive"
+      ],
+      keywords: ["Organic Reach", "Brand Authority", "Content Calendar", "Viral Engineering", "Trust Signals"]
+    },
+    ecom: {
+      badge: "Revenue Operations",
+      title: "E-Commerce Scaling",
+      desc: "We fix the leaks in your bucket before turning on the traffic firehose. A comprehensive overhaul of your post-click experience to maximize AOV (Average Order Value) and compound your cash flow.",
+      deliverables: [
+        "Shopify Checkout Friction Optimization",
+        "Post-Purchase Upsell Flow Design",
+        "Cart Abandonment Email Architecture",
+        "LTV (Lifetime Value) Maximization Strategy",
+        "Omnichannel Scaling Systems (Google + Meta)"
+      ],
+      keywords: ["CRO", "Klaviyo Flows", "AOV Expansion", "Customer Retention", "Liquid Code"]
+    }
+  };
 
+  const modalOverlay = document.getElementById('serviceModal');
+  const modalBackdrop = document.getElementById('serviceModalBackdrop');
+  const closeBtn = document.getElementById('closeServiceModal');
+  
+  const mBadge = document.getElementById('modalBadge');
+  const mTitle = document.getElementById('modalTitle');
+  const mDesc = document.getElementById('modalDesc');
+  const mDeliverables = document.getElementById('modalDeliverables');
+  const mKeywords = document.getElementById('modalKeywords');
+
+  const triggers = document.querySelectorAll('.btn-service-trigger');
+
+  function openModal(serviceKey) {
+    const data = serviceData[serviceKey];
+    if(!data) return;
+
+    if(mBadge) mBadge.textContent = data.badge;
+    if(mTitle) mTitle.innerHTML = data.title;
+    if(mDesc) mDesc.textContent = data.desc;
+
+    if(mDeliverables) {
+      mDeliverables.innerHTML = '';
+      data.deliverables.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        mDeliverables.appendChild(li);
+      });
+    }
+
+    if(mKeywords) {
+      mKeywords.innerHTML = '';
+      data.keywords.forEach(kw => {
+        const span = document.createElement('span');
+        span.textContent = kw;
+        mKeywords.appendChild(span);
+      });
+    }
+
+    if(modalOverlay) {
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden'; 
+    }
+  }
+
+  function closeModal() {
+    if(modalOverlay) {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = ''; 
+    }
+  }
+
+  triggers.forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.getAttribute('data-service')));
+  });
+
+  if(closeBtn) closeBtn.addEventListener('click', closeModal);
+  if(modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('active')) {
+      closeModal();
+    }
+  });
+});
+
+// ============================================================
+// CTA & FORMSPREE ENGINE
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const contactModal = document.getElementById('contactModal');
+  const closeContactModal = document.getElementById('closeContactModal');
+  const form = document.getElementById('ddpStrategyForm');
+  const successState = document.getElementById('formSuccessState');
+  const submitBtn = document.getElementById('frmSubmitBtn');
+
+  if (!contactModal) return;
+
+  const ctaButtons = document.querySelectorAll('a[href="#apply"], a[href^="mailto:"]');
+  
+  ctaButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault(); 
+      contactModal.classList.add('active');
+      document.body.style.overflow = 'hidden'; 
+    });
+  });
+
+  const closePortal = () => {
+    contactModal.classList.remove('active');
+    document.body.style.overflow = ''; 
+    setTimeout(() => {
+      if(form) form.reset();
+      if(successState) successState.classList.remove('active');
+    }, 500);
+  };
+
+  if(closeContactModal) closeContactModal.addEventListener('click', closePortal);
+  const contactBackdrop = document.getElementById('contactModalBackdrop');
+  if(contactBackdrop) contactBackdrop.addEventListener('click', closePortal);
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && contactModal.classList.contains('active')) {
+      closePortal();
+    }
+  });
+
+  if (form && submitBtn) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); 
+      
+      const originalBtnText = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'Transmission in progress...';
+      submitBtn.style.opacity = '0.7';
+      submitBtn.style.pointerEvents = 'none';
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          if(successState) successState.classList.add('active');
+        } else {
+          alert("Network Error: Could not verify transmission. Please email us directly.");
+        }
+      } catch (error) {
+        alert("System Error: Could not connect to endpoints. Please email us directly.");
+      } finally {
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.pointerEvents = 'auto';
+      }
+    });
+  }
+});

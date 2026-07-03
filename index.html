@@ -20,23 +20,25 @@
 <div id="premium-preloader" class="preloader-container">
   <div class="preloader-inner">
     
-    <div class="preloader-brand-wrap">
-      <!-- Injected Brand Logo -->
-      <img src="images/ddp-logo.png" alt="Dani Digital Pro Identity" class="preloader-img-logo">
-      <h1 class="preloader-brand">Dani Digital Pro<span class="dot">.</span></h1>
-      <div class="preloader-sub">AI Marketing Revenue Architect</div>
-    </div>
-
-    <div class="preloader-graph-wrap">
-      <svg class="preloader-graph" viewBox="0 0 300 100" preserveAspectRatio="none">
-        <line x1="0" y1="25" x2="300" y2="25" class="grid-line"></line>
-        <line x1="0" y1="50" x2="300" y2="50" class="grid-line"></line>
-        <line x1="0" y1="75" x2="300" y2="75" class="grid-line"></line>
+    <div class="ddp-logo-anim-wrapper">
+      <svg class="ddp-vector-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         
-        <path id="growth-line" d="M0,90 C100,90 150,50 300,10" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"></path>
+        <path id="path-outer" class="ddp-path" d="M15,10 L55,10 C78,10 90,25 90,45 C90,65 78,80 55,80 L25,80 L25,50" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        
+        <path id="path-inner" class="ddp-path" d="M35,25 L50,25 C62,25 70,33 70,45 C70,57 62,65 50,65 L35,65 L35,25 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+        
+        <path id="path-arrow" class="ddp-path" d="M35,65 L55,45 L45,45 L55,45 L55,55" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        
+        <rect id="path-dot" class="ddp-path" x="15" y="85" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
+        
       </svg>
       
-      <div class="graph-fill-overlay" id="graph-fill"></div>
+      <img src="images/ddp-logo.png" alt="Dani Digital Pro Identity" class="ddp-final-logo-img">
+    </div>
+
+    <div class="preloader-brand-wrap">
+      <h1 class="preloader-brand">Dani Digital Pro<span class="dot">.</span></h1>
+      <div class="preloader-sub">AI Marketing Revenue Architect</div>
     </div>
 
     <div class="preloader-metrics">
@@ -49,9 +51,11 @@
   </div>
 </div>
 
-<!-- Cursor -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- ============================================================
+     BULLETPROOF CUSTOM CURSOR
+============================================================ -->
+<div class="cursor-dot" id="cursorDot" style="z-index: 2147483647 !important; opacity: 1 !important;"></div>
+<div class="cursor-ring" id="cursorRing" style="z-index: 2147483646 !important; opacity: 1 !important;"></div>
 
 <!-- Particles Canvas -->
 <canvas id="particles"></canvas>
@@ -101,7 +105,7 @@
     </div>
     <div class="hero-card hero-elem hero-delay-3">
       <div class="hero-card-photo">
-        <img src="images/hero.png" alt="Daniyal - Digital Growth Architect" class="real-hero-img">
+        <img src="images/hero3.jpeg" alt="Daniyal - Digital Growth Architect" class="real-hero-img">
       </div>
       <div class="hero-card-body">
         <div class="hero-card-status">
@@ -114,7 +118,7 @@
             <div class="hero-stat-lbl">Campaigns Managed</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">12x</div>
+            <div class="hero-stat-num">8x</div>
             <div class="hero-stat-lbl">Avg ROAS</div>
           </div>
           <div class="hero-stat">
@@ -150,7 +154,7 @@
       
       <div class="metric-item reveal reveal-delay-2">
         <div class="metric-line"></div>
-        <div class="metric-num" data-count="12">0<span class="base-suffix">×</span></div>
+        <div class="metric-num" data-count="8">0<span class="base-suffix">×</span></div>
         <div class="metric-label">Average ROAS</div>
         <div class="metric-desc">Consistent return on ad spend across all managed accounts.</div>
       </div>
@@ -345,13 +349,21 @@
     ============================================================ */
     .ddp-kpi-value {
       font-family: 'Cormorant Garamond', serif !important;
-      font-size: 2.8rem !important; /* This font needs to be larger to carry its weight */
+      font-size: 2.8rem !important; 
       font-weight: 600 !important; 
       letter-spacing: -0.01em !important; 
-      color: var(--gold) !important; /* Pure luxury in gold */
+      color: var(--gold) !important; 
       line-height: 1 !important;
       transform: none !important; 
     }
+    
+    .ddp-kpi-value .base-suffix {
+      font-family: 'Syne', sans-serif !important;
+      font-size: 1.6rem !important;
+      font-weight: 700 !important;
+      margin-left: 2px;
+    }
+
     .ddp-kpi-trend {
       display: flex;
       align-items: center;
@@ -457,8 +469,8 @@
         <div class="ddp-dot green"></div>
       </div>
       <div class="ddp-url-bar">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4.5 13.5H11L11 22L19.5 10.5H13L13 2Z"/></svg>
-        app.danidigitalpro.com
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        danidigitalpro.com
       </div>
     </div>
 
@@ -467,23 +479,19 @@
       <aside class="ddp-sidebar">
         <div class="ddp-nav-item active">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-          Dashboard
+          Overview
         </div>
         <div class="ddp-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
-          Campaigns
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          Meta
         </div>
         <div class="ddp-nav-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-          Automations
+          Google
         </div>
         <div class="ddp-nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          Calls
-        </div>
-        <div class="ddp-nav-item" style="color: #4ade80;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-          Try AI
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+          TikTok
         </div>
       </aside>
 
@@ -493,34 +501,34 @@
           
           <div class="ddp-kpi-card">
             <div class="ddp-kpi-header">
-              <span class="ddp-kpi-title">Active Calls</span>
-              <div class="ddp-kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
-            </div>
-            <div class="ddp-kpi-value" id="count-calls">0</div>
-            <div class="ddp-kpi-trend">
-              <span class="ddp-trend-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg> +42%</span> vs last week
-            </div>
-          </div>
-
-          <div class="ddp-kpi-card">
-            <div class="ddp-kpi-header">
-              <span class="ddp-kpi-title">Leads Today</span>
-              <div class="ddp-kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
-            </div>
-            <div class="ddp-kpi-value" id="count-leads">0</div>
-            <div class="ddp-kpi-trend">
-              <span class="ddp-trend-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg> +18%</span> vs last week
-            </div>
-          </div>
-
-          <div class="ddp-kpi-card">
-            <div class="ddp-kpi-header">
-              <span class="ddp-kpi-title">Revenue (MTD)</span>
+              <span class="ddp-kpi-title">Ad Spend</span>
               <div class="ddp-kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
             </div>
-            <div class="ddp-kpi-value" id="count-rev">$0</div>
+            <div class="ddp-kpi-value" id="count-spend">$0</div>
+            <div class="ddp-kpi-trend">
+              <span class="ddp-trend-up">+ this month</span>
+            </div>
+          </div>
+
+          <div class="ddp-kpi-card">
+            <div class="ddp-kpi-header">
+              <span class="ddp-kpi-title">Revenue</span>
+              <div class="ddp-kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+            </div>
+            <div class="ddp-kpi-value" id="count-hero-rev">$0</div>
             <div class="ddp-kpi-trend">
               <span class="ddp-trend-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg> +35%</span> vs last week
+            </div>
+          </div>
+
+          <div class="ddp-kpi-card">
+            <div class="ddp-kpi-header">
+              <span class="ddp-kpi-title">ROAS</span>
+              <div class="ddp-kpi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+            </div>
+            <div class="ddp-kpi-value" id="count-roas">0</div>
+            <div class="ddp-kpi-trend">
+              <span class="ddp-trend-up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg> +0.9×</span> vs last week
             </div>
           </div>
 
@@ -529,11 +537,11 @@
         <div class="ddp-chart-card">
           <div class="ddp-chart-header">
             <div>
-              <div class="ddp-chart-title">Call Volume</div>
-              <div class="ddp-chart-subtitle">Last 12 hours</div>
+              <div class="ddp-chart-title">Revenue Trend</div>
+              <div class="ddp-chart-subtitle">Last 30 Days</div>
             </div>
             <div class="ddp-chart-live">
-              <span class="ddp-live-dot"></span> Live
+              <span class="ddp-live-dot"></span> Active
             </div>
           </div>
           <div class="ddp-canvas-wrap">
@@ -546,7 +554,7 @@
   </div>
   
   <div class="ddp-preview-caption">
-    <span></span> Interactive product preview — engineered for elite scaling.
+    <span></span> A real look at how campaigns perform — spend in, revenue out.
   </div>
 
 </section>
@@ -626,89 +634,163 @@
 <div class="divider-line"></div>
 
 <!-- ============================================================
-     SERVICES
+     SERVICES (MILLION DOLLAR ARCHITECTURE)
 ============================================================ -->
-<section class="section" id="services">
-  <div class="section-inner">
-    <div class="label reveal">Expertise</div>
-    <h2 class="section-h2 reveal reveal-delay-1">Growth Services, <em>Precisely Engineered</em></h2>
-    <p class="section-p reveal reveal-delay-2">
-      We don't rely on random tricks or guesswork. Instead, we build <strong>custom growth systems</strong> — proven strategies designed to maximize your ad spend, drive consistent profit, and scale your brand with <em>total certainty.</em>
+<section class="section" id="services" style="overflow: hidden; padding-top: 140px;">
+  <div class="section-inner" style="max-width: 1400px;">
+    
+    <div class="label reveal">Elite Expertise</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Growth Systems,<br><em>Precisely Engineered</em></h2>
+    <p class="section-p reveal reveal-delay-2" style="margin-bottom: 120px; max-width: 600px;">
+      We don't rely on random tricks or guesswork. We build <strong>custom growth architecture</strong> designed to maximize ad spend, drive consistent profit, and scale your brand with <em>total certainty.</em>
     </p>
 
-    <div class="services-list mt-64">
+    <div class="elite-services-wrapper">
       
-      <div class="svc-row reveal">
-        <div class="svc-row-num">01</div>
-        <div class="svc-image-wrap">
-          <img src="https://images.unsplash.com/photo-1674027326254-88c960d8e561?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2VhcmNoJTIwZW5naW5lJTIwb3B0aW1pemF0aW9ufGVufDB8fDB8fHww?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bWFya2V0aW5nfGVufDB8fDB8fHww" alt="Search Engine Architecture" class="svc-img">
-        </div>
-        <div class="svc-row-content">
-          <h3 class="svc-row-title">AI-Search Engine Marketing & PPC</h3>
-          <p class="svc-row-desc">Signal-driven search campaigns. Capturing high-intent traffic and turning queries into predictable revenue using advanced AI bidding structures and search architecture.</p>
-          <div class="svc-row-tags">
-            <span>Google Ads</span>
-            <span>Bing Ads</span>
-            <span>AI Bidding</span>
-            <span>Search Intent</span>
+      <!-- SERVICE 01: AI SEM -->
+      <div class="elite-service-block reveal">
+        <div class="es-content">
+          <div class="es-num-watermark">01</div>
+          <div class="es-badge">High Intent Capture</div>
+          <h3 class="es-title">AI-Search Engine<br><span>Marketing & PPC</span></h3>
+          <p class="es-desc">Signal-driven search campaigns. Capturing high-intent traffic and turning queries into predictable revenue using advanced AI bidding structures and search architecture.</p>
+          
+          <div class="es-metrics-row">
+            <div class="es-metric"><span class="es-m-val">18.2×</span><span class="es-m-lbl">Avg Yield</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">AI</span><span class="es-m-lbl">Bidding</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">99%</span><span class="es-m-lbl">Intent Match</span></div>
           </div>
+
+          <div class="es-tags">
+            <span>Google Ads</span><span>Bing Ads</span><span>Search Intent</span><span>CRO</span>
+          </div>
+          <!-- Add this to Service 01 (SEM) -->
+          <div class="es-action" style="margin-top: 40px;">
+            <button class="btn-service-trigger" data-service="sem">
+              <span class="btn-text">View Architecture</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="es-gallery ddp-tilt-gallery">
+          <div class="es-img es-img-main"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80" alt="Data Architecture"></div>
+          <div class="es-img es-img-2"><img src="https://images.unsplash.com/photo-1661956602116-aa6865609028?w=600&auto=format&fit=crop&q=80" alt="AI Algorithm"></div>
+          <div class="es-img es-img-3"><img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&auto=format&fit=crop&q=80" alt="Code Bidding"></div>
+          <div class="es-img es-img-4"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&auto=format&fit=crop&q=80" alt="Metrics Zoom"></div>
         </div>
       </div>
 
-      <div class="svc-row reveal reveal-delay-1">
-        <div class="svc-row-num">02</div>
-        <div class="svc-image-wrap">
-          <img src="https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzN8fG1hcmtldGluZ3xlbnwwfHwwfHx8MA%3D%3D" alt="Social Media Engineering" class="svc-img">
-        </div>
-        <div class="svc-row-content">
-          <h3 class="svc-row-title">AI-Social Media Marketing</h3>
-          <p class="svc-row-desc">Algorithmic authority. Engineering high-converting paid social funnels across all major platforms to capture attention, stop the scroll, and scale customer acquisition ruthlessly.</p>
-          <div class="svc-row-tags">
-            <span>Meta Ads</span>
-            <span>TikTok Ads</span>
-            <span>Snapchat Ads</span>
-            <span>X / Twitter</span>
+      <!-- SERVICE 02: META & SOCIAL -->
+      <div class="elite-service-block reveal">
+        <div class="es-content">
+          <div class="es-num-watermark">02</div>
+          <div class="es-badge">Algorithmic Authority</div>
+          <h3 class="es-title">AI-Social Media<br><span>Marketing Funnels</span></h3>
+          <p class="es-desc">Engineering high-converting paid social funnels across all major platforms to capture attention, stop the scroll, and scale customer acquisition ruthlessly.</p>
+          
+          <div class="es-metrics-row">
+            <div class="es-metric"><span class="es-m-val">-40%</span><span class="es-m-lbl">Target CPA</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">LTV</span><span class="es-m-lbl">Optimized</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">A/B</span><span class="es-m-lbl">Testing</span></div>
           </div>
+
+          <div class="es-tags">
+            <span>Meta Ads</span><span>TikTok Ads</span><span>Snapchat</span><span>X / Twitter</span>
+          </div>
+          <!-- Add this to Service 02 (Meta/Social) -->
+          <div class="es-action" style="margin-top: 40px;">
+            <button class="btn-service-trigger" data-service="social">
+              <span class="btn-text">View Architecture</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="es-gallery ddp-tilt-gallery">
+          <div class="es-img es-img-main"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&auto=format&fit=crop&q=80" alt="Social Media Scroll"></div>
+          <div class="es-img es-img-2"><img src="https://images.unsplash.com/photo-1557838923-2985c318be48?w=600&auto=format&fit=crop&q=80" alt="Target Audience"></div>
+          <div class="es-img es-img-3"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&auto=format&fit=crop&q=80" alt="Engagement Data"></div>
+          <div class="es-img es-img-4"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&auto=format&fit=crop&q=80" alt="Creative Studio"></div>
         </div>
       </div>
 
-      <div class="svc-row reveal reveal-delay-2">
-        <div class="svc-row-num">03</div>
-        <div class="svc-image-wrap">
-          <img src="https://images.unsplash.com/photo-1683721003111-070bcc053d8b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzd8fG1hcmtldGluZ3xlbnwwfHwwfHx8MA%3D%3D" alt="Brand Authority" class="svc-img">
-        </div>
-        <div class="svc-row-content">
-          <h3 class="svc-row-title">Social Media Management</h3>
-          <p class="svc-row-desc">Building brands that command attention. Strategic organic positioning that earns trust at scale, turning casual followers into loyal, high-LTV buyers.</p>
-          <div class="svc-row-tags">
-            <span>Content Strategy</span>
-            <span>Community Growth</span>
-            <span>Brand Authority</span>
+      <!-- SERVICE 03: BRAND MANAGEMENT -->
+      <div class="elite-service-block reveal">
+        <div class="es-content">
+          <div class="es-num-watermark">03</div>
+          <div class="es-badge">Organic Positioning</div>
+          <h3 class="es-title">Elite Social Media<br><span>Management</span></h3>
+          <p class="es-desc">Building brands that command attention. Strategic organic positioning that earns trust at scale, turning casual followers into loyal, high-LTV buyers.</p>
+          
+          <div class="es-metrics-row">
+            <div class="es-metric"><span class="es-m-val">Trust</span><span class="es-m-lbl">Building</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">100k+</span><span class="es-m-lbl">Reach</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">360°</span><span class="es-m-lbl">Strategy</span></div>
           </div>
+
+          <div class="es-tags">
+            <span>Content Architecture</span><span>Community Growth</span><span>Brand Authority</span>
+          </div>
+          <div class="es-action" style="margin-top: 40px;">
+            <button class="btn-service-trigger" data-service="management">
+              <span class="btn-text">View Architecture</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="es-gallery ddp-tilt-gallery">
+          <div class="es-img es-img-main"><img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2?w=800&auto=format&fit=crop&q=80" alt="Brand Aesthetics"></div>
+          <div class="es-img es-img-2"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&auto=format&fit=crop&q=80" alt="Team Strategy"></div>
+          <div class="es-img es-img-3"><img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=600&auto=format&fit=crop&q=80" alt="Content Creation"></div>
+          <div class="es-img es-img-4"><img src="https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&auto=format&fit=crop&q=80" alt="Editorial View"></div>
         </div>
       </div>
 
-      <div class="svc-row reveal reveal-delay-3">
-        <div class="svc-row-num">04</div>
-        <div class="svc-image-wrap">
-          <img src="https://plus.unsplash.com/premium_photo-1681488262364-8aeb1b6aac56?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZSUyMGNvbW1lcmNlfGVufDB8fDB8fHww" alt="E-Commerce Scaling" class="svc-img">
-        </div>
-        <div class="svc-row-content">
-          <h3 class="svc-row-title">E-Commerce Growth</h3>
-          <p class="svc-row-desc">Full-funnel revenue operations. Turning store traffic into consistent, compounding cash flow through systematic funnel design, retargeting, and conversion rate optimization.</p>
-          <div class="svc-row-tags">
-            <span>Funnel Architecture</span>
-            <span>Retargeting</span>
-            <span>CRO</span>
-            <span>Email Ops</span>
+      <!-- SERVICE 04: E-COMMERCE -->
+      <div class="elite-service-block reveal">
+        <div class="es-content">
+          <div class="es-num-watermark">04</div>
+          <div class="es-badge">Revenue Operations</div>
+          <h3 class="es-title">E-Commerce<br><span>Scaling & Growth</span></h3>
+          <p class="es-desc">Full-funnel revenue operations. Turning store traffic into consistent, compounding cash flow through systematic funnel design, retargeting, and CRO.</p>
+          
+          <div class="es-metrics-row">
+            <div class="es-metric"><span class="es-m-val">Full</span><span class="es-m-lbl">Funnel</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">+380%</span><span class="es-m-lbl">Rev Target</span></div>
+            <div class="es-metric-divider"></div>
+            <div class="es-metric"><span class="es-m-val">Ops</span><span class="es-m-lbl">Automated</span></div>
           </div>
+
+          <div class="es-tags">
+            <span>Shopify</span><span>Retargeting</span><span>CRO Systems</span><span>Email Ops</span>
+          </div>
+          <div class="es-action" style="margin-top: 40px;">
+            <button class="btn-service-trigger" data-service="ecommerce">
+              <span class="btn-text">View Architecture</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+        <div class="es-gallery ddp-tilt-gallery">
+          <div class="es-img es-img-main"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop&q=80" alt="Ecom Checkout"></div>
+          <div class="es-img es-img-2"><img src="https://images.unsplash.com/photo-1586880244406-556ebe35f282?w=600&auto=format&fit=crop&q=80" alt="Premium Packaging"></div>
+          <div class="es-img es-img-3"><img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=600&auto=format&fit=crop&q=80" alt="Digital Storefront"></div>
+          <div class="es-img es-img-4"><img src="https://images.unsplash.com/photo-1664575602276-acd073f104c1?w=400&auto=format&fit=crop&q=80" alt="Tracking Logistics"></div>
         </div>
       </div>
 
     </div>
-    <div class="svc-cta-wrapper reveal">
+
+    <!-- CTA Wrapper -->
+    <div class="svc-cta-wrapper reveal" style="margin-top: 120px;">
       <a href="#apply" class="btn-elite">
-        <span class="btn-text">Hire DDP</span>
+        <span class="btn-text">Initiate Growth System</span>
         <span class="btn-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -717,6 +799,163 @@
         </span>
       </a>
     </div>
+
+  </div>
+</section>
+
+<section class="section" id="integrations" style="padding-top: 140px; padding-bottom: 140px;">
+  <div class="section-inner" style="max-width: 1200px; display: flex; flex-direction: column; align-items: center;">
+    
+    <div class="label reveal" style="justify-content: center;">
+      <span class="pulse-dot-small" style="margin-right: 8px;"></span> Integrations
+    </div>
+    
+    <h2 class="section-h2 reveal reveal-delay-1" style="text-align: center;">
+      Connect with <em>Elite Platforms.</em>
+    </h2>
+    
+    <p class="section-p reveal reveal-delay-2" style="text-align: center; max-width: 600px; margin: 0 auto 24px auto;">
+      Seamlessly deploy our growth systems into your existing infrastructure. From enterprise CRMs to advanced analytics, we integrate directly with the tools driving your business.
+    </p>
+    
+
+    <div class="marquee-master-wrapper mt-64 reveal reveal-delay-3">
+      
+      <div class="marquee-track-container">
+        <div class="marquee-track track-left">
+          
+          <div class="marquee-group">
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+              <span class="int-label">Google Ads</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span class="int-label">Meta</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.64-.5 3.29-1.46 4.6-1.26 1.67-3.18 2.72-5.27 3.01-2.14.31-4.4-.04-6.18-1.34-1.87-1.36-3.08-3.48-3.32-5.76-.23-2.18.25-4.41 1.4-6.17 1.11-1.68 2.82-2.84 4.75-3.31 1.99-.48 4.13-.33 5.99.53V10.6c-1.3-.58-2.79-.76-4.18-.5-1.46.28-2.78 1.09-3.71 2.25-.9 1.12-1.36 2.61-1.24 4.07.12 1.5.85 2.91 2 3.89 1.22 1.04 2.9 1.47 4.46 1.16 1.48-.28 2.8-1.17 3.63-2.42.59-.89.92-1.96 1.03-3.02V.02z"/></svg>
+              <span class="int-label">TikTok</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span class="int-label">LinkedIn</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span class="int-label">X Platform</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+              <span class="int-label">Looker Studio</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span class="int-label">GTM</span>
+            </div>
+          </div>
+          
+          <div class="marquee-group" aria-hidden="true">
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+              <span class="int-label">Google Ads</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span class="int-label">Meta</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.02c-.01 1.64-.5 3.29-1.46 4.6-1.26 1.67-3.18 2.72-5.27 3.01-2.14.31-4.4-.04-6.18-1.34-1.87-1.36-3.08-3.48-3.32-5.76-.23-2.18.25-4.41 1.4-6.17 1.11-1.68 2.82-2.84 4.75-3.31 1.99-.48 4.13-.33 5.99.53V10.6c-1.3-.58-2.79-.76-4.18-.5-1.46.28-2.78 1.09-3.71 2.25-.9 1.12-1.36 2.61-1.24 4.07.12 1.5.85 2.91 2 3.89 1.22 1.04 2.9 1.47 4.46 1.16 1.48-.28 2.8-1.17 3.63-2.42.59-.89.92-1.96 1.03-3.02V.02z"/></svg>
+              <span class="int-label">TikTok</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span class="int-label">LinkedIn</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span class="int-label">X Platform</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+              <span class="int-label">Looker Studio</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span class="int-label">GTM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee-track-container mt-24">
+        <div class="marquee-track track-right">
+          
+          <div class="marquee-group">
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              <span class="int-label">Shopify</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16.24 7.2a4.67 4.67 0 0 0-8.8-1.57A3.75 3.75 0 0 0 4.2 13c-.15 0-.29-.02-.43-.05A3.18 3.18 0 0 0 3.18 19h13.91a4.27 4.27 0 0 0 4.27-4.27c0-2.2-1.68-4.01-3.82-4.23a4.63 4.63 0 0 0-1.3-3.3z"/></svg>
+              <span class="int-label">Salesforce</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span class="int-label">Klaviyo</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 2c-5.53 0-10 4.47-10 10s4.47 10 10 10 10-4.47 10-10-4.47-10-10-10zm2.75 13.91c-1.28.61-3.14.73-4.57.14-1.92-.79-2.5-2.61-2.43-3.79.11-1.74 1.48-3.03 3.4-3.52 1.68-.43 3.61-.17 4.29.13v1.85c-.86-.44-2.19-.68-3.32-.42-1.13.26-1.58 1.15-1.55 1.83.03.6.59 1.05 1.5 1.34 2.15.68 3.51 1.67 3.42 3.32-.08 1.64-1.5 2.65-3.37 2.88-1.56.19-3.23-.21-4.14-.65v-1.89c.89.47 2.37 1.05 3.99.71 1.18-.25 1.58-.94 1.59-1.5.01-.65-.63-1.07-1.61-1.4-2.14-.71-3.39-1.67-3.48-3.14-.11-1.82 1.39-3.36 3.65-3.88 1.66-.38 3.59-.06 4.67.38v2.01z"/></svg>
+              <span class="int-label">Stripe</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+              <span class="int-label">Zapier</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 22C6.49 22 2 17.51 2 12S6.49 2 12 2s10 4.49 10 10-4.49 10-10 10zm-3.36-4.5c-2.45-1.35-3.83-4.04-3.43-6.84.4-2.8 2.5-5.06 5.25-5.63 2.75-.58 5.48.51 6.83 2.76.71 1.19.95 2.58.7 3.91l-1.92-.81c.14-.85-.02-1.74-.47-2.5-1.01-1.69-3.13-2.31-4.88-1.42-1.75.89-2.55 3-1.84 4.88.71 1.88 2.82 2.89 4.88 2.32l1.32 1.62c-2.61.94-5.5.09-7.14-2.2-1.64-2.3-.95-5.46 1.43-7.06 2.38-1.6 5.61-1.07 7.37 1.15l-1.41 1.41c-1.34-1.69-3.77-2.07-5.58-.87-1.81 1.2-2.3 3.65-1.12 5.4 1.18 1.76 3.49 2.22 5.35 1.07l.63 2.34c-2.47 1.19-5.42.54-7.16-1.53z"/></svg>
+              <span class="int-label">WooCommerce</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              <span class="int-label">HubSpot</span>
+            </div>
+          </div>
+          
+          <div class="marquee-group" aria-hidden="true">
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              <span class="int-label">Shopify</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16.24 7.2a4.67 4.67 0 0 0-8.8-1.57A3.75 3.75 0 0 0 4.2 13c-.15 0-.29-.02-.43-.05A3.18 3.18 0 0 0 3.18 19h13.91a4.27 4.27 0 0 0 4.27-4.27c0-2.2-1.68-4.01-3.82-4.23a4.63 4.63 0 0 0-1.3-3.3z"/></svg>
+              <span class="int-label">Salesforce</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span class="int-label">Klaviyo</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 2c-5.53 0-10 4.47-10 10s4.47 10 10 10 10-4.47 10-10-4.47-10-10-10zm2.75 13.91c-1.28.61-3.14.73-4.57.14-1.92-.79-2.5-2.61-2.43-3.79.11-1.74 1.48-3.03 3.4-3.52 1.68-.43 3.61-.17 4.29.13v1.85c-.86-.44-2.19-.68-3.32-.42-1.13.26-1.58 1.15-1.55 1.83.03.6.59 1.05 1.5 1.34 2.15.68 3.51 1.67 3.42 3.32-.08 1.64-1.5 2.65-3.37 2.88-1.56.19-3.23-.21-4.14-.65v-1.89c.89.47 2.37 1.05 3.99.71 1.18-.25 1.58-.94 1.59-1.5.01-.65-.63-1.07-1.61-1.4-2.14-.71-3.39-1.67-3.48-3.14-.11-1.82 1.39-3.36 3.65-3.88 1.66-.38 3.59-.06 4.67.38v2.01z"/></svg>
+              <span class="int-label">Stripe</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+              <span class="int-label">Zapier</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 22C6.49 22 2 17.51 2 12S6.49 2 12 2s10 4.49 10 10-4.49 10-10 10zm-3.36-4.5c-2.45-1.35-3.83-4.04-3.43-6.84.4-2.8 2.5-5.06 5.25-5.63 2.75-.58 5.48.51 6.83 2.76.71 1.19.95 2.58.7 3.91l-1.92-.81c.14-.85-.02-1.74-.47-2.5-1.01-1.69-3.13-2.31-4.88-1.42-1.75.89-2.55 3-1.84 4.88.71 1.88 2.82 2.89 4.88 2.32l1.32 1.62c-2.61.94-5.5.09-7.14-2.2-1.64-2.3-.95-5.46 1.43-7.06 2.38-1.6 5.61-1.07 7.37 1.15l-1.41 1.41c-1.34-1.69-3.77-2.07-5.58-.87-1.81 1.2-2.3 3.65-1.12 5.4 1.18 1.76 3.49 2.22 5.35 1.07l.63 2.34c-2.47 1.19-5.42.54-7.16-1.53z"/></svg>
+              <span class="int-label">WooCommerce</span>
+            </div>
+            <div class="integration-card">
+              <svg class="int-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              <span class="int-label">HubSpot</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
   </div>
 </section>
 
@@ -724,16 +963,15 @@
   <div class="section-inner">
     
     <div class="label reveal">Live Operations</div>
-    <h2 class="section-h2 reveal reveal-delay-1">Campaign <em>Command Center</em></h2>
+    <h2 class="section-h2 reveal reveal-delay-1">How a Live Paid Ads Campaign <em>Performs</em></h2>
     <p class="section-p reveal reveal-delay-2">
-      A real-time simulation of the exact omni-channel acquisition engine we deploy for our elite partners. Watch the data compound.
+      A real look at how I manage Google, Meta, and TikTok ad campaigns — the funnel, the spend, and the numbers, updated as they move.
     </p>
 
     <div class="ddp-dashboard reveal reveal-delay-3 mt-64">
       
       <header class="dash-topbar">
-        <div class="dash-brand">
-        </div>
+        <div class="dash-brand"></div>
         <div class="dash-meta">
           <span class="dash-live-dot" aria-hidden="true"></span>
           Live Engine &nbsp;·&nbsp; Tracking Active Pipelines
@@ -753,19 +991,19 @@
             </div>
             <div class="dash-info-row">
               <div class="dash-info-item">
-                <span class="dash-info-label">Active Sequence</span>
-                <span class="dash-info-value">Q3 Growth Architecture</span>
+                <span class="dash-info-label">Active Funnel</span>
+                <span class="dash-info-value">3-Step E-Commerce Sales Funnel</span>
               </div>
               <div class="dash-info-item">
                 <span class="dash-info-label">Status</span>
-                <span class="dash-badge dash-badge-active"><span class="dash-badge-dot"></span>Deployed</span>
+                <span class="dash-badge dash-badge-active"><span class="dash-badge-dot"></span>Live & Scaling</span>
               </div>
               <div class="dash-info-item">
                 <span class="dash-info-label">Monthly Ad Spend</span>
                 <span class="dash-info-value">$12,500 USD</span>
               </div>
               <div class="dash-info-item">
-                <span class="dash-info-label">Routing</span>
+                <span class="dash-info-label">Channels</span>
                 <span class="dash-info-value">Meta · Google · TikTok</span>
               </div>
             </div>
@@ -777,11 +1015,11 @@
             </div>
             <div class="dash-manager-row">
               <div class="dash-manager-avatar">
-                <img src="images/about-photo.png" alt="Daniyal Liaqat" />
+                <img src="images/about-photo.png" alt="Choudary Hussain Ali" />
               </div>
               <div>
-                <div class="dash-manager-name">Daniyal Liaqat</div>
-                <div class="dash-manager-role">Growth Architect</div>
+                <div class="dash-manager-name">Choudary Hussain Ali</div>
+                <div class="dash-manager-role">Google & Meta Ads Specialist</div>
               </div>
               <span class="dash-manager-badge">Online</span>
             </div>
@@ -796,12 +1034,12 @@
                   <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                 </svg>
               </div>
-              <span class="dash-feed-title">Real-Time Event Stream</span>
+              <span class="dash-feed-title">Live Campaign Activity</span>
             </div>
             <div class="dash-feed-tabs" role="tablist">
               <button class="dash-feed-tab active" role="tab" onclick="dashSetTab(this,'all')">All</button>
-              <button class="dash-feed-tab" role="tab" onclick="dashSetTab(this,'reviews')">Conversions</button>
-              <button class="dash-feed-tab" role="tab" onclick="dashSetTab(this,'dm')">Lead Flow</button>
+              <button class="dash-feed-tab" role="tab" onclick="dashSetTab(this,'optimizations')">Optimizations</button>
+              <button class="dash-feed-tab" role="tab" onclick="dashSetTab(this,'results')">Results</button>
             </div>
           </div>
 
@@ -829,7 +1067,7 @@
 
           <div class="dash-card dash-kpi-card dash-kpi-teal">
             <div class="dash-kpi-top">
-              <span class="dash-kpi-label">Market Reach</span>
+              <span class="dash-kpi-label">Ad Reach</span>
               <div class="dash-kpi-icon dash-icon-teal">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               </div>
@@ -859,6 +1097,18 @@
             <div class="dash-kpi-value" id="dashKpiConversion">0%</div>
             <div class="dash-kpi-progress"><div class="dash-kpi-bar dash-bar-lav" id="dashBarConversion" style="width:0%"></div></div>
           </div>
+          
+          <div class="dash-card dash-kpi-card dash-kpi-gold">
+            <div class="dash-kpi-top">
+              <span class="dash-kpi-label">ROAS (Return on Ad Spend)</span>
+              <div class="dash-kpi-icon dash-icon-gold">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+            </div>
+            <div class="dash-kpi-value" id="dashKpiRoasRight">0×</div>
+            <div class="dash-kpi-progress"><div class="dash-kpi-bar dash-bar-gold" id="dashBarRoasRight" style="width:0%"></div></div>
+          </div>
+          
         </aside>
       </div>
       
@@ -882,119 +1132,125 @@
       When you invest in ads, you expect a clear return. These recent campaigns show how we build reliable systems that <strong>consistently multiply our clients' sales</strong> and grow their businesses.
     </p>
 
-    <div class="results-grid mt-64">
+    <div class="results-master-layout mt-64">
         
-      <div class="result-card reveal">
-        <div class="result-card-top">
-          <span class="result-tag">Google Ads • E-Commerce</span>
-          <span class="verified-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Verified
-          </span>
+      <div class="result-hero-card reveal">
+        <div class="hero-card-visual">
+          <div class="result-image">
+            <img src="images/roas-1829.jpeg" alt="Google Ads Dashboard - 1829% ROAS">
+          </div>
         </div>
-
-        <div class="result-image">
-          <img src="images/roas-1829.jpeg" alt="Google Ads Dashboard - 1829% ROAS">
-        </div>
-        <div class="result-metric">1,829<span>%</span></div>
-        <h3 class="result-title">Scaling Search Architecture</h3>
-        <p class="result-desc">Deployed Rs 334K in precision search campaigns to engineer <strong>Rs 6.11 Million</strong> in total conversion value over a 45-day sprint.</p>
-        <div class="result-footer">
-          <span class="result-stat-label">Primary KPI</span>
-          <span class="result-stat-value">18.2× Return on Spend</span>
-        </div>
-      </div>
-
-      <div class="result-card reveal reveal-delay-1">
-        <div class="result-card-top">
-          <span class="result-tag">Meta Ads • Paid Social</span>
-          <span class="verified-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Verified
-          </span>
-        </div>
-
-        <div class="result-image">
-          <img src="images/meta-roas-18.jpeg" alt="Meta Ads Dashboard - 18.4x ROAS">
-        </div>
-        <div class="result-metric">18.4<span>×</span></div>
-        <h3 class="result-title">High-Velocity Funnel Scaling</h3>
-        <p class="result-desc">Scaled a primary acquisition campaign past <strong>Rs 1.1 Million</strong> in revenue at an 8.85x ROAS, while retargeting architecture peaked at an 18.44x yield.</p>
-        <div class="result-footer">
-          <span class="result-stat-label">Primary KPI</span>
-          <span class="result-stat-value">Peak Campaign ROAS</span>
+        <div class="hero-card-content">
+          <div class="result-card-top">
+            <span class="result-tag">Flagship Campaign • E-Commerce</span>
+            <span class="verified-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              Verified
+            </span>
+          </div>
+          <h3 class="result-title" style="text-align: left; font-size: 2.2rem;">Scaling Search Architecture</h3>
+          <p class="result-desc" style="font-size: 1.1rem;">Deployed Rs 334K in precision search campaigns to engineer <strong>Rs 6.11 Million</strong> in total conversion value over a 45-day sprint.</p>
+          <div class="hero-metric-block">
+            <div class="result-metric" style="text-align: left; font-size: 5.5rem;">1,829<span>%</span></div>
+            <div class="result-stat-label">Verified Return on Ad Spend</div>
+          </div>
         </div>
       </div>
 
-      <div class="result-card reveal reveal-delay-2">
-        <div class="result-card-top">
-          <span class="result-tag">Google Ads • High Intent</span>
-          <span class="verified-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            Verified
-          </span>
+      <div class="results-trio">
+          
+        <div class="result-card reveal reveal-delay-1">
+          <div class="result-card-top">
+            <span class="result-tag">Meta Ads • Paid Social</span>
+          </div>
+          <div class="result-image">
+            <img src="images/meta-roas-18.jpeg" alt="Meta Ads Dashboard - 18.4x ROAS">
+          </div>
+          <div class="result-metric">18.4<span>×</span></div>
+          <h3 class="result-title">High-Velocity Scaling</h3>
+          <p class="result-desc">Scaled a primary acquisition campaign past <strong>Rs 1.1 Million</strong> in revenue at an 8.85x ROAS.</p>
         </div>
 
-        <div class="result-image">
-          <img src="images/google-ctr-11.jpeg" alt="Google Ads Dashboard - 11.68% CTR">
+        <div class="result-card reveal reveal-delay-2">
+          <div class="result-card-top">
+            <span class="result-tag">Google Ads • High Intent</span>
+          </div>
+          <div class="result-image">
+            <img src="images/google-ctr-11.jpeg" alt="Google Ads Dashboard - 11.68% CTR">
+          </div>
+          <div class="result-metric">469<span></span></div>
+          <h3 class="result-title">Conversion Rate Ops</h3>
+          <p class="result-desc">Captured massive market share with an <strong>11.68% CTR</strong>, driving 469 hard conversions.</p>
         </div>
-        <div class="result-metric">469<span></span></div>
-        <h3 class="result-title">Conversion Rate Optimization</h3>
-        <p class="result-desc">Captured massive market share with a hyper-efficient <strong>11.68% CTR</strong>, driving 469 hard conversions on just dh 16.5K in ad spend.</p>
-        <div class="result-footer">
-          <span class="result-stat-label">Primary KPI</span>
-          <span class="result-stat-value">Qualified Conversions</span>
+
+        <div class="result-card reveal reveal-delay-3">
+          <div class="result-card-top">
+            <span class="result-tag">Google Ads • Healthcare</span>
+          </div>
+          <div class="result-image">
+            <img src="images/medical-results.jpeg" alt="Medical Leads Dashboard">
+          </div>
+          <div class="result-metric">154<span></span></div>
+          <h3 class="result-title">Patient Acquisition</h3>
+          <p class="result-desc">Precision search architecture capturing <strong>154 qualified inquiries</strong> at an $8.19 CPA.</p>
         </div>
+
       </div>
-
     </div>
   </div>
 </section>
-
-<section id="trust" class="spotlight-section">
-  
-  <div class="spotlight-header reveal">
+<!-- ============================================================
+     TRUSTED BRANDS - MILLION DOLLAR DOUBLE MARQUEE
+============================================================ -->
+<section id="trust" class="elite-trust-section">
+  <div class="trust-header reveal">
     <div class="premium-eyebrow">
-      <span class="pulse-dot"></span> Trusted By Industry Leaders
+      <span class="pulse-dot"></span> Elite Partnerships
     </div>
-    <h3 class="spotlight-title">Architecting Revenue for <em>Elite Brands</em>.</h3>
+    <h3 class="trust-title">Architecting Revenue for <em>Industry Leaders</em>.</h3>
   </div>
 
-  <div class="spotlight-grid" id="client-grid">
-    <div class="grid-spotlight"></div>
+  <div class="marquee-master-wrapper reveal reveal-delay-1">
     
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name">Jugnu's Salon</span>
+    <div class="marquee-track-container">
+      <div class="marquee-track track-left">
+        <div class="marquee-group">
+          <div class="trust-card"><img src="Logos/butterfly.png" alt="Butterfly Taxi" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/colorplus.jpeg" alt="Colorplus" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/community.jpeg" alt="Community Residential" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/dunes.jpeg" alt="Dunes Med Spa" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/furniture.jpeg" alt="Furniture" class="brand-logo-img"></div>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <div class="trust-card"><img src="Logos/butterfly.png" alt="Butterfly Taxi" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/colorplus.jpeg" alt="Colorplus" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/community.jpeg" alt="Community Residential" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/dunes.jpeg" alt="Dunes Med Spa" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/furniture.jpeg" alt="Furniture" class="brand-logo-img"></div>
+        </div>
       </div>
     </div>
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name">Kulfa Station</span>
+
+    <div class="marquee-track-container mt-24">
+      <div class="marquee-track track-right">
+        <div class="marquee-group">
+          <div class="trust-card"><img src="Logos/gift.jpeg" alt="Gift" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/home.jpeg" alt="Home" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/pili.jpeg" alt="Pili" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/star.jpeg" alt="Star" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/trux.jpeg" alt="Trux" class="brand-logo-img"></div>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <div class="trust-card"><img src="Logos/gift.jpeg" alt="Gift" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/home.jpeg" alt="Home" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/pili.jpeg" alt="Pili" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/star.jpeg" alt="Star" class="brand-logo-img"></div>
+          <div class="trust-card"><img src="Logos/trux.jpeg" alt="Trux" class="brand-logo-img"></div>
+        </div>
       </div>
     </div>
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name" style="letter-spacing: 2px;">TurkishFurnitureByRF</span>
-      </div>
-    </div>
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name" style="font-weight: 800;">Root<span style="color: var(--accent);">4</span>Tech</span>
-      </div>
-    </div>
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name">NexusBridge</span>
-      </div>
-    </div>
-    <div class="client-card">
-      <div class="client-card-inner">
-        <span class="client-name">Aqsa Danish Spa</span>
-      </div>
-    </div>
+
   </div>
-  
 </section>
 
 <!-- ============================================================
@@ -1130,7 +1386,7 @@
 
         </div>
         <div class="about-floater">
-          <div class="floater-num">+12X</div>
+          <div class="floater-num">+8X</div>
           <div class="floater-lbl">Peak ROAS Delivered</div>
         </div>
       </div>
@@ -1169,14 +1425,77 @@
 
 <div class="divider-line"></div>
 
-<!-- ============================================================
-     TESTIMONIALS
-============================================================ -->
-<section class="section">
+<<section class="section" id="testimonials">
   <div class="section-inner">
-    <div class="label reveal">Social Proof</div>
-    <h2 class="section-h2 reveal reveal-delay-1">What <em>Clients Say</em></h2>
-    <div class="testi-grid">
+    
+    <div class="label reveal">Client Success</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Undeniable <em>Proof</em>.</h2>
+    <p class="section-p reveal reveal-delay-2" style="margin-bottom: 64px;">
+      Don't take our word for it. Listen to the founders and operators who have scaled their revenue using our engineered growth systems.
+    </p>
+
+    <div class="video-testi-grid reveal reveal-delay-3">
+      
+      <div class="video-card">
+        <div class="video-thumbnail-wrap">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop" alt="Client Video" class="v-thumb">
+          <div class="v-overlay"></div>
+          
+          <button class="v-play-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div class="v-play-pulse"></div>
+          </button>
+          
+          <div class="v-metric-tag">+380% Revenue</div>
+          
+          <div class="v-meta">
+            <div class="v-name">Sarah Jenkins</div>
+            <div class="v-role">Founder, Lumina Skincare</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumbnail-wrap">
+          <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=800&auto=format&fit=crop" alt="Client Video" class="v-thumb">
+          <div class="v-overlay"></div>
+          
+          <button class="v-play-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div class="v-play-pulse"></div>
+          </button>
+          
+          <div class="v-metric-tag">18.2x ROAS</div>
+          
+          <div class="v-meta">
+            <div class="v-name">Marcus Thorne</div>
+            <div class="v-role">CEO, Apex Apparel</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumbnail-wrap">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&auto=format&fit=crop" alt="Client Video" class="v-thumb">
+          <div class="v-overlay"></div>
+          
+          <button class="v-play-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div class="v-play-pulse"></div>
+          </button>
+          
+          <div class="v-metric-tag">$1.2M Generated</div>
+          
+          <div class="v-meta">
+            <div class="v-name">Elena Rodriguez</div>
+            <div class="v-role">Director, Vivant Beauty</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="testi-grid mt-64">
       <div class="testi-card reveal">
         <div class="stars">★★★★★</div>
         <div class="testi-quote">"</div>
@@ -1189,7 +1508,7 @@
           </div>
         </div>
       </div>
-      <div class="testi-card reveal reveal-delay-2">
+      <div class="testi-card reveal reveal-delay-1">
         <div class="stars">★★★★★</div>
         <div class="testi-quote">"</div>
         <p class="testi-text">Highly skilled in digital marketing and delivers outstanding results. His contributions made a big difference — very professional, very knowledgeable, and genuinely invested.</p>
@@ -1201,7 +1520,7 @@
           </div>
         </div>
       </div>
-      <div class="testi-card reveal reveal-delay-3">
+      <div class="testi-card reveal reveal-delay-2">
         <div class="stars">★★★★★</div>
         <div class="testi-quote">"</div>
         <p class="testi-text">Daniyal's strategies brought great results for our business. His deep understanding of digital marketing made a noticeable impact on our growth trajectory.</p>
@@ -1214,6 +1533,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -1255,6 +1575,89 @@
 
 <div class="divider-line"></div>
 
+<!-- ============================================================
+     MILLION DOLLAR STACKING CERTIFICATIONS
+============================================================ -->
+<section class="section premium-certs-section" id="certifications">
+  <div class="section-inner">
+    
+    <div class="label reveal">Verified Authority</div>
+    <h2 class="section-h2 reveal reveal-delay-1">Official <em>Credentials</em>.</h2>
+    <p class="section-p reveal reveal-delay-2" style="max-width: 650px; margin-bottom: 60px;">
+      In an industry full of guesswork, we rely on certified engineering. Officially vetted and recognized by the platforms that control the global attention economy.
+    </p>
+
+    <!-- The Stacking Engine -->
+    <div class="cert-stack-wrapper mt-64">
+      
+      <!-- CARD 01 -->
+      <div class="cert-stack-card reveal" style="--stack-idx: 1;" onclick="forceOpenModal('certifications/google-ads.jpeg')">
+        <div class="cert-stack-inner">
+          <div class="cert-stack-meta">
+            <div class="stack-num">01</div>
+            <h3 class="stack-title">Google Ads<br>Certified</h3>
+            <p class="stack-sub">Search Architecture & AI Bidding</p>
+            <div class="stack-badge"><span class="pulse-dot-small"></span> Active Status</div>
+          </div>
+          <div class="cert-stack-image">
+            <img src="certifications/google-ads.jpeg" alt="Google Ads Certification">
+            <div class="stack-zoom-hint">Click to Enlarge</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 02 -->
+      <div class="cert-stack-card reveal" style="--stack-idx: 2;" onclick="forceOpenModal('certifications/SMM.jpeg')">
+        <div class="cert-stack-inner">
+          <div class="cert-stack-meta">
+            <div class="stack-num">02</div>
+            <h3 class="stack-title">Meta Blueprint<br>Certified</h3>
+            <p class="stack-sub">Media Buying Professional</p>
+            <div class="stack-badge"><span class="pulse-dot-small"></span> Active Status</div>
+          </div>
+          <div class="cert-stack-image">
+            <img src="certifications/SMM.jpeg" alt="Meta Blueprint Certification">
+            <div class="stack-zoom-hint">Click to Enlarge</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 03 -->
+      <div class="cert-stack-card reveal" style="--stack-idx: 3;" onclick="forceOpenModal('certifications/ecommerce.jpeg')">
+        <div class="cert-stack-inner">
+          <div class="cert-stack-meta">
+            <div class="stack-num">03</div>
+            <h3 class="stack-title">Google Analytics<br>Certified</h3>
+            <p class="stack-sub">GA4 Individual Qualification</p>
+            <div class="stack-badge"><span class="pulse-dot-small"></span> Active Status</div>
+          </div>
+          <div class="cert-stack-image">
+            <img src="certifications/ecommerce.jpeg" alt="Google Analytics Certification">
+            <div class="stack-zoom-hint">Click to Enlarge</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 04 -->
+      <div class="cert-stack-card reveal" style="--stack-idx: 4;" onclick="forceOpenModal('certifications/VA.jpeg')">
+        <div class="cert-stack-inner">
+          <div class="cert-stack-meta">
+            <div class="stack-num">04</div>
+            <h3 class="stack-title">Amazon VA<br>Training</h3>
+            <p class="stack-sub">On-Job E-Commerce Operations</p>
+            <div class="stack-badge" style="color:var(--muted);"><span class="pulse-dot-small" style="background:var(--muted); box-shadow:none;"></span> Completed</div>
+          </div>
+          <div class="cert-stack-image">
+            <img src="certifications/VA.jpeg" alt="Amazon VA Training Certification">
+            <div class="stack-zoom-hint">Click to Enlarge</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section class="section" id="insights">
   <div class="section-inner">
     
@@ -1268,7 +1671,7 @@
       
       <a href="insights.html" class="insight-card reveal">
         <div class="insight-image-wrapper">
-          <img src="images/insight-1.jpg" alt="Google Ads Scaling Strategy">
+          <img src="https://plus.unsplash.com/premium_photo-1728457508551-8973fedacaa4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2FtcGFpZ25zfGVufDB8fDB8fHww" alt="Google Ads Scaling Strategy">
         </div>
         <div class="insight-content">
           <div class="insight-meta">
@@ -1284,7 +1687,7 @@
 
       <a href="insights.html" class="insight-card reveal reveal-delay-1">
         <div class="insight-image-wrapper">
-          <img src="images/insight-2.jpg" alt="Meta Ads B2B Lead Gen">
+          <img src="https://plus.unsplash.com/premium_photo-1681487743905-d1a1881b03bf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGNhbXBhaWduc3xlbnwwfHwwfHx8MA%3D%3D" alt="Meta Ads B2B Lead Gen">
         </div>
         <div class="insight-content">
           <div class="insight-meta">
@@ -1300,7 +1703,7 @@
 
       <a href="insights.html" class="insight-card reveal reveal-delay-2">
         <div class="insight-image-wrapper">
-          <img src="images/insight-3.jpg" alt="E-Commerce Conversion Rate Optimization">
+          <img src="https://images.unsplash.com/photo-1664455340023-214c33a9d0bd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZSUyMGNvbW1lcmNlfGVufDB8fDB8fHww" alt="E-Commerce Conversion Rate Optimization">
         </div>
         <div class="insight-content">
           <div class="insight-meta">
@@ -1467,7 +1870,7 @@
       <a href="#insights">Insights</a>
       <a href="#apply">Contact</a>
     </div>
-    <div class="footer-copy">© 2025 Dani Digital Pro. Lahore, Pakistan.</div>
+    <div class="footer-copy">© 2026 Dani Digital Pro. Lahore, Pakistan.</div>
   </div>
 </footer>
 
@@ -1516,7 +1919,7 @@
     // 2. The Core Engine
     function igniteDashboardEngine() {
       
-      // --- Number Counters ---
+      // --- Number Counters (Upgraded Dynamic Engine) ---
       function animateValue(id, start, end, duration, formatStr = '') {
         const obj = document.getElementById(id);
         if (!obj) return;
@@ -1525,23 +1928,32 @@
           if (!startTimestamp) startTimestamp = timestamp;
           const progress = Math.min((timestamp - startTimestamp) / duration, 1);
           const ease = 1 - Math.pow(1 - progress, 4);
-          const current = Math.floor(progress * (end - start) + start);
+          const current = progress * (end - start) + start;
           
           if (formatStr === 'money') {
             obj.innerHTML = '$' + (current / 1000).toFixed(1) + 'K';
+          } else if (formatStr === 'roas') {
+            obj.innerHTML = current.toFixed(1) + '<span class="base-suffix">×</span>';
           } else {
-            obj.innerHTML = current.toLocaleString();
+            obj.innerHTML = Math.floor(current).toLocaleString();
           }
           
           if (progress < 1) {
             window.requestAnimationFrame(step);
           } else {
-            if(formatStr === 'money') obj.innerHTML = '$48.5K';
+            // Final exact frame rendering to prevent floating point errors
+            if(formatStr === 'money') obj.innerHTML = '$' + (end / 1000).toFixed(1) + 'K';
+            else if(formatStr === 'roas') obj.innerHTML = end.toFixed(1) + '<span class="base-suffix">×</span>';
             else obj.innerHTML = end.toLocaleString();
           }
         };
         window.requestAnimationFrame(step);
       }
+
+      // Fire Dynamic Counters
+      animateValue("count-spend", 0, 12500, 2000, 'money');
+      animateValue("count-hero-rev", 0, 108000, 2000, 'money');
+      animateValue("count-roas", 0, 8.6, 2000, 'roas');
 
       // Fire Counters
       animateValue("count-calls", 0, 1247, 2000);
@@ -1600,6 +2012,132 @@
     }
   });
 </script>
+<!-- ============================================================
+     MILLION DOLLAR DYNAMIC SERVICE MODAL
+============================================================ -->
+<div class="ddp-service-modal-overlay" id="serviceModal">
+  <div class="ddp-service-modal-backdrop" id="serviceModalBackdrop"></div>
+  
+  <div class="ddp-service-modal">
+    <button class="ddp-modal-close" id="closeServiceModal">&times;</button>
+    
+    <div class="ddp-modal-grid">
+      
+      <!-- Left: Context & CTA -->
+      <div class="ddp-modal-left">
+        <div class="ddp-modal-badge" id="modalBadge">...</div>
+        <h2 class="ddp-modal-title" id="modalTitle">...</h2>
+        <p class="ddp-modal-desc" id="modalDesc">...</p>
+        
+        <!-- CALENDLY CTA -->
+        <!-- CALENDLY CTA -->
+        <a href="https://calendly.com/danidigitalpro/30min" target="_blank" rel="noopener noreferrer" class="btn-gold ddp-modal-cta">
+          Schedule Strategy Call <span style="margin-left:8px;">→</span>
+        </a>
+      </div>
 
+      <!-- Right: Deliverables & Tech Stack -->
+      <div class="ddp-modal-right">
+        
+        <div class="ddp-modal-section-title">
+          <span class="pulse-dot-small"></span> Engineering Deliverables
+        </div>
+        <ul class="ddp-modal-deliverables" id="modalDeliverables">
+          <!-- JS will inject <li> items here -->
+        </ul>
+
+        <div class="ddp-modal-section-title mt-40">
+          <span class="pulse-dot-small"></span> Technology & Architecture
+        </div>
+        <div class="ddp-modal-keywords" id="modalKeywords">
+          <!-- JS will inject <span> tags here -->
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="ddp-contact-modal-overlay" id="contactModal">
+  <div class="ddp-contact-backdrop" id="contactModalBackdrop"></div>
+  
+  <div class="ddp-contact-modal">
+    <button class="ddp-modal-close" id="closeContactModal">&times;</button>
+    
+    <div class="ddp-contact-grid">
+      
+      <div class="ddp-contact-left">
+        <div class="ddp-modal-badge">Initiate System</div>
+        <h2 class="ddp-modal-title" style="font-size: 3rem;">Apply for<br><em>Partnership</em></h2>
+        <p class="ddp-modal-desc">Tell us about your current revenue bottleneck. If we are a fit, we will architect a custom growth roadmap.</p>
+        
+        <div class="contact-trust-info">
+          <div class="ct-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            daniidigitalpro@gmail.com
+          </div>
+          <div class="ct-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            +92 324 485 9790
+          </div>
+        </div>
+      </div>
+
+      <div class="ddp-contact-right">
+        
+        <form id="ddpStrategyForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+          <div class="form-row-2">
+            <div class="input-group">
+              <label for="frmName">Full Name</label>
+              <input type="text" id="frmName" name="name" required placeholder="John Doe">
+            </div>
+            <div class="input-group">
+              <label for="frmEmail">Work Email</label>
+              <input type="email" id="frmEmail" name="email" required placeholder="john@company.com">
+            </div>
+          </div>
+          
+          <div class="form-row-2">
+            <div class="input-group">
+              <label for="frmPhone">Phone Number</label>
+              <input type="tel" id="frmPhone" name="phone" placeholder="+1 (555) 000-0000">
+            </div>
+            <div class="input-group">
+              <label for="frmService">Primary Interest</label>
+              <select id="frmService" name="service" required>
+                <option value="" disabled selected>Select an architecture...</option>
+                <option value="Google Ads & SEM">AI-Search & PPC Operations</option>
+                <option value="Meta Ads & Social">Paid Social Funnel Scaling</option>
+                <option value="E-Commerce Growth">E-Commerce Scaling</option>
+                <option value="Organic Management">Elite Brand Management</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="input-group">
+            <label for="frmDesc">Project Brief & Revenue Goals</label>
+            <textarea id="frmDesc" name="message" rows="4" required placeholder="Where is your current revenue, and where do you want to scale it?"></textarea>
+          </div>
+          
+          <button type="submit" class="btn-gold form-submit-btn" id="frmSubmitBtn" style="width: 100%; justify-content: center; margin-top: 16px;">
+            <span>Submit Application <span class="arrow">→</span></span>
+          </button>
+        </form>
+
+        <div class="form-success-state" id="formSuccessState">
+          <div class="success-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <h3 class="success-title">Application Secured.</h3>
+          <p class="success-desc">Our architecture team has received your data. We will review your current infrastructure and contact you within 24 hours.</p>
+          <button class="btn-outline" onclick="document.getElementById('closeContactModal').click();" style="margin-top: 24px;">Close Portal</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
