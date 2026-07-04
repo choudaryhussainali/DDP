@@ -5842,3 +5842,40 @@ footer {
     margin-bottom: 20px !important;
   }
 }
+
+/* ============================================================
+   MOBILE HERO LINES + CURSOR FIX
+   Desktop untouched.
+============================================================ */
+
+@media (max-width: 1024px) {
+  .hero-line-left,
+  .hero-line-right {
+    display: none !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring,
+  .cursor {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  label,
+  .svc-card,
+  .insight-card,
+  .testi-card,
+  .cert-verify-btn,
+  .result-image,
+  .cert-stack-card {
+    cursor: auto !important;
+  }
+}

@@ -742,3 +742,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.innerWidth > 1024) closeMenu();
   });
 });
+
+
+
+// ============================================================
+// MOBILE CURSOR KILL SWITCH
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.matchMedia('(max-width: 1024px), (hover: none), (pointer: coarse)').matches) {
+    document.querySelectorAll('.cursor-dot, .cursor-ring, .cursor').forEach(el => {
+      el.remove();
+    });
+  }
+});
