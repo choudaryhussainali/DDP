@@ -5879,3 +5879,141 @@ footer {
     cursor: auto !important;
   }
 }
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   TOUCH DEVICES — REMOVE IMAGE HOVER COLOR / ZOOM EFFECTS
+   Desktop untouched.
+============================================================ */
+
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
+  /* Results images */
+  .result-hero-card:hover .result-image img,
+  .results-trio .result-card:hover .result-image img {
+    opacity: 0.75 !important;
+    filter: grayscale(20%) !important;
+    transform: none !important;
+  }
+
+  /* Service gallery images */
+  .elite-service-block:hover .es-img img,
+  .es-img:hover img {
+    filter: inherit !important;
+    transform: none !important;
+  }
+
+  /* Framework cards */
+  .fw-card:hover .fw-img,
+  .fw-img:hover {
+    filter: inherit !important;
+    transform: none !important;
+  }
+
+  /* Insight/blog cards */
+  .insight-card:hover .insight-image-wrapper img,
+  .insight-image-wrapper:hover img {
+    filter: inherit !important;
+    transform: none !important;
+  }
+
+  /* Video testimonial thumbnails */
+  .video-card:hover .v-thumb,
+  .video-thumbnail-wrap:hover .v-thumb {
+    filter: inherit !important;
+    transform: none !important;
+  }
+
+  /* Certificate images */
+  .cert-stack-card:hover .cert-stack-image img,
+  .cert-stack-image:hover img {
+    filter: grayscale(40%) contrast(1.1) !important;
+    transform: none !important;
+  }
+
+  /* Brand logos / integration icons */
+  .trust-card:hover .brand-logo-img,
+  .integration-card:hover .int-icon {
+    filter: inherit !important;
+    transform: none !important;
+  }
+
+  /* Prevent hover-lift sticking on touch */
+  .result-hero-card:hover,
+  .results-trio .result-card:hover,
+  .elite-service-block:hover,
+  .fw-card:hover,
+  .insight-card:hover,
+  .video-card:hover,
+  .cert-stack-card:hover,
+  .trust-card:hover,
+  .integration-card:hover {
+    transform: none !important;
+  }
+}
+/* ============================================================
+   MOBILE / TOUCH IMAGE COLOR FIX
+   Desktop untouched.
+   Images stay colorful by default on mobile/tablet.
+============================================================ */
+
+@media (max-width: 1024px), ((hover: none) and (pointer: coarse)) {
+  /* DDP Growth Engine / Framework images */
+  .framework-grid .fw-img,
+  .fw-card .fw-img,
+  .fw-card:hover .fw-img,
+  .fw-card:active .fw-img,
+  .fw-card:focus-within .fw-img {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Insights / blog images */
+  .insights-grid .insight-image-wrapper img,
+  .insight-card .insight-image-wrapper img,
+  .insight-card:hover .insight-image-wrapper img,
+  .insight-card:active .insight-image-wrapper img,
+  .insight-card:focus-within .insight-image-wrapper img {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Service images, if any are also using grayscale */
+  .elite-service-block .es-img img,
+  .elite-service-block:hover .es-img img,
+  .elite-service-block:active .es-img img,
+  .elite-service-block:focus-within .es-img img {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Result images, keep them clean and stable on touch */
+  #results .result-image img,
+  #results .result-hero-card:hover .result-image img,
+  #results .results-trio .result-card:hover .result-image img,
+  #results .result-hero-card:active .result-image img,
+  #results .results-trio .result-card:active .result-image img {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Video thumbnails */
+  .video-card .v-thumb,
+  .video-card:hover .v-thumb,
+  .video-card:active .v-thumb,
+  .video-card:focus-within .v-thumb {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
