@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================================
   const preloader = document.getElementById('premium-preloader');
   const countEl = document.getElementById('loader-count');
+  const barEl = document.getElementById('loader-bar');
   const paths = document.querySelectorAll('.ddp-path');
   const svgCanvas = document.querySelector('.ddp-vector-logo');
   
@@ -27,6 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (progress > 100) progress = 100;
 
       countEl.innerText = progress;
+
+      // Fill the progress bar in perfect lockstep with the counter (0 -> 100%).
+      if (barEl) barEl.style.width = progress + '%';
 
       const drawProgress = Math.min(progress / 86, 1);
       
@@ -705,43 +709,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ============================================================
-// MOBILE NAVIGATION — RESPONSIVE ONLY
+// MOBILE NAVIGATION — moved to shared js/nav-drawer.js
+// (canonical drawer engine, mirrors the Insights page)
 // ============================================================
-document.addEventListener('DOMContentLoaded', () => {
-  const nav = document.getElementById('navbar');
-  const toggle = nav ? nav.querySelector('.nav-toggle') : null;
-  const menu = document.getElementById('primary-navigation');
-
-  if (!nav || !toggle || !menu) return;
-
-  const closeMenu = () => {
-    document.body.classList.remove('nav-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Open menu');
-  };
-
-  const openMenu = () => {
-    document.body.classList.add('nav-open');
-    toggle.setAttribute('aria-expanded', 'true');
-    toggle.setAttribute('aria-label', 'Close menu');
-  };
-
-  toggle.addEventListener('click', () => {
-    document.body.classList.contains('nav-open') ? closeMenu() : openMenu();
-  });
-
-  menu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeMenu();
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 1024) closeMenu();
-  });
-});
 
 
 

@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Dani Digital Pro — Revenue Growth Architect</title>
+<link rel="icon" type="image/png" href="images/ddp-logo.png" />
 <meta name="description" content="PPC & Paid Ads Growth Expert. Scaling brands with data-driven paid advertising & growth systems." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -12,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/insights.css">
+<link rel="stylesheet" href="css/nav-drawer.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -48,6 +50,10 @@
       </div>
     </div>
 
+    <div class="preloader-bar" aria-hidden="true">
+      <div class="preloader-bar-fill" id="loader-bar"></div>
+    </div>
+
   </div>
 </div>
 
@@ -68,20 +74,20 @@
     <!-- <img src="images/ddp-logo.png" alt="DDP Mark" class="nav-img-logo"> -->
     <span>Dani Digital Pro</span>
   </a>
+  <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
   <ul class="nav-links" id="primary-navigation">
     <li><a href="#services">Services</a></li>
     <li><a href="#framework">System</a></li>
     <li><a href="#results">Results</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#insights">Insights</a></li>
-    <li class="nav-mobile-cta"><a href="#apply">Book Strategy Call</a></li>
+    <li class="nav-mobile-cta-item"><a href="#apply" class="nav-mobile-cta"><span>Book Strategy Call</span></a></li>
   </ul>
   <a href="#apply" class="nav-cta"><span>Book Strategy Call</span></a>
-  <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
 </nav>
 
 <!-- ============================================================
@@ -2091,6 +2097,7 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/nav-drawer.js"></script>
 <div id="image-modal" class="image-modal">
     <span class="modal-close">&times;</span>
     <img class="modal-content" id="modal-img" src="" alt="Verified Proof Zoom">

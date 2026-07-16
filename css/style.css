@@ -151,6 +151,52 @@ body.loading-lock { overflow: hidden; height: 100vh; }
   color: var(--gold); line-height: 0.8; letter-spacing: -0.02em;
 }
 .preloader-percent { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-left: 4px; }
+
+/* --- Premium Progress Bar (driven in lockstep with the counter) --- */
+.preloader-bar {
+  width: 100%;
+  height: 2px;
+  margin-top: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease 0.35s, transform 0.6s ease 0.35s;
+}
+
+.preloader-container.text-active .preloader-bar {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.preloader-bar-fill {
+  position: relative;
+  width: 0%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.55);
+  transition: width 0.07s linear;
+}
+
+/* Glowing leading edge that rides the fill from 0% to 100% */
+.preloader-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 7px;
+  height: 7px;
+  transform: translate(50%, -50%);
+  border-radius: 50%;
+  background: var(--gold2);
+  box-shadow: 0 0 10px 2px rgba(232, 201, 109, 0.85);
+}
+
+.preloader-container.loaded .preloader-bar-fill {
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.75);
+}
+
 /* --- Animations --- */
 @keyframes fade-up {
   0% { opacity: 0; transform: translateY(20px); }
@@ -562,6 +608,8 @@ nav.scrolled {
 }
 .marquee-item {
   display: flex; align-items: center; gap: 40px;
+  flex-shrink: 0; /* critical: keep each keyword row at full width so the -50% loop is seamless and text never overlaps */
+  min-width: max-content; /* overrides the global `* { min-width: 0 }` responsive reset that otherwise crushes the row and overlaps the text on mobile */
   padding: 0 40px;
   font-family: 'Syne', sans-serif;
   font-size: 0.72rem; font-weight: 700;
@@ -575,8 +623,8 @@ nav.scrolled {
   border-radius: 50%; opacity: 0.5;
 }
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 /* ============================================================
@@ -3903,8 +3951,12 @@ footer {
 .marquee-track {
   display: flex;
   width: max-content;
+  min-width: max-content; /* floor the track at its true content width so `* { min-width: 0 }` can't collapse it (keeps the -50% loop exact on every device) */
+  flex-shrink: 0; /* never let the track collapse under the global `* { min-width: 0 }` responsive reset */
   /* Hardware Acceleration for Butter Smooth 60fps */
   will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* The Left & Right Animations */
@@ -3923,18 +3975,19 @@ footer {
 
 .marquee-group {
   display: flex;
+  flex-shrink: 0; /* keep every group at full width so the -50% loop stays seamless */
   gap: 24px;
   padding-right: 24px; /* Matches the gap so the loop is mathematically seamless */
 }
 
 @keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes scroll-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 /* ============================================================
@@ -3943,15 +3996,18 @@ footer {
 .trust-card {
   width: 320px; /* Forces exactly 4 cards into view on most desktop screens */
   height: 200px;
-  background: rgba(255, 255, 255, 0.015);
-  backdrop-filter: blur(10px);
+  flex-shrink: 0; /* critical: cards must keep their width on tablet/mobile (global reset zeroes min-width) */
+  background: rgba(255, 255, 255, 0.02);
+  /* NOTE: no backdrop-filter — blurring a near-solid dark backdrop is invisible but
+     forces the compositor to re-sample every frame across 20 moving cards, which
+     causes the stutter/"blink". Removing it gives a buttery, continuous marquee. */
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: border-color 0.5s cubic-bezier(0.19, 1, 0.22, 1), background 0.5s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   cursor: pointer;
   overflow: hidden;
 }
@@ -4019,10 +4075,12 @@ footer {
 
 /* Responsive Overrides */
 @media (max-width: 1024px) {
+  .elite-trust-section { padding: 100px 0; }
   .trust-card { width: 280px; height: 100px; }
   .brand-text { font-size: 1.1rem; }
 }
 @media (max-width: 600px) {
+  .elite-trust-section { padding: 80px 0; }
   .trust-card { width: 240px; height: 90px; }
   .brand-text { font-size: 0.95rem; }
   /* Speed it up slightly on mobile so it doesn't feel stagnant */
@@ -4611,115 +4669,6 @@ footer {
     display: none;
   }
 
-  .nav-toggle {
-    display: inline-flex;
-    width: 46px;
-    height: 46px;
-    border: 1px solid var(--border2);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--off);
-    cursor: pointer;
-    position: relative;
-    z-index: 1005;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 5px;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .nav-toggle span {
-    display: block;
-    width: 18px;
-    height: 2px;
-    border-radius: 999px;
-    background: currentColor;
-    transition: transform 0.28s ease, opacity 0.2s ease;
-  }
-
-  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-
-  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
-  .nav-links {
-    display: flex !important;
-    position: fixed;
-    top: 82px;
-    right: 32px;
-    left: auto;
-    width: min(380px, calc(100vw - 64px));
-    max-height: calc(100dvh - 104px);
-    overflow-y: auto;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 4px;
-    padding: 22px;
-    border: 1px solid var(--border2);
-    border-radius: 18px;
-    background: rgba(13, 13, 13, 0.98);
-    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.72);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    transform: translateX(calc(100% + 48px));
-    opacity: 0;
-    pointer-events: none;
-    z-index: 1004;
-    transition: transform 0.42s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.25s ease;
-  }
-
-  body.nav-open .nav-links {
-    transform: translateX(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  body.nav-open::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-  }
-
-  .nav-links li {
-    width: 100%;
-  }
-
-  .nav-links a {
-    min-height: 48px;
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-    padding: 0 14px;
-  }
-
-  .nav-links a::after {
-    display: none;
-  }
-
-  .nav-mobile-cta {
-    display: block;
-    margin-top: 10px;
-  }
-
-  .nav-mobile-cta a {
-    justify-content: center;
-    color: var(--bg) !important;
-    background: linear-gradient(135deg, var(--gold), var(--gold2));
-    font-weight: 800;
-  }
-
   #hero {
     min-height: auto;
     padding-top: 128px;
@@ -4909,13 +4858,6 @@ footer {
     max-width: 58vw;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  .nav-links {
-    top: 78px;
-    right: 24px;
-    width: calc(100vw - 48px);
-    max-height: calc(100dvh - 98px);
   }
 
   #hero,
@@ -5352,18 +5294,6 @@ footer {
     font-size: 0.98rem;
   }
 
-  .nav-toggle {
-    width: 44px;
-    height: 44px;
-  }
-
-  .nav-links {
-    right: 18px;
-    width: calc(100vw - 36px);
-    padding: 18px;
-    border-radius: 16px;
-  }
-
   #hero,
   .section,
   .metrics-band,
@@ -5646,129 +5576,6 @@ footer {
   .hero-elem {
     opacity: 1 !important;
     transform: none !important;
-  }
-}
-
-/* ============================================================
-   MOBILE NAV FULLSCREEN FIX
-   Fixes half-visible/clipped mobile menu.
-   Desktop remains untouched.
-============================================================ */
-
-@media (max-width: 1024px) {
-  body.nav-open {
-    overflow: hidden !important;
-  }
-
-  body.nav-open::after {
-    display: none !important;
-  }
-
-  #navbar {
-    overflow: visible !important;
-  }
-
-  .nav-toggle {
-    position: relative !important;
-    z-index: 1000002 !important;
-  }
-
-  .nav-links {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100dvh !important;
-    max-height: none !important;
-
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: stretch !important;
-
-    padding: 96px 28px 36px !important;
-    margin: 0 !important;
-    gap: 10px !important;
-
-    left: 0 !important;
-    right: auto !important;
-    top: 0 !important;
-    bottom: 0 !important;
-
-    border: 0 !important;
-    border-radius: 0 !important;
-    background:
-      radial-gradient(circle at 80% 10%, rgba(201,168,76,0.08), transparent 34%),
-      linear-gradient(180deg, rgba(8,8,8,0.98), rgba(5,5,5,0.995)) !important;
-    box-shadow: none !important;
-    backdrop-filter: blur(24px) !important;
-    -webkit-backdrop-filter: blur(24px) !important;
-
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-
-    transform: translateX(100%) !important;
-    opacity: 1 !important;
-    pointer-events: none !important;
-
-    z-index: 1000000 !important;
-    transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1) !important;
-  }
-
-  body.nav-open .nav-links {
-    transform: translateX(0) !important;
-    pointer-events: auto !important;
-  }
-
-  .nav-links li {
-    width: 100% !important;
-    list-style: none !important;
-  }
-
-  .nav-links a {
-    width: 100% !important;
-    min-height: 56px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    padding: 0 18px !important;
-    border-radius: 12px !important;
-
-    background: rgba(255,255,255,0.025) !important;
-    border: 1px solid rgba(255,255,255,0.06) !important;
-
-    font-size: 0.74rem !important;
-    letter-spacing: 0.14em !important;
-    text-align: center !important;
-  }
-
-  .nav-links a::after {
-    display: none !important;
-  }
-
-  .nav-mobile-cta {
-    display: block !important;
-    margin-top: 16px !important;
-  }
-
-  .nav-mobile-cta a {
-    min-height: 58px !important;
-    background: linear-gradient(135deg, var(--gold), var(--gold2)) !important;
-    color: var(--bg) !important;
-    border-color: transparent !important;
-    font-weight: 800 !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-links {
-    padding: 92px 18px 28px !important;
-    gap: 9px !important;
-  }
-
-  .nav-links a {
-    min-height: 54px !important;
-    font-size: 0.68rem !important;
   }
 }
 

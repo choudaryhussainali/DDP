@@ -1,0 +1,368 @@
+/* ============================================================
+   SHARED MOBILE NAVIGATION DRAWER — CANONICAL IMPLEMENTATION
+   ------------------------------------------------------------
+   Source of truth: the Insights page drawer (css/insights.css).
+   This file reproduces that drawer's exact final computed styles
+   so index.html and trainings.html render an identical mobile
+   menu. insights.html keeps its own inline copy (untouched); this
+   file mirrors it verbatim in effect.
+
+   Scope: mobile menu DRAWER only (toggle button, overlay,
+   sliding panel, drawer links, in-drawer CTA, open/close
+   animation, scroll-lock, z-index layering). It intentionally
+   does NOT restyle the <nav>/#navbar header bar itself — each
+   page keeps its own header. Activation breakpoint: 1024px.
+
+   Load LAST (after the page's own stylesheet) so it is
+   authoritative. Values verified against insights.css.
+============================================================ */
+
+/* Hide mobile-only controls on desktop */
+nav .nav-toggle { display: none; }
+.nav-mobile-cta-item { display: none; }
+
+@media (max-width: 1024px) {
+  /* ---- keep logo/toggle above their own stacking context ---- */
+  .nav-logo,
+  .nav-toggle {
+    position: relative;
+    z-index: 10010;
+  }
+
+  /* ---- TOGGLE BUTTON (hamburger) ---- */
+  .nav-toggle {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    min-height: 46px !important;
+    margin-left: auto !important;
+    padding: 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    color: var(--off) !important;
+    cursor: none;
+    pointer-events: auto !important;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  }
+
+  .nav-toggle span {
+    display: block !important;
+    width: 20px !important;
+    height: 1.5px !important;
+    background: var(--off) !important;
+    border-radius: 999px !important;
+    opacity: 1 !important;
+    transform-origin: center;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+
+  .nav-toggle:hover,
+  body.nav-open .nav-toggle {
+    border-color: var(--gold-border) !important;
+    color: var(--gold) !important;
+    background: rgba(201, 168, 76, 0.08) !important;
+  }
+
+  body.nav-open .nav-toggle span {
+    background: var(--gold) !important;
+  }
+
+  body.nav-open .nav-toggle span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg) !important;
+  }
+
+  body.nav-open .nav-toggle span:nth-child(2) {
+    opacity: 0 !important;
+  }
+
+  body.nav-open .nav-toggle span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg) !important;
+  }
+
+  /* ---- OVERLAY (backdrop) ---- */
+  nav::before {
+    content: '' !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 10020 !important;
+    background: rgba(5, 5, 5, 0.72) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.35s ease !important;
+  }
+
+  body.nav-open nav::before {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* ---- hide the header CTA on mobile (moved into the drawer) ---- */
+  .nav-cta {
+    display: none !important;
+  }
+
+  /* ---- DRAWER PANEL ---- */
+  .nav-links {
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    bottom: 0 !important;
+    width: min(88vw, 390px) !important;
+    max-width: 390px !important;
+    max-height: none !important;
+    height: 100vh !important;
+    height: 100svh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    padding-top: calc(104px + env(safe-area-inset-top)) !important;
+    padding-right: 32px !important;
+    padding-bottom: calc(36px + env(safe-area-inset-bottom)) !important;
+    padding-left: 32px !important;
+    background: rgba(8, 8, 8, 0.985) !important;
+    border: 0 !important;
+    border-left: 1px solid var(--border) !important;
+    border-radius: 0 !important;
+    box-shadow: -24px 0 70px rgba(0, 0, 0, 0.72) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    z-index: 10030 !important;
+    transform: translate3d(100%, 0, 0) !important;
+    opacity: 1 !important;
+    transition: transform 0.55s cubic-bezier(0.19, 1, 0.22, 1) !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  body.nav-open .nav-links {
+    transform: translate3d(0, 0, 0) !important;
+    pointer-events: auto !important;
+    z-index: 10030 !important;
+  }
+
+  /* ---- scroll-lock ---- */
+  body.nav-open {
+    overflow: hidden !important;
+    touch-action: none !important;
+  }
+
+  /* ---- DRAWER LINKS ---- */
+  .nav-links li {
+    width: 100% !important;
+    list-style: none !important;
+  }
+
+  /*
+    NOTE: these link rules are intentionally NOT !important. `.nav-links a`
+    (specificity 0,1,1) is more specific than `.nav-mobile-cta` (0,1,0); making
+    it !important would beat the CTA's own !important rules and strip the gold
+    button styling. Non-important here mirrors the Insights page cascade, so the
+    CTA (`.nav-mobile-cta { … !important }`) wins as intended.
+  */
+  .nav-links a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 54px;
+    padding: 4px 0;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 0;
+    background: none;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--off);
+  }
+
+  .nav-links a::after {
+    bottom: 0;
+  }
+
+  /* ---- IN-DRAWER CTA ---- */
+  .nav-mobile-cta-item {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 32px !important;
+    padding-top: 8px !important;
+    border-bottom: none !important;
+  }
+
+  .nav-mobile-cta {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-height: 54px !important;
+    padding: 15px 22px !important;
+    background: var(--gold) !important;
+    color: var(--bg) !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    font-family: 'Syne', sans-serif !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    border-bottom: none !important;
+    box-shadow: 0 18px 40px rgba(201, 168, 76, 0.12) !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .nav-mobile-cta::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: var(--gold2) !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s ease !important;
+    z-index: 1 !important;
+  }
+
+  .nav-mobile-cta:hover::after {
+    transform: translateX(0) !important;
+  }
+
+  .nav-mobile-cta span {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .nav-links > li:not(.nav-mobile-cta-item) > a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  }
+
+  .nav-mobile-cta-item .nav-mobile-cta {
+    border-bottom: none !important;
+  }
+
+  /* ---- z-index layering when open ---- */
+  body.nav-open .nav-logo {
+    z-index: 10000 !important;
+  }
+
+  body.nav-open nav::before {
+    z-index: 10020 !important;
+  }
+
+  body.nav-open .nav-toggle {
+    z-index: 10040 !important;
+  }
+}
+
+/* ---- small phones ---- */
+@media (max-width: 640px) {
+  .nav-links {
+    width: min(90vw, 360px) !important;
+    padding-right: 28px !important;
+    padding-left: 28px !important;
+  }
+
+  .nav-mobile-cta {
+    min-height: 52px !important;
+    font-size: 0.68rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    width: 90vw !important;
+    padding-top: calc(96px + env(safe-area-inset-top)) !important;
+    padding-right: 24px !important;
+    padding-left: 24px !important;
+  }
+
+  .nav-mobile-cta-item {
+    margin-top: 28px !important;
+  }
+
+  .nav-mobile-cta {
+    min-height: 50px !important;
+    padding: 14px 18px !important;
+    font-size: 0.64rem !important;
+  }
+}
+
+/* ---- touch devices: real pointer for the toggle ---- */
+@media (hover: none), (pointer: coarse) {
+  .nav-toggle {
+    cursor: pointer;
+  }
+}
+
+/* ---- reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .nav-links {
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   CURSOR VISIBILITY SAFETY NET
+   ------------------------------------------------------------
+   The custom gold cursor is a desktop-only effect: at <=1024px
+   (and on touch devices) it is removed. But the base stylesheet
+   forces `cursor: none` globally, which would otherwise leave
+   NO cursor at all on a narrow window / small laptop with a
+   mouse. Restore the native cursor wherever the custom one is
+   not shown. Loaded last, so it overrides `cursor: none`.
+============================================================ */
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
+  /* The custom gold cursor is desktop-only. Ensure it is not shown here
+     (index removes it via JS; trainings does not — hide it either way so a
+     stray second cursor never appears alongside the restored native one). */
+  .cursor-dot,
+  .cursor-ring,
+  .cursor {
+    display: none !important;
+  }
+
+  html,
+  body,
+  input,
+  select,
+  textarea,
+  label {
+    cursor: auto !important;
+  }
+
+  a,
+  button,
+  summary,
+  [role="button"],
+  [onclick],
+  .nav-toggle,
+  .nav-cta,
+  .nav-mobile-cta,
+  .btn-gold,
+  .btn-outline,
+  .btn-elite,
+  .faq-header {
+    cursor: pointer !important;
+  }
+}
