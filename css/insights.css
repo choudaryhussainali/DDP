@@ -507,7 +507,10 @@ footer { border-top: 1px solid var(--border); padding: 48px 64px; }
   border-radius: 20px;
   box-shadow: 0 40px 100px -10px rgba(0,0,0,0.9), 0 0 50px rgba(201, 168, 76, 0.05);
   z-index: 2;
-  overflow: hidden;
+  overflow: hidden auto;
+  max-height: calc(100dvh - 40px);
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   transform: scale(0.95) translateY(20px);
   transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -549,10 +552,26 @@ footer { border-top: 1px solid var(--border); padding: 48px 64px; }
 
 .ct-item svg { width: 18px; height: 18px; color: var(--gold); }
 
+.ct-item a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.ct-item a:hover,
+.ct-item a:focus-visible { color: var(--gold); }
+
 .ddp-contact-right {
   padding: 64px 48px;
   background: #121214;
   position: relative;
+}
+
+/* Fluid modal heading — scales smoothly across every device width */
+.ddp-contact-left .ddp-modal-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
 }
 
 /* --- FORM FIELDS --- */
