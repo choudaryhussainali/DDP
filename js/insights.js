@@ -181,7 +181,11 @@ document.addEventListener("DOMContentLoaded", () => {
   drawerCloseBtn.addEventListener('click', closeDrawer);
   drawerOverlay.addEventListener('click', closeDrawer);
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && articleDrawer.classList.contains('active')) {
+    // While the contact popup is open on top of the drawer, let Escape close the
+    // modal first; a second Escape then closes the drawer.
+    const contactPortal = document.getElementById('contactModal');
+    const portalOpen = contactPortal && contactPortal.classList.contains('active');
+    if (e.key === 'Escape' && articleDrawer.classList.contains('active') && !portalOpen) {
       closeDrawer();
     }
   });
@@ -202,22 +206,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!contactModal) return;
 
-  // 1. CTA HIJACKER: Aggressive targeting to prevent redirects
-  const ctaButtons = document.querySelectorAll('a[href="#apply"], a[href="index.html#apply"], a[href^="mailto:"]');
-  
-  ctaButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault(); // Kills the default jump/redirect dead
-      contactModal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Lock background scrolling
-    });
+  // 1. CTA HIJACKER (event-delegated):
+  //    Bound ONCE on the document so it catches the static nav/footer CTAs AND
+  //    every "Book Strategy Call" link that data.js injects into the article
+  //    drawer *after* page load. Direct binding at load missed those dynamic
+  //    links, so they redirected to index.html#apply instead of opening this
+  //    popup. Delegation makes every article CTA open the same modal as the home page.
+  const CTA_SELECTOR = 'a[href="#apply"], a[href="index.html#apply"], a[href^="mailto:"]';
+
+  const openPortal = () => {
+    contactModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Lock background scrolling
+  };
+
+  document.addEventListener('click', (e) => {
+    const cta = e.target.closest(CTA_SELECTOR);
+    if (!cta) return;
+    e.preventDefault(); // Kills the default jump/redirect dead
+    openPortal();
   });
 
   // 2. MODAL CLOSING LOGIC
   const closePortal = () => {
     contactModal.classList.remove('active');
-    document.body.style.overflow = ''; 
-    
+
+    // If the article drawer is still open beneath the modal (CTA was clicked
+    // from inside an article), keep the body locked so the page doesn't scroll
+    // away underneath it; otherwise release the scroll lock.
+    const articleDrawer = document.getElementById('articleDrawer');
+    const drawerStillOpen = articleDrawer && articleDrawer.classList.contains('active');
+    document.body.style.overflow = drawerStillOpen ? 'hidden' : '';
+
     // Reset form and hide success state silently after modal slides away
     setTimeout(() => {
       if(form) form.reset();

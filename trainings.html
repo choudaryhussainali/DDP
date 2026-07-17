@@ -28,17 +28,16 @@
 
     <ul class="nav-links" id="primaryNavigation">
       <li><a href="index.html#services">Services</a></li>
-      <li><a href="index.html#framework">System</a></li>
-      <li><a href="trainings.html" style="color: var(--off);">Academy</a></li>
+      <li><a href="trainings.html" style="color: var(--off);">Trainings</a></li>
       <li><a href="index.html#results">Results</a></li>
       <li><a href="insights.html">Insights</a></li>
 
       <li class="nav-mobile-cta-item">
-        <a href="index.html#apply" class="nav-mobile-cta"><span>Book Strategy Call</span></a>
+        <a href="#apply" class="nav-mobile-cta"><span>Book Strategy Call</span></a>
       </li>
     </ul>
 
-    <a href="index.html#apply" class="nav-cta"><span>Book Strategy Call</span></a>
+    <a href="#apply" class="nav-cta"><span>Book Strategy Call</span></a>
   </nav>
 
  <header class="academy-hero section">
@@ -129,7 +128,7 @@
 
         <div class="vault-footer">
           <div class="vf-info">Comprehensive Blueprint • Lifetime Access</div>
-          <a href="index.html#apply" class="btn-gold">Apply For Enrollment <span>→</span></a>
+          <a href="#enroll" data-course="E-Commerce Growth Systems" class="btn-gold">Apply For Enrollment <span>→</span></a>
         </div>
 
       </div>
@@ -183,7 +182,7 @@
 
         <div class="vault-footer">
           <div class="vf-info">Technical Blueprint • Lifetime Access</div>
-          <a href="index.html#apply" class="btn-gold">Apply For Enrollment <span>→</span></a>
+          <a href="#enroll" data-course="AI Performance Marketing" class="btn-gold">Apply For Enrollment <span>→</span></a>
         </div>
 
       </div>
@@ -239,7 +238,7 @@
 
         <div class="vault-footer">
           <div class="vf-info">Omnichannel Strategy • Lifetime Access</div>
-          <a href="index.html#apply" class="btn-gold">Apply For Enrollment <span>→</span></a>
+          <a href="#enroll" data-course="Social Media Marketing" class="btn-gold">Apply For Enrollment <span>→</span></a>
         </div>
 
       </div>
@@ -295,7 +294,7 @@
 
         <div class="vault-footer">
           <div class="vf-info">Search Architect Blueprint • Lifetime Access</div>
-          <a href="index.html#apply" class="btn-gold">Apply For Enrollment <span>→</span></a>
+          <a href="#enroll" data-course="Search Engine Marketing" class="btn-gold">Apply For Enrollment <span>→</span></a>
         </div>
 
       </div>
@@ -675,7 +674,7 @@
       </p>
       
       <div class="cta-actions">
-        <a href="index.html#apply" class="btn-gold" style="padding: 20px 48px; font-size: 0.9rem;">
+        <a href="#enroll" data-course="1-on-1 Mentorship" class="btn-gold" style="padding: 20px 48px; font-size: 0.9rem;">
           Apply For Mentorship <span style="margin-left: 8px;">→</span>
         </a>
       </div>
@@ -684,10 +683,260 @@
   </section>
   <footer>
     <div class="footer-inner">
-      <a href="index.html" class="footer-logo">Dani Digital Pro<span class="dot">.</span></a>
-      <div class="footer-copy">© 2026 Dani Digital Pro. All Rights Reserved.</div>
+      <a href="index.html" class="footer-logo">
+        <img src="images/ddp-logo.png" alt="DDP Mark" class="footer-img-logo">
+        <span>Dani Digital Pro</span>
+      </a>
+      <div class="footer-links">
+        <a href="index.html#services">Services</a>
+        <a href="index.html#results">Results</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#insights">Insights</a>
+        <a href="index.html#apply">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 Dani Digital Pro. Lahore, Pakistan.</div>
     </div>
   </footer>
+
+  <!-- ============================================================
+       ENROLLMENT APPLICATION MODAL
+       Opened by every "Apply For Enrollment" / "Apply For Mentorship"
+       CTA (a[href="#enroll"]). The clicked CTA's data-course pre-selects
+       the matching program. Mirrors the site's contact-modal design system.
+  ============================================================ -->
+  <div class="ddp-contact-modal-overlay" id="enrollModal" aria-hidden="true">
+    <div class="ddp-contact-backdrop" id="enrollModalBackdrop"></div>
+
+    <div class="ddp-contact-modal" role="dialog" aria-modal="true" aria-labelledby="enrollModalTitle">
+      <button class="ddp-modal-close" id="closeEnrollModal" aria-label="Close enrollment form">&times;</button>
+
+      <div class="ddp-contact-grid">
+
+        <div class="ddp-contact-left">
+          <div class="ddp-modal-badge">Limited Cohort</div>
+          <h2 class="ddp-modal-title" id="enrollModalTitle">Apply for<br><em>Enrollment</em></h2>
+          <p class="ddp-modal-desc">Reserve your seat in the program. Our admissions team reviews every application and responds within 24 hours with your onboarding details and payment plan.</p>
+
+          <ul class="enroll-perks">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Lifetime access to the full curriculum</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Live mentorship &amp; campaign feedback</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Completion certificate &amp; alumni network</span>
+            </li>
+          </ul>
+
+          <div class="contact-trust-info">
+            <div class="ct-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <a href="mailto:daniidigitalpro@gmail.com">daniidigitalpro@gmail.com</a>
+            </div>
+            <div class="ct-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <a href="tel:+923244859790">+92 324 485 9790</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ddp-contact-right">
+
+          <form id="ddpEnrollForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+            <div class="form-row-2">
+              <div class="input-group">
+                <label for="enrName">Full Name</label>
+                <input type="text" id="enrName" name="name" required placeholder="John Doe">
+              </div>
+              <div class="input-group">
+                <label for="enrEmail">Email Address</label>
+                <input type="email" id="enrEmail" name="email" required placeholder="john@email.com">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="input-group">
+                <label for="enrPhone">Phone / WhatsApp</label>
+                <input type="tel" id="enrPhone" name="phone" required placeholder="+92 300 0000000">
+              </div>
+              <div class="input-group">
+                <label for="enrLocation">City &amp; Country</label>
+                <input type="text" id="enrLocation" name="location" required placeholder="Lahore, Pakistan">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="input-group">
+                <label for="enrCourse">Program of Interest</label>
+                <select id="enrCourse" name="course" required>
+                  <option value="" disabled selected>Select a program...</option>
+                  <option value="E-Commerce Growth Systems">E-Commerce Growth Systems</option>
+                  <option value="AI Performance Marketing">AI Performance Marketing</option>
+                  <option value="Social Media Marketing">Social Media Marketing</option>
+                  <option value="Search Engine Marketing">Search Engine Marketing</option>
+                  <option value="1-on-1 Mentorship">1-on-1 Mentorship</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="enrLevel">Experience Level</label>
+                <select id="enrLevel" name="experience" required>
+                  <option value="" disabled selected>Select your level...</option>
+                  <option value="Beginner">Beginner — just starting out</option>
+                  <option value="Intermediate">Intermediate — some experience</option>
+                  <option value="Advanced">Advanced — scaling actively</option>
+                  <option value="Professional / Agency">Professional / Agency</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="input-group">
+                <label for="enrSchedule">Preferred Schedule</label>
+                <select id="enrSchedule" name="schedule" required>
+                  <option value="" disabled selected>Select availability...</option>
+                  <option value="Weekdays">Weekdays</option>
+                  <option value="Weekends">Weekends</option>
+                  <option value="Flexible">Flexible</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="enrHeard">How Did You Hear About Us?</label>
+                <select id="enrHeard" name="referral_source">
+                  <option value="" disabled selected>Select a source...</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="YouTube">YouTube</option>
+                  <option value="Google Search">Google Search</option>
+                  <option value="Referral">Referral / Friend</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="enrGoals">What Do You Want To Achieve?</label>
+              <textarea id="enrGoals" name="goals" rows="4" required placeholder="Tell us about your current situation and the results you're aiming for."></textarea>
+            </div>
+
+            <button type="submit" class="ddp-btn ddp-btn-primary form-submit-btn" id="enrSubmitBtn" style="width: 100%; justify-content: center; margin-top: 8px;">
+              <span>Submit Application <span class="arrow">→</span></span>
+            </button>
+          </form>
+
+          <div class="form-success-state" id="enrollSuccessState">
+            <div class="success-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3 class="success-title">Application Received.</h3>
+            <p class="success-desc">Thank you for applying. Our admissions team will review your submission and reach out within 24 hours to confirm your seat and next steps.</p>
+            <button type="button" class="ddp-btn ddp-btn-outline" id="enrollSuccessClose" style="margin-top: 32px;">Close Window</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CONTACT / STRATEGY-CALL MODAL
+       Same form as the homepage. Opened in-page by the header
+       "Book Strategy Call" CTA (a[href="#apply"]) and the footer
+       Contact link — never redirects to the homepage.
+  ============================================================ -->
+  <div class="ddp-contact-modal-overlay" id="contactModal" aria-hidden="true">
+    <div class="ddp-contact-backdrop" id="contactModalBackdrop"></div>
+
+    <div class="ddp-contact-modal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+      <button class="ddp-modal-close" id="closeContactModal" aria-label="Close contact form">&times;</button>
+
+      <div class="ddp-contact-grid">
+
+        <div class="ddp-contact-left">
+          <div class="ddp-modal-badge">Initiate System</div>
+          <h2 class="ddp-modal-title" id="contactModalTitle">Book a 30 min<br><em>Strategy Call</em></h2>
+          <p class="ddp-modal-desc">Tell us about your current revenue bottleneck. If we are a fit, we will architect a custom growth roadmap.</p>
+
+          <div class="contact-trust-info">
+            <div class="ct-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <a href="mailto:daniidigitalpro@gmail.com">daniidigitalpro@gmail.com</a>
+            </div>
+            <div class="ct-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <a href="tel:+923244859790">+92 324 485 9790</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ddp-contact-right">
+
+          <form id="ddpStrategyForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+            <div class="form-row-2">
+              <div class="input-group">
+                <label for="frmName">Full Name</label>
+                <input type="text" id="frmName" name="name" required placeholder="John Doe">
+              </div>
+              <div class="input-group">
+                <label for="frmEmail">Work Email</label>
+                <input type="email" id="frmEmail" name="email" required placeholder="john@company.com">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="input-group">
+                <label for="frmPhone">Phone Number</label>
+                <input type="tel" id="frmPhone" name="phone" placeholder="+1 (555) 000-0000">
+              </div>
+              <div class="input-group">
+                <label for="frmService">Primary Interest</label>
+                <select id="frmService" name="service" required>
+                  <option value="" disabled selected>Select an architecture...</option>
+                  <option value="Google Ads & SEM">AI-Search & PPC Operations</option>
+                  <option value="Meta Ads & Social">Paid Social Funnel Scaling</option>
+                  <option value="E-Commerce Growth">E-Commerce Scaling</option>
+                  <option value="Organic Management">Elite Brand Management</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="frmBusinessType">Business Type</label>
+              <select id="frmBusinessType" name="business_type" required>
+                <option value="" disabled selected>Select your business type...</option>
+                <option value="Service Based">Service Based</option>
+                <option value="E-Commerce">E-Commerce</option>
+                <option value="SaaS (B2B)">SaaS (B2B)</option>
+                <option value="Personal Brand">Personal Brand</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="frmDesc">Project Brief & Revenue Goals</label>
+              <textarea id="frmDesc" name="message" rows="4" required placeholder="Enter your website & your biggest challenge."></textarea>
+            </div>
+
+            <button type="submit" class="ddp-btn ddp-btn-primary form-submit-btn" id="frmSubmitBtn" style="width: 100%; justify-content: center; margin-top: 16px;">
+              <span>Book Strategy Call <span class="arrow">→</span></span>
+            </button>
+          </form>
+
+          <div class="form-success-state" id="formSuccessState">
+            <div class="success-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3 class="success-title">Application Secured.</h3>
+            <p class="success-desc">Our architecture team has received your data. We will review your current infrastructure and contact you within 24 hours.</p>
+            <button type="button" class="ddp-btn ddp-btn-outline" id="contactSuccessClose" style="margin-top: 24px;">Close Portal</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="js/trainings.js"></script>
   <script src="js/nav-drawer.js"></script>

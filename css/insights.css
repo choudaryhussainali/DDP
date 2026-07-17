@@ -334,12 +334,65 @@ nav.scrolled {
 .featured-card:hover .insight-read-more, .insight-card:hover .insight-read-more { color: var(--gold); }
 .featured-card:hover .insight-read-more .arrow, .insight-card:hover .insight-read-more .arrow { transform: translateX(6px); }
 
-/* --- 8. FOOTER --- */
-footer { border-top: 1px solid var(--border); padding: 48px 64px; }
-.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-.footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: var(--off); }
+/* --- 8. FOOTER (identical across all pages — mirrors the homepage) --- */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 48px 64px;
+  position: relative; z-index: 2;
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 1rem;
+  color: var(--off); text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
 .footer-logo .dot { color: var(--gold); }
-.footer-copy { font-family: 'Syne', sans-serif; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; }
+.footer-img-logo {
+  width: 28px;
+  height: auto;
+  mix-blend-mode: screen;
+  filter: grayscale(30%) opacity(0.8);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.footer-logo:hover .footer-img-logo {
+  filter: grayscale(0%) opacity(1) drop-shadow(0px 4px 12px rgba(201,168,76,0.2));
+  transform: scale(1.08);
+}
+.footer-links { display: flex; gap: 32px; }
+.footer-links a {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--off); }
+.footer-copy {
+  font-size: 0.72rem; color: #333;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.04em;
+}
+/* Footer responsive — all footer breakpoints live here to stay in lockstep
+   with the homepage. Do not add page-specific footer rules elsewhere. */
+@media (max-width: 1024px) {
+  footer { padding: 40px 32px; }
+  .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+@media (max-width: 600px) {
+  .footer-links { gap: 18px; }
+}
+@media (max-width: 480px) {
+  footer { padding-left: 18px !important; padding-right: 18px !important; }
+  .footer-links { flex-direction: column; gap: 12px; }
+}
+@media (max-width: 360px) {
+  footer { padding-left: 16px !important; padding-right: 16px !important; }
+}
 
 /* --- 9. RESPONSIVE --- */
 @media (max-width: 1024px) {
@@ -355,8 +408,6 @@ footer { border-top: 1px solid var(--border); padding: 48px 64px; }
 @media (max-width: 768px) {
   .insights-grid { grid-template-columns: 1fr; }
   .insight-image { height: 200px; }
-  .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
-  footer { padding: 40px 32px; }
 }
 
 
@@ -1406,27 +1457,6 @@ nav .nav-toggle {
 
 
 /* ================================
-   FOOTER
-================================ */
-
-@media (max-width: 1279px) {
-  footer {
-    padding-left: clamp(24px, 4vw, 48px);
-    padding-right: clamp(24px, 4vw, 48px);
-  }
-
-  .footer-inner {
-    width: 100%;
-    gap: 20px;
-  }
-
-  .footer-copy {
-    line-height: 1.5;
-  }
-}
-
-
-/* ================================
    TABLET
 ================================ */
 
@@ -1514,15 +1544,6 @@ nav .nav-toggle {
     justify-content: center;
   }
 
-  footer {
-    padding-top: 38px;
-    padding-bottom: 38px;
-  }
-
-  .footer-inner {
-    flex-direction: column;
-    text-align: center;
-  }
 }
 
 
@@ -1760,11 +1781,6 @@ nav .nav-toggle {
   .ddp-contact-modal .ddp-btn {
     width: 100%;
     padding: 15px 20px;
-  }
-
-  footer {
-    padding-left: 18px;
-    padding-right: 18px;
   }
 }
 

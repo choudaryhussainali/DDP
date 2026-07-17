@@ -37,15 +37,15 @@ body, a, button { cursor: none !important; }
 .cursor-dot {
   width: 8px; height: 8px; background: var(--gold2); border-radius: 50%;
   position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
-  z-index: 99999 !important; pointer-events: none; opacity: 1; transition: opacity 0.2s ease;
+  transition: width 0.2s, height 0.2s, opacity 0.2s;
+  z-index: 9999999 !important; pointer-events: none; opacity: 1;
 }
 .cursor-ring {
   width: 40px; height: 40px; border: 1px solid rgba(201,168,76,0.5); border-radius: 50%;
   position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
-  z-index: 99998 !important; pointer-events: none; opacity: 1;
-  transition: width 0.2s, height 0.2s, background-color 0.2s, opacity 0.2s;
+  transition: all 0.12s ease;
+  z-index: 9999999 !important; pointer-events: none; opacity: 1;
 }
-a:hover ~ .cursor-ring, button:hover ~ .cursor-ring { width: 60px; height: 60px; background: rgba(201,168,76,0.05); }
 
 /* --- UTILITIES --- */
 
@@ -113,9 +113,14 @@ nav.scrolled { padding: 18px 64px; background: rgba(8,8,8,0.94); backdrop-filter
   transition: all 0.25s ease; position: relative; overflow: hidden;
   display: inline-flex; align-items: center; gap: 10px;
 }
-.btn-gold::after, .nav-cta::after { content: ''; position: absolute; inset: 0; background: var(--gold2); transform: translateX(-100%); transition: transform 0.3s ease; }
-.btn-gold:hover::after, .nav-cta:hover::after { transform: translateX(0); }
-.btn-gold span, .nav-cta span { position: relative; z-index: 1; }
+/* Primary gold CTA: clean lift hover (matches index/insights). No fill overlay,
+   so the label never gets covered on hover. */
+.btn-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%); box-shadow: 0 8px 32px rgba(201,168,76,0.25); }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(201,168,76,0.35); }
+/* Nav CTA keeps its slide-fill wipe; its label is span-wrapped so it stays visible. */
+.nav-cta::after { content: ''; position: absolute; inset: 0; background: var(--gold2); transform: translateX(-100%); transition: transform 0.3s ease; }
+.nav-cta:hover::after { transform: translateX(0); }
+.nav-cta span { position: relative; z-index: 1; }
 
 /* --- HEADER & ANIMATIONS --- */
 
@@ -509,12 +514,65 @@ nav.scrolled { padding: 18px 64px; background: rgba(8,8,8,0.94); backdrop-filter
 }
 
 
-/* --- FOOTER --- */
-footer { border-top: 1px solid var(--border); padding: 48px 64px; position: relative; z-index: 2;}
-.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-.footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: var(--off); }
+/* --- FOOTER (identical across all pages — mirrors the homepage) --- */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 48px 64px;
+  position: relative; z-index: 2;
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 1rem;
+  color: var(--off); text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
 .footer-logo .dot { color: var(--gold); }
-.footer-copy { font-family: 'Syne', sans-serif; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; }
+.footer-img-logo {
+  width: 28px;
+  height: auto;
+  mix-blend-mode: screen;
+  filter: grayscale(30%) opacity(0.8);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.footer-logo:hover .footer-img-logo {
+  filter: grayscale(0%) opacity(1) drop-shadow(0px 4px 12px rgba(201,168,76,0.2));
+  transform: scale(1.08);
+}
+.footer-links { display: flex; gap: 32px; }
+.footer-links a {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--off); }
+.footer-copy {
+  font-size: 0.72rem; color: #333;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.04em;
+}
+/* Footer responsive — all footer breakpoints live here to stay in lockstep
+   with the homepage. Do not add page-specific footer rules elsewhere. */
+@media (max-width: 1024px) {
+  footer { padding: 40px 32px; }
+  .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+@media (max-width: 600px) {
+  .footer-links { gap: 18px; }
+}
+@media (max-width: 480px) {
+  footer { padding-left: 18px !important; padding-right: 18px !important; }
+  .footer-links { flex-direction: column; gap: 12px; }
+}
+@media (max-width: 360px) {
+  footer { padding-left: 16px !important; padding-right: 16px !important; }
+}
 
 /* --- RESPONSIVE --- */
 @media (max-width: 1024px) {
@@ -523,8 +581,6 @@ footer { border-top: 1px solid var(--border); padding: 48px 64px; position: rela
   .section { padding-left: 32px; padding-right: 32px; }
   .course-container { grid-template-columns: 1fr; gap: 40px; }
   .enroll-card { position: relative; top: 0; }
-  .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
-  footer { padding: 40px 32px; }
 }
 
 
@@ -2173,48 +2229,6 @@ FINAL CTA
 
 
 /* ================================
-FOOTER
-================================ */
-
-@media (max-width: 1024px) {
-  .footer-inner {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-  }
-
-  footer {
-    padding: 40px 32px;
-  }
-}
-
-@media (max-width: 768px) {
-  footer {
-    padding: 36px 24px;
-  }
-
-  .footer-copy {
-    max-width: 320px;
-    line-height: 1.6;
-  }
-}
-
-@media (max-width: 480px) {
-  footer {
-    padding: 34px 18px;
-  }
-
-  .footer-logo {
-    font-size: 0.95rem;
-  }
-
-  .footer-copy {
-    font-size: 0.68rem;
-  }
-}
-
-
-/* ================================
 TABLET
 ================================ */
 
@@ -2332,4 +2346,389 @@ ACCESSIBILITY / MOTION
   .nav-links {
     transition: none !important;
   }
+}
+
+
+/* ============================================================
+   ENROLLMENT APPLICATION MODAL
+   Premium enrollment popup for every "Apply" CTA on this page.
+   Design mirrors the site's shared contact-modal system so the
+   brand stays consistent. Self-contained + fully responsive.
+============================================================ */
+.ddp-contact-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.ddp-contact-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ddp-contact-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.ddp-contact-modal {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  background: #0f0f11;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 40px 100px -10px rgba(0,0,0,0.9), 0 0 50px rgba(201, 168, 76, 0.05);
+  overflow: hidden auto;
+  max-height: calc(100dvh - 40px);
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  transform: scale(0.95) translateY(20px);
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.ddp-contact-modal-overlay.active .ddp-contact-modal {
+  transform: scale(1) translateY(0);
+}
+
+.ddp-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+}
+
+.ddp-contact-left {
+  padding: 60px 48px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.03) 0%, transparent 100%);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.ddp-contact-right {
+  padding: 60px 48px;
+  background: #121214;
+  position: relative;
+}
+
+/* --- Left panel typography --- */
+.ddp-modal-badge {
+  display: inline-block;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  width: max-content;
+}
+
+.ddp-modal-title {
+  font-family: 'Playfair Display', serif;
+  color: var(--off);
+  line-height: 1.1;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 5vw, 3rem);
+  overflow-wrap: anywhere;
+}
+.ddp-modal-title em { font-style: italic; color: var(--gold); }
+
+.ddp-modal-desc {
+  font-size: 0.95rem;
+  color: var(--muted2);
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 28px;
+}
+
+/* --- Enrollment perks list --- */
+.enroll-perks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0 0 4px;
+  padding: 0;
+}
+.enroll-perks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted2);
+}
+.enroll-perks svg {
+  width: 18px; height: 18px;
+  color: var(--gold);
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+/* --- Contact trust info (email / phone) --- */
+.contact-trust-info {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.ct-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted2);
+}
+.ct-item svg { width: 18px; height: 18px; color: var(--gold); flex: 0 0 auto; }
+.ct-item a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.ct-item a:hover,
+.ct-item a:focus-visible { color: var(--gold); }
+
+/* --- Close cross --- */
+.ddp-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--muted2);
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1;
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.ddp-modal-close:hover,
+.ddp-modal-close:focus-visible {
+  color: var(--gold);
+  transform: scale(1.1) rotate(90deg);
+  outline: none;
+}
+
+/* --- Form fields --- */
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.input-group {
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-group label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 15px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--off);
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+.input-group input::placeholder,
+.input-group textarea::placeholder { color: rgba(255, 255, 255, 0.25); }
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.02);
+  box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.1);
+}
+.input-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23c9a84c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+  padding-right: 44px;
+  cursor: pointer;
+}
+.input-group select option { background: #121214; color: var(--off); }
+.input-group textarea { resize: vertical; min-height: 120px; }
+
+/* --- Success state --- */
+.form-success-state {
+  position: absolute;
+  inset: 0;
+  background: #121214;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  z-index: 10;
+}
+.form-success-state.active { opacity: 1; pointer-events: auto; }
+.success-icon-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.success-icon-wrap svg { width: 40px; height: 40px; }
+.success-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--off);
+  margin-bottom: 12px;
+}
+.success-desc {
+  font-size: 1rem;
+  color: var(--muted2);
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+/* --- Modal buttons --- */
+.ddp-contact-modal .ddp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 16px 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+.ddp-contact-modal .ddp-btn-primary { background: var(--gold); color: var(--bg); gap: 12px; }
+.ddp-contact-modal .ddp-btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold2);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+.ddp-contact-modal .ddp-btn-primary:hover::after { transform: translateX(0); }
+.ddp-contact-modal .ddp-btn-primary span {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ddp-contact-modal .ddp-btn-primary .arrow { transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1); }
+.ddp-contact-modal .ddp-btn-primary:hover .arrow { transform: translateX(6px); }
+.ddp-contact-modal .ddp-btn-outline {
+  background: transparent;
+  color: var(--off);
+  border: 1px solid var(--border2);
+}
+.ddp-contact-modal .ddp-btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201, 168, 76, 0.05);
+}
+
+/* ============================================================
+   ENROLLMENT MODAL — RESPONSIVE
+============================================================ */
+/* Tablet / touch: guarantee 44px+ tap targets and 16px inputs (no iOS zoom) */
+@media (max-width: 1279px) {
+  .ddp-contact-modal {
+    width: min(100%, 1040px);
+    max-height: calc(100dvh - 32px);
+  }
+  .ddp-contact-left,
+  .ddp-contact-right {
+    padding: clamp(44px, 5vw, 58px) clamp(36px, 4vw, 48px);
+  }
+  .ddp-contact-modal .ddp-btn,
+  .ddp-modal-close {
+    min-height: 44px;
+  }
+  .input-group input,
+  .input-group select,
+  .input-group textarea {
+    min-height: 48px;
+    font-size: 16px;
+  }
+}
+
+/* Stack to a single column — left panel on top, form below */
+@media (max-width: 900px) {
+  .ddp-contact-modal-overlay { align-items: stretch; padding: 16px; }
+  .ddp-contact-grid { grid-template-columns: 1fr; }
+  .ddp-contact-left {
+    padding: 42px 32px 34px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .ddp-contact-right { padding: 36px 32px 42px; }
+  .contact-trust-info { margin-top: 24px; padding-top: 24px; }
+  .form-row-2 { grid-template-columns: 1fr; gap: 0; }
+  .ddp-modal-title { font-size: clamp(2.2rem, 8vw, 3rem); }
+}
+
+@media (max-width: 600px) {
+  .ddp-contact-modal-overlay { padding: 10px; }
+  .ddp-contact-left { padding: 38px 24px 28px; }
+  .ddp-contact-right { padding: 30px 24px 34px; }
+  .ddp-modal-desc { margin-bottom: 24px; }
+  .success-title { font-size: 1.9rem; }
+}
+
+@media (max-width: 400px) {
+  .ddp-contact-modal { border-radius: 16px; }
+  .ddp-contact-left,
+  .ddp-contact-right { padding-left: 20px; padding-right: 20px; }
+  .ddp-modal-title { font-size: 2.05rem; }
+  .ddp-modal-close { top: 14px; right: 16px; font-size: 2.2rem; }
+  .input-group { margin-bottom: 18px; }
+  .form-success-state { padding: 40px 24px; }
 }
