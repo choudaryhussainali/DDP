@@ -1,0 +1,12 @@
+# robots.txt — Dani Digital Pro (https://danidigitalpro.com)
+# Allow all reputable crawlers full access.
+User-agent: *
+Allow: /
+
+# Common AI/SEO crawlers — explicitly welcomed
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://danidigitalpro.com/sitemap.xml
