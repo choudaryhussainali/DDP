@@ -73,6 +73,12 @@ body.loading-lock { overflow: hidden; height: 100vh; }
 /* The Drawing Physics */
 /* The Drawing Physics (JS Controlled) */
 .ddp-path {
+  /* Start hidden on the very first paint (CSS is render-blocking, so this
+     applies before main.js runs). Prevents the logo from flashing fully-drawn
+     for a frame before the draw-on animation kicks in. JS then sets each path's
+     exact length and animates strokeDashoffset from length -> 0. */
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
   /* No hardcoded transitions here; JS controls the exact frame-by-frame offset */
   stroke-linecap: round;
   stroke-linejoin: round;

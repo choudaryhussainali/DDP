@@ -123,11 +123,13 @@ nav.scrolled {
 .nav-logo {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
-  font-size: 1.15rem;
-  letter-spacing: -0.01em;
+  font-size: 1.3rem;
+  letter-spacing: -0.03em;
   color: var(--off);
   text-decoration: none;
 }
+.nav-logo span { transition: color 0.4s ease; }
+.nav-logo:hover span { color: #ffffff; }
 .nav-logo .dot { color: var(--gold); }
 .nav-links {
   display: flex; gap: 40px; list-style: none;

@@ -99,7 +99,9 @@ nav {
   transition: all 0.4s ease;
 }
 nav.scrolled { padding: 18px 64px; background: rgba(8,8,8,0.94); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
-.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--off); }
+.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; letter-spacing: -0.03em; color: var(--off); }
+.nav-logo span { transition: color 0.4s ease; }
+.nav-logo:hover span { color: #ffffff; }
 .nav-logo .dot { color: var(--gold); }
 .nav-links { display: flex; gap: 40px; list-style: none; position: absolute; left: 50%; transform: translateX(-50%); }
 .nav-links a { font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted2); transition: color 0.2s; position: relative; }
