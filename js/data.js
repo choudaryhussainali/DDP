@@ -63,7 +63,7 @@ const articleDatabase = {
       <div style="margin-top: 56px; padding: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; text-align: center;">
         <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 12px;">Ready to restructure your ad account?</h4>
         <p style="color: #999; margin-bottom: 24px;">Stop bleeding budget on outdated campaign architecture. Let us map your scaling strategy.</p>
-        <a href="index.html#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
+        <a href="#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
       </div>
     `
   },
@@ -111,7 +111,7 @@ const articleDatabase = {
       <div style="margin-top: 56px; padding: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; text-align: center;">
         <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 12px;">Need a Google Ads audit?</h4>
         <p style="color: #999; margin-bottom: 24px;">We find 20 to 30 percent of wasted ad spend in the first 48 hours for most new accounts.</p>
-        <a href="index.html#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
+        <a href="#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
       </div>
     `
   },
@@ -163,7 +163,7 @@ const articleDatabase = {
       <div style="margin-top: 56px; padding: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; text-align: center;">
         <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 12px;">Want better B2B leads?</h4>
         <p style="color: #999; margin-bottom: 24px;">Stop fighting for unqualified clicks. Let us build a proper B2B acquisition pipeline.</p>
-        <a href="index.html#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
+        <a href="#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
       </div>
     `
   },
@@ -215,7 +215,7 @@ const articleDatabase = {
       <div style="margin-top: 56px; padding: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; text-align: center;">
         <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 12px;">Is your landing page leaking money?</h4>
         <p style="color: #999; margin-bottom: 24px;">Let us audit your post-click architecture and remove the friction.</p>
-        <a href="index.html#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
+        <a href="#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
       </div>
     `
   },
@@ -267,7 +267,7 @@ const articleDatabase = {
       <div style="margin-top: 56px; padding: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; text-align: center;">
         <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 12px;">Are you losing attribution data?</h4>
         <p style="color: #999; margin-bottom: 24px;">Let us build a bulletproof server-side tracking infrastructure for your brand.</p>
-        <a href="index.html#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
+        <a href="#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
       </div>
     `
   },
@@ -319,7 +319,7 @@ const articleDatabase = {
       <div style="margin-top: 56px; padding: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; text-align: center;">
         <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 12px;">Want to scale with mathematical certainty?</h4>
         <p style="color: #999; margin-bottom: 24px;">Let us calculate your exact CAC thresholds and build a compounding growth engine.</p>
-        <a href="index.html#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
+        <a href="#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
       </div>
     `
   },
@@ -370,7 +370,7 @@ const articleDatabase = {
       <div style="margin-top: 56px; padding: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; text-align: center;">
         <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 12px;">Are your creatives fatiguing?</h4>
         <p style="color: #999; margin-bottom: 24px;">Let us script and deploy direct-response assets that actually convert.</p>
-        <a href="index.html#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
+        <a href="#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
       </div>
     `
   },
@@ -422,7 +422,7 @@ const articleDatabase = {
       <div style="margin-top: 56px; padding: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; text-align: center;">
         <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 12px;">Is your offer failing to convert cold traffic?</h4>
         <p style="color: #999; margin-bottom: 24px;">Let us design an irresistible value stack that makes buying a no-brainer.</p>
-        <a href="index.html#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
+        <a href="#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
       </div>
     `
   },
@@ -474,7 +474,7 @@ const articleDatabase = {
       <div style="margin-top: 56px; padding: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; text-align: center;">
         <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 12px;">Leaving backend money on the table?</h4>
         <p style="color: #999; margin-bottom: 24px;">Let us build the automated email sequences that double your lifetime value.</p>
-        <a href="index.html#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
+        <a href="#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
       </div>
     `
   },
@@ -527,7 +527,7 @@ const articleDatabase = {
       <div style="margin-top: 56px; padding: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; text-align: center;">
         <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9a84c; margin-bottom: 12px;">Is your agency wasting your money?</h4>
         <p style="color: #999; margin-bottom: 24px;">Get a comprehensive audit of your ad account architecture.</p>
-        <a href="index.html#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
+        <a href="#apply" style="display: inline-block; background: #c9a84c; color: #000; padding: 12px 24px; font-family: 'Syne', sans-serif; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.08em; text-decoration: none; border-radius: 4px;">Book Strategy Call</a>
       </div>
     `
   }
