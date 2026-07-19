@@ -18,8 +18,8 @@ Validate manually:
 - Check desktop **and** mobile widths (see breakpoints below).
 - Test keyboard (Tab/Enter/Escape) for any interactive change.
 - For links: click every affected anchor/CTA.
-- For the form: only claim it works against a **real Formspree ID** (the repo
-  ships a placeholder — see Known-broken).
+- For the form: it POSTs to Formspree `https://formspree.io/f/mvzeaded` (live);
+  only claim a submission works if you see a network 200 / the success state.
 
 ## Page → files map (scripts/CSS are NOT shared)
 | Page | CSS | JS |
@@ -148,11 +148,11 @@ support expected.
 - The shared `#ddpStrategyForm` markup (exists on 2 pages — change both together).
 
 ## Known-broken / placeholders (don't report as "working")
-- Contact form Formspree action = `YOUR_FORMSPREE_ID` (index + insights) — form
-  does NOT submit until a real ID is set.
-- insights.html images `insight-featured/1/2/3.jpg` are missing (4 broken images).
-- Chart.js `<script>` included 3× in index head.
-- insights.html nav `#apply` links point nowhere on that page (JS-hijacked only).
+- Contact & enrollment forms POST to the **live** Formspree endpoint
+  `https://formspree.io/f/mvzeaded` (index, insights, trainings). Formspree may
+  require confirming the first submission in the account dashboard.
+- insights.html nav `#apply` opens the in-page contact modal (JS-hijacked; no
+  on-page `#apply` section).
 - Email `daniidigitalpro@gmail.com` uses double-i (brand/domain are single-i) —
   confirm before "fixing".
 
