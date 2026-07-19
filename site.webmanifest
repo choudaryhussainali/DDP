@@ -9,8 +9,8 @@
   "theme_color": "#080808",
   "icons": [
     {
-      "src": "/images/ddp-logo.png",
-      "sizes": "975x742",
+      "src": "/favicon.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     }
