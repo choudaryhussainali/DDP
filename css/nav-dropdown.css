@@ -1,0 +1,229 @@
+/* ============================================================
+   PREMIUM SERVICES DROPDOWN  (shared: index, insights, trainings)
+   Desktop  = hover mega-menu below the "Services" nav link.
+   Mobile   = accordion inside the slide-in drawer (<=1024px).
+   Load LAST (after css/nav-drawer.css) so mobile overrides win.
+   Self-contained: uses its own classes + brand tokens.
+============================================================ */
+
+.nav-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-dropdown > .nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* caret button (also the mobile accordion toggle) */
+.nav-dropdown-caret {
+  background: none;
+  border: 0;
+  margin: 0;
+  padding: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted2, #9a9a9a);
+  cursor: pointer;
+  transition: transform 0.42s cubic-bezier(0.19, 1, 0.22, 1), color 0.3s ease;
+}
+.nav-dropdown-caret svg { width: 13px; height: 13px; display: block; }
+.nav-dropdown:hover > .nav-dropdown-caret,
+.nav-dropdown:focus-within > .nav-dropdown-caret,
+.nav-dropdown.open > .nav-dropdown-caret {
+  color: var(--gold, #c9a84c);
+  transform: rotate(180deg);
+}
+
+/* ---------- desktop panel ---------- */
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: -8px;
+  margin-top: 16px;
+  width: 346px;
+  padding: 12px;
+  background: linear-gradient(180deg, rgba(23, 23, 25, 0.97), rgba(12, 12, 14, 0.97));
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgba(201, 168, 76, 0.20);
+  border-radius: 16px;
+  box-shadow:
+    0 34px 74px -24px rgba(0, 0, 0, 0.92),
+    0 0 46px rgba(201, 168, 76, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.98);
+  transform-origin: top left;
+  transition:
+    opacity 0.42s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 0.42s cubic-bezier(0.19, 1, 0.22, 1),
+    visibility 0.42s;
+  z-index: 1300;
+}
+/* invisible bridge so the menu survives crossing the gap from the nav */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: -18px;
+  height: 18px;
+}
+/* gold accent tick, top-left */
+.nav-dropdown-menu::after {
+  content: '';
+  position: absolute;
+  left: 14px; top: 0;
+  width: 46px; height: 2px;
+  background: linear-gradient(90deg, var(--gold, #c9a84c), transparent);
+  border-radius: 0 0 3px 3px;
+}
+.nav-dropdown:hover > .nav-dropdown-menu,
+.nav-dropdown:focus-within > .nav-dropdown-menu,
+.nav-dropdown.open > .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* ---------- items ---------- */
+.nd-item {
+  display: flex !important;
+  align-items: center;
+  gap: 13px;
+  padding: 11px 12px !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 11px;
+  background: none;
+  text-decoration: none;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  transition: background 0.28s ease;
+  position: relative;
+}
+.nd-item::after { content: none !important; display: none !important; }
+.nd-item + .nd-item { margin-top: 3px; }
+.nd-item:hover,
+.nd-item:focus-visible { background: rgba(201, 168, 76, 0.09); outline: none; }
+
+.nd-ico {
+  flex: 0 0 auto;
+  width: 42px; height: 42px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: rgba(201, 168, 76, 0.10);
+  border: 1px solid rgba(201, 168, 76, 0.20);
+  color: var(--gold, #c9a84c);
+  transition: background 0.28s ease, transform 0.28s ease;
+}
+.nd-item:hover .nd-ico { background: rgba(201, 168, 76, 0.17); transform: translateY(-1px); }
+.nd-ico svg { width: 20px; height: 20px; }
+
+.nd-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.nd-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--off, #f0ece4);
+}
+.nd-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--muted2, #9a9a9a);
+}
+
+.nd-arrow {
+  margin-left: auto;
+  flex: 0 0 auto;
+  color: var(--gold, #c9a84c);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+.nd-arrow svg { width: 16px; height: 16px; display: block; }
+.nd-item:hover .nd-arrow,
+.nd-item:focus-visible .nd-arrow { opacity: 1; transform: translateX(0); }
+
+/* fixed-nav offset so anchored service blocks aren't hidden under the header */
+#services .elite-service-block[id] { scroll-margin-top: 100px; }
+
+/* ============================================================
+   MOBILE (<=1024px) — accordion inside the drawer
+============================================================ */
+@media (max-width: 1024px) {
+  .nav-dropdown {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .nav-links li.nav-dropdown > a.nav-dropdown-toggle {
+    flex: 1 1 auto;
+    width: auto !important;
+    border-bottom: 0 !important;
+  }
+  .nav-dropdown > .nav-dropdown-caret {
+    flex: 0 0 auto;
+    align-self: stretch;
+    min-height: 54px;
+    padding: 0 4px 0 16px;
+  }
+  .nav-dropdown > .nav-dropdown-caret svg { width: 16px; height: 16px; }
+
+  .nav-dropdown-menu {
+    position: static;
+    flex-basis: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.19, 1, 0.22, 1), padding 0.45s ease;
+    z-index: auto;
+  }
+  .nav-dropdown-menu::before,
+  .nav-dropdown-menu::after { display: none; }
+  .nav-dropdown.open > .nav-dropdown-menu { max-height: 460px; padding: 6px 0 14px; }
+
+  .nav-links .nav-dropdown-menu a.nd-item {
+    padding: 11px 8px 11px 10px !important;
+    min-height: 0 !important;
+  }
+  .nav-dropdown-menu .nd-ico { width: 36px; height: 36px; }
+  .nav-dropdown-menu .nd-ico svg { width: 18px; height: 18px; }
+  .nav-dropdown-menu .nd-title { font-size: 0.82rem; }
+  .nav-dropdown-menu .nd-desc { font-size: 0.68rem; }
+  .nav-dropdown-menu .nd-arrow { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown-menu,
+  .nav-dropdown-caret,
+  .nd-item,
+  .nd-ico,
+  .nd-arrow { transition: none !important; }
+}
