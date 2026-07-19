@@ -33,7 +33,20 @@
     // Choosing a service closes the panel (the drawer's own handler,
     // if present, then closes the drawer because these are <a> links).
     menu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { close(dd); });
+      a.addEventListener('click', function () {
+        close(dd);
+        // Reflect ONLY the chosen service in the URL slug. On the homepage
+        // main.js's smooth-scroll preventDefaults the native hash change, so
+        // we set it explicitly here. Runs after main.js's listener (this
+        // script loads later), so the smooth scroll is untouched. Guarded to
+        // on-page "#service-*" anchors — every other site link is left as-is.
+        // (Subpages use "./#service-*", which navigate for real and already
+        // carry the hash, so they never reach this branch.)
+        var href = a.getAttribute('href') || '';
+        if (href.charAt(0) === '#' && href.length > 1) {
+          history.pushState(null, '', href);
+        }
+      });
     });
   });
 
