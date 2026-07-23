@@ -9,11 +9,11 @@
 /* ---------------- Floating side tray (desktop) ---------------- */
 .social-tray {
   position: fixed;
-  /* Sit in the left gutter of the 1200px content column holding a ~30px gap
+  /* Sit in the right gutter of the 1200px content column holding a ~30px gap
      from it (never crowds content). clamp() floors it at 8px so it can't clip
      off-screen at the narrow end, and caps it at 64px on wide screens so it
-     hugs the edge (aligned to the logo) instead of drifting toward center. */
-  left: clamp(8px, calc((100vw - 1200px) / 2 - 72px), 64px);
+     hugs the edge instead of drifting toward center. */
+  right: clamp(16px, calc((100vw - 1200px) / 2 - 72px), 64px);
   top: 50%;
   transform: translateY(-50%);
   z-index: 800;
@@ -25,7 +25,7 @@
   animation: socialTrayIn 0.9s cubic-bezier(0.19, 1, 0.22, 1) 0.6s forwards;
 }
 @keyframes socialTrayIn {
-  from { opacity: 0; transform: translateY(-50%) translateX(-18px); }
+  from { opacity: 0; transform: translateY(-50%) translateX(18px); }
   to   { opacity: 1; transform: translateY(-50%) translateX(0); }
 }
 
@@ -80,9 +80,9 @@
 /* Slide-out handle tooltip */
 .st-tip {
   position: absolute;
-  left: calc(100% + 14px);
+  right: calc(100% + 14px);
   top: 50%;
-  transform: translateY(-50%) translateX(-8px);
+  transform: translateY(-50%) translateX(8px);
   white-space: nowrap;
   padding: 7px 13px;
   border-radius: 9px;
@@ -103,11 +103,11 @@
 .st-tip::before {
   content: '';
   position: absolute;
-  right: 100%;
+  left: 100%;
   top: 50%;
   transform: translateY(-50%);
   border: 6px solid transparent;
-  border-right-color: var(--gold-border);
+  border-left-color: var(--gold-border);
 }
 .social-tray-link:hover .st-tip,
 .social-tray-link:focus-visible .st-tip {
