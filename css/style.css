@@ -92,7 +92,10 @@ body.loading-lock { overflow: hidden; height: 100vh; }
 .ddp-logo-fill {
   z-index: 3;
   clip-path: inset(100% 0 0 0);
-  filter: drop-shadow(0 0 14px rgba(201,168,76,0.42));
+  /* No filter while clip-path is active: a drop-shadow is rasterised into the
+     element box and clip-path then cuts it into a hard rectangle, which reads
+     as a dark gold square behind the mark. The ambient aura below supplies the
+     glow instead; JS drops clip-path at 100% so the final glow can render. */
   transition: clip-path 0.18s linear,
               transform 0.9s cubic-bezier(0.19, 1, 0.22, 1),
               filter 0.9s ease;

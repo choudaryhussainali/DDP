@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (progress === 100) {
         clearInterval(interval);
 
+        // Drop the clip first: while clip-path is active a drop-shadow gets
+        // rasterised into the element box and clipped into a hard rectangle,
+        // which reads as a dark gold square behind the mark.
+        if (logoFill) logoFill.style.clipPath = 'none';
+
         // Final flourish: mark settles + specular sweep across the silhouette.
         preloader.classList.add('image-active');
 
