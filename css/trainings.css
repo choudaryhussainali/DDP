@@ -2734,3 +2734,163 @@ ACCESSIBILITY / MOTION
   .input-group { margin-bottom: 18px; }
   .form-success-state { padding: 40px 24px; }
 }
+
+/* ============================================================
+   PREMIUM ACADEMY HERO - two-column agency layout
+   (content left, framed instructor image right)
+============================================================ */
+.ah-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 72px;
+  align-items: center;
+}
+.ah-content { position: relative; z-index: 2; }
+
+.ah-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 4.6vw, 4.7rem);
+  font-weight: 900;
+  color: var(--off);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin: 30px 0 26px;
+}
+.ah-h1 em { color: var(--gold); font-style: italic; }
+
+.ah-desc {
+  font-size: 1.1rem;
+  color: var(--muted2);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 540px;
+  margin-bottom: 38px;
+}
+
+.ah-actions {
+  display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap; margin-bottom: 46px;
+}
+.ah-btn-ghost {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted2);
+  padding: 15px 30px; border-radius: 4px;
+  border: 1px solid var(--border2);
+  text-decoration: none;
+  transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+.ah-btn-ghost:hover { color: var(--gold); border-color: var(--gold-border); transform: translateY(-2px); }
+.ah-btn-ghost:focus-visible { outline: 2px solid var(--gold2); outline-offset: 3px; }
+
+.ah-stats {
+  display: flex; align-items: center; gap: 30px;
+  padding-top: 34px;
+  border-top: 1px solid var(--border);
+}
+.ah-stat { display: flex; flex-direction: column; gap: 8px; }
+.ah-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 700; color: var(--gold);
+  line-height: 1; letter-spacing: -0.01em;
+}
+.ah-stat-lbl {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); line-height: 1.45;
+}
+.ah-stat-div { width: 1px; height: 46px; background: var(--border); }
+
+/* ---- right: framed instructor image ---- */
+.ah-visual { position: relative; z-index: 2; }
+.ah-visual::before {
+  content: '';
+  position: absolute; inset: -8% -6%;
+  background: radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.16), transparent 65%);
+  z-index: 0; pointer-events: none;
+}
+.ah-card {
+  position: relative; z-index: 1;
+  border-radius: 22px; overflow: hidden;
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  box-shadow: 0 40px 90px rgba(0,0,0,0.55);
+}
+.ah-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  z-index: 3;
+}
+.ah-card-img {
+  display: block; width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 22%;
+}
+.ah-badge {
+  position: absolute; top: 18px; left: 18px; z-index: 3;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 15px; border-radius: 40px;
+  background: rgba(10,10,10,0.55);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--gold-border);
+  font-family: 'Syne', sans-serif; font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold2);
+}
+.ah-badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #5bd08a; animation: pulse-gold 2s infinite;
+}
+.ah-plate {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  padding: 64px 26px 24px;
+  background: linear-gradient(to top, rgba(8,8,8,0.94) 8%, rgba(8,8,8,0.45) 55%, transparent);
+}
+.ah-plate-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700; color: var(--off); line-height: 1.1;
+}
+.ah-plate-role {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold2); margin-top: 6px;
+}
+.ah-float-stat {
+  position: absolute; bottom: 116px; left: -26px; z-index: 4;
+  background: rgba(20,20,20,0.82);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px; padding: 16px 22px;
+  box-shadow: 0 22px 50px rgba(0,0,0,0.55);
+}
+.ah-float-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1;
+}
+.ah-float-lbl {
+  font-family: 'Syne', sans-serif; font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted2); margin-top: 6px; line-height: 1.4;
+}
+
+/* --- hero responsive --- */
+@media (max-width: 1024px) {
+  .ah-grid { gap: 48px; }
+  .ah-h1 { font-size: clamp(2.6rem, 6vw, 3.6rem); }
+  .ah-float-stat { left: -14px; padding: 14px 18px; }
+  .ah-float-num { font-size: 1.7rem; }
+}
+@media (max-width: 900px) {
+  .ah-grid { grid-template-columns: 1fr; gap: 52px; }
+  .ah-visual { max-width: 440px; margin: 0 auto; width: 100%; }
+  .ah-float-stat { left: auto; right: 16px; bottom: 20px; }
+}
+@media (max-width: 560px) {
+  .ah-stats { gap: 18px; }
+  .ah-stat-num { font-size: 1.8rem; }
+  .ah-actions .btn-gold, .ah-actions .ah-btn-ghost { width: 100%; text-align: center; justify-content: center; }
+  .ah-float-stat { display: none; }
+}
