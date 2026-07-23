@@ -662,6 +662,7 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.style.opacity = '0.7';
       submitBtn.style.pointerEvents = 'none';
 
+      let redirecting = false;
       try {
         const response = await fetch(form.action, {
           method: form.method,
@@ -670,16 +671,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
-          if(successState) successState.classList.add('active');
+          // Booked — send the visitor to the premium consultation thank-you page.
+          // Relative path resolves to /thank-you-hire regardless of the clean URL.
+          redirecting = true;
+          submitBtn.innerHTML = 'Booking confirmed — redirecting…';
+          window.location.href = 'thank-you-hire';
+          return;
         } else {
           alert("Network Error: Could not verify transmission. Please email us directly.");
         }
       } catch (error) {
         alert("System Error: Could not connect to endpoints. Please email us directly.");
       } finally {
-        submitBtn.innerHTML = originalBtnText;
-        submitBtn.style.opacity = '1';
-        submitBtn.style.pointerEvents = 'auto';
+        if (!redirecting) {
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.style.opacity = '1';
+          submitBtn.style.pointerEvents = 'auto';
+        }
       }
     });
   }
