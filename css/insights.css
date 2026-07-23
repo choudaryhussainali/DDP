@@ -336,7 +336,7 @@ nav.scrolled {
 .featured-card:hover .insight-read-more, .insight-card:hover .insight-read-more { color: var(--gold); }
 .featured-card:hover .insight-read-more .arrow, .insight-card:hover .insight-read-more .arrow { transform: translateX(6px); }
 
-/* --- 8. FOOTER (identical across all pages — mirrors the homepage) --- */
+/* --- 8. FOOTER (identical across all pages - mirrors the homepage) --- */
 footer {
   border-top: 1px solid var(--border);
   padding: 48px 64px;
@@ -378,7 +378,7 @@ footer {
   font-family: 'Syne', sans-serif;
   letter-spacing: 0.04em;
 }
-/* Footer responsive — all footer breakpoints live here to stay in lockstep
+/* Footer responsive - all footer breakpoints live here to stay in lockstep
    with the homepage. Do not add page-specific footer rules elsewhere. */
 @media (max-width: 1024px) {
   footer { padding: 40px 32px; }
@@ -620,7 +620,7 @@ footer {
   position: relative;
 }
 
-/* Fluid modal heading — scales smoothly across every device width */
+/* Fluid modal heading - scales smoothly across every device width */
 .ddp-contact-left .ddp-modal-title {
   font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.1;

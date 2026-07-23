@@ -1,5 +1,5 @@
 /* ============================================================
-   SHARED MOBILE NAVIGATION DRAWER — CANONICAL IMPLEMENTATION
+   SHARED MOBILE NAVIGATION DRAWER - CANONICAL IMPLEMENTATION
    ------------------------------------------------------------
    Source of truth: the Insights page drawer (css/insights.css).
    This file reproduces that drawer's exact final computed styles
@@ -10,7 +10,7 @@
    Scope: mobile menu DRAWER only (toggle button, overlay,
    sliding panel, drawer links, in-drawer CTA, open/close
    animation, scroll-lock, z-index layering). It intentionally
-   does NOT restyle the <nav>/#navbar header bar itself — each
+   does NOT restyle the <nav>/#navbar header bar itself - each
    page keeps its own header. Activation breakpoint: 1024px.
 
    Load LAST (after the page's own stylesheet) so it is
@@ -334,7 +334,7 @@ nav .nav-toggle { display: none; }
 ============================================================ */
 @media (max-width: 1024px), (hover: none), (pointer: coarse) {
   /* The custom gold cursor is desktop-only. Ensure it is not shown here
-     (index removes it via JS; trainings does not — hide it either way so a
+     (index removes it via JS; trainings does not - hide it either way so a
      stray second cursor never appears alongside the restored native one). */
   .cursor-dot,
   .cursor-ring,

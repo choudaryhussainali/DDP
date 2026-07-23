@@ -22,7 +22,7 @@
     if (!caret || !menu) return;
 
     // Caret is a <button> (not an <a>), so the mobile drawer's
-    // close-on-link-click never fires here — it just toggles the panel.
+    // close-on-link-click never fires here - it just toggles the panel.
     caret.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -39,7 +39,7 @@
         // main.js's smooth-scroll preventDefaults the native hash change, so
         // we set it explicitly here. Runs after main.js's listener (this
         // script loads later), so the smooth scroll is untouched. Guarded to
-        // on-page "#service-*" anchors — every other site link is left as-is.
+        // on-page "#service-*" anchors - every other site link is left as-is.
         // (Subpages use "./#service-*", which navigate for real and already
         // carry the hash, so they never reach this branch.)
         var href = a.getAttribute('href') || '';

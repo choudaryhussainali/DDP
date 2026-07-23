@@ -32,9 +32,9 @@ const articleDatabase = {
       <h3 style="font-family: 'Syne', sans-serif; font-size: 1.4rem; color: #ffffff; margin-top: 40px; margin-bottom: 16px;">Step one: we collapsed the account</h3>
       <p style="color: #999; line-height: 1.8; margin-bottom: 24px;">The old account had 40-plus ad sets, each starved of the 50 weekly conversions Meta needs to exit the learning phase. Budget was scattered so thin that nothing ever stabilised. We tore it down to three pillars and nothing else:</p>
       <ul style="color:#999; line-height:1.8; margin:0 0 24px; padding-left:20px;">
-        <li style="margin-bottom:10px;"><strong style="color:#f0ece4;">Broad acquisition</strong> — one Advantage+ Shopping campaign, no interest stacking, letting the model find buyers wherever they hide.</li>
-        <li style="margin-bottom:10px;"><strong style="color:#f0ece4;">Dynamic retargeting</strong> — catalogue ads for anyone who viewed, added to cart, or bounced at checkout.</li>
-        <li style="margin-bottom:10px;"><strong style="color:#f0ece4;">Retention</strong> — a lean layer aimed at past buyers, priming the next purchase.</li>
+        <li style="margin-bottom:10px;"><strong style="color:#f0ece4;">Broad acquisition</strong>: one Advantage+ Shopping campaign, no interest stacking, letting the model find buyers wherever they hide.</li>
+        <li style="margin-bottom:10px;"><strong style="color:#f0ece4;">Dynamic retargeting</strong>: catalogue ads for anyone who viewed, added to cart, or bounced at checkout.</li>
+        <li style="margin-bottom:10px;"><strong style="color:#f0ece4;">Retention</strong>: a lean layer aimed at past buyers, priming the next purchase.</li>
       </ul>
       <p style="color: #999; line-height: 1.8; margin-bottom: 24px;">Within 48 hours the campaigns had enough concentrated volume to leave the learning phase. Cost per acquisition, which had been swinging by 60 percent day to day, flattened into a line you could actually plan against.</p>
 

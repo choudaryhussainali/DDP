@@ -1,5 +1,5 @@
 // ============================================================
-// SHARED MOBILE NAVIGATION DRAWER — CANONICAL IMPLEMENTATION
+// SHARED MOBILE NAVIGATION DRAWER - CANONICAL IMPLEMENTATION
 // Source of truth: Insights page (js/insights.js drawer engine).
 // Used by: index.html, trainings.html (insights.html keeps its
 // own inline copy, which this file mirrors verbatim).
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Drawer open (mobile): close it, then honour same-page anchors. The
       // scroll-lock resets the scroll position on release, so the scroll must
-      // run AFTER unlock (next frame). `#apply` is skipped on purpose — it
+      // run AFTER unlock (next frame). `#apply` is skipped on purpose - it
       // opens the contact modal, handled elsewhere.
       closeNav();
       const href = link.getAttribute('href') || '';

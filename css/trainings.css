@@ -516,7 +516,7 @@ nav.scrolled { padding: 18px 64px; background: rgba(8,8,8,0.94); backdrop-filter
 }
 
 
-/* --- FOOTER (identical across all pages — mirrors the homepage) --- */
+/* --- FOOTER (identical across all pages - mirrors the homepage) --- */
 footer {
   border-top: 1px solid var(--border);
   padding: 48px 64px;
@@ -558,7 +558,7 @@ footer {
   font-family: 'Syne', sans-serif;
   letter-spacing: 0.04em;
 }
-/* Footer responsive — all footer breakpoints live here to stay in lockstep
+/* Footer responsive - all footer breakpoints live here to stay in lockstep
    with the homepage. Do not add page-specific footer rules elsewhere. */
 @media (max-width: 1024px) {
   footer { padding: 40px 32px; }
@@ -2678,7 +2678,7 @@ ACCESSIBILITY / MOTION
 }
 
 /* ============================================================
-   ENROLLMENT MODAL — RESPONSIVE
+   ENROLLMENT MODAL - RESPONSIVE
 ============================================================ */
 /* Tablet / touch: guarantee 44px+ tap targets and 16px inputs (no iOS zoom) */
 @media (max-width: 1279px) {
@@ -2702,7 +2702,7 @@ ACCESSIBILITY / MOTION
   }
 }
 
-/* Stack to a single column — left panel on top, form below */
+/* Stack to a single column - left panel on top, form below */
 @media (max-width: 900px) {
   .ddp-contact-modal-overlay { align-items: stretch; padding: 16px; }
   .ddp-contact-grid { grid-template-columns: 1fr; }

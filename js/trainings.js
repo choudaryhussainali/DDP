@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     const cta = e.target.closest('a[href="#enroll"]');
     if (!cta) return;
-    e.preventDefault(); // never redirect — always open the popup
+    e.preventDefault(); // never redirect - always open the popup
     lastTrigger = cta;
     openModal(cta.getAttribute('data-course'));
   });
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Relative path resolves to /thank-you-enroll (served from
           // thank-you-enroll.html) regardless of the current clean URL.
           redirecting = true;
-          if (submitBtn) submitBtn.innerHTML = '<span>Application received — redirecting…</span>';
+          if (submitBtn) submitBtn.innerHTML = '<span>Application received, redirecting…</span>';
           window.location.href = 'thank-you-enroll';
           return;
         } else {
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // CONTACT / STRATEGY-CALL MODAL ENGINE
 // Opens the same contact form as the homepage IN-PAGE for the header
 // "Book Strategy Call" CTA and the footer Contact link
-// (a[href="#apply"] / a[href="index.html#apply"]) — it never redirects
+// (a[href="#apply"] / a[href="index.html#apply"]) - it never redirects
 // to the homepage. Independent of the enrollment modal above.
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     const cta = e.target.closest(CONTACT_CTA);
     if (!cta) return;
-    e.preventDefault(); // never jump / redirect — always open the popup in-page
+    e.preventDefault(); // never jump / redirect - always open the popup in-page
     lastTrigger = cta;
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
@@ -355,9 +355,9 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Accept': 'application/json' }
         });
         if (response.ok) {
-          // Booked — send the visitor to the premium consultation thank-you page.
+          // Booked - send the visitor to the premium consultation thank-you page.
           redirecting = true;
-          if (submitBtn) submitBtn.innerHTML = '<span>Booking confirmed — redirecting…</span>';
+          if (submitBtn) submitBtn.innerHTML = '<span>Booking confirmed, redirecting…</span>';
           window.location.href = 'thank-you-hire';
           return;
         } else {

@@ -4058,7 +4058,7 @@ footer {
   height: 200px;
   flex-shrink: 0; /* critical: cards must keep their width on tablet/mobile (global reset zeroes min-width) */
   background: rgba(255, 255, 255, 0.02);
-  /* NOTE: no backdrop-filter — blurring a near-solid dark backdrop is invisible but
+  /* NOTE: no backdrop-filter - blurring a near-solid dark backdrop is invisible but
      forces the compositor to re-sample every frame across 20 moving cards, which
      causes the stutter/"blink". Removing it gives a buttery, continuous marquee. */
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -4107,7 +4107,7 @@ footer {
   max-height: 70%;     /* Expanded from 50% for maximum visibility */
   object-fit: contain; /* Ensures they never stretch or distort */
   
-  /* Removed grayscale & dimming — displaying full original colors */
+  /* Removed grayscale & dimming - displaying full original colors */
   filter: none;
   opacity: 1;
   
@@ -4527,7 +4527,7 @@ footer {
   position: relative;
 }
 
-/* Fluid modal heading — scales smoothly across every device width */
+/* Fluid modal heading - scales smoothly across every device width */
 .ddp-contact-left .ddp-modal-title {
   font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.1;
@@ -4671,14 +4671,14 @@ footer {
 
 
 /* ============================================================
-   DDP RESPONSIVE PATCH — MOBILE / TABLET ONLY
+   DDP RESPONSIVE PATCH - MOBILE / TABLET ONLY
    Desktop protection rule:
    This file does NOT affect screens wider than 1024px.
    Your original desktop version remains untouched.
 ============================================================ */
 
 /* ============================================================
-   NEW MOBILE NAV ELEMENTS — DESKTOP SAFE
+   NEW MOBILE NAV ELEMENTS - DESKTOP SAFE
    These only hide newly-added mobile elements on desktop.
    They do not affect existing desktop classes/layout.
 ============================================================ */
@@ -5661,7 +5661,7 @@ footer {
 
 
 /* ============================================================
-   RESULTS IMAGES — MOBILE ZERO-CROP FIX
+   RESULTS IMAGES - MOBILE ZERO-CROP FIX
    Desktop untouched. Wrapper now adapts to real image height.
 ============================================================ */
 
@@ -5775,7 +5775,7 @@ footer {
 
 
 /* ============================================================
-   TOUCH DEVICES — REMOVE IMAGE HOVER COLOR / ZOOM EFFECTS
+   TOUCH DEVICES - REMOVE IMAGE HOVER COLOR / ZOOM EFFECTS
    Desktop untouched.
 ============================================================ */
 

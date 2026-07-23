@@ -160,7 +160,7 @@
 #services .elite-service-block[id] { scroll-margin-top: 100px; }
 
 /* ============================================================
-   MOBILE (<=1024px) — accordion inside the drawer
+   MOBILE (<=1024px) - accordion inside the drawer
 ============================================================ */
 @media (max-width: 1024px) {
   .nav-dropdown {

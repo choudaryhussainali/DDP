@@ -274,10 +274,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
-          // Booked — send the visitor to the premium consultation thank-you page.
+          // Booked - send the visitor to the premium consultation thank-you page.
           // Relative path resolves to /thank-you-hire regardless of the clean URL.
           redirecting = true;
-          submitBtn.innerHTML = 'Booking confirmed — redirecting…';
+          submitBtn.innerHTML = 'Booking confirmed, redirecting…';
           window.location.href = 'thank-you-hire';
           return;
         } else {

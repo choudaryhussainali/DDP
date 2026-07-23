@@ -318,16 +318,16 @@ if (clientGrid) {
 // ============================================================
 (() => {
   const dashFeedData = [
-    { type:'optimization', user:'Cold Traffic Launched — Meta Advantage+', avatar:'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'Meta', text:'New video creatives live to a fresh audience.', time:'just now' },
-    { type:'optimization', user:'Retargeting Funnel Active — 14-day window', avatar:'https://images.unsplash.com/photo-1557838923-2985c318be48?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'Meta', text:'Re-engaging website visitors and add-to-cart drop-offs.', time:'just now' },
-    { type:'optimization', user:'Budget Scaled +20% — winning ad set', avatar:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'Google', text:'Shifted spend to the top-performing campaign.', time:'just now' },
-    { type:'optimization', user:'Lookalike Audience Added — Google', avatar:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&h=100&fit=crop', color:'var(--dash-lav)', platform:'Google', text:'1% lookalike built from past buyers.', time:'1m ago' },
-    { type:'result', user:'Landing Page Test Live — Variant B winning', avatar:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Landing Page', text:'Higher conversion rate on the new page layout.', time:'3m ago' },
-    { type:'result', user:'ROAS Target Hit — 8.6× this week', avatar:'https://images.unsplash.com/photo-1661956602116-aa6865609028?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Google', text:'Target exceeded this week. Engine scaling.', time:'5m ago' }
+    { type:'optimization', user:'Cold Traffic Launched, Meta Advantage+', avatar:'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'Meta', text:'New video creatives live to a fresh audience.', time:'just now' },
+    { type:'optimization', user:'Retargeting Funnel Active, 14-day window', avatar:'https://images.unsplash.com/photo-1557838923-2985c318be48?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'Meta', text:'Re-engaging website visitors and add-to-cart drop-offs.', time:'just now' },
+    { type:'optimization', user:'Budget Scaled +20%, winning ad set', avatar:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'Google', text:'Shifted spend to the top-performing campaign.', time:'just now' },
+    { type:'optimization', user:'Lookalike Audience Added, Google', avatar:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&h=100&fit=crop', color:'var(--dash-lav)', platform:'Google', text:'1% lookalike built from past buyers.', time:'1m ago' },
+    { type:'result', user:'Landing Page Test Live, Variant B winning', avatar:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Landing Page', text:'Higher conversion rate on the new page layout.', time:'3m ago' },
+    { type:'result', user:'ROAS Target Hit, 8.6× this week', avatar:'https://images.unsplash.com/photo-1661956602116-aa6865609028?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Google', text:'Target exceeded this week. Engine scaling.', time:'5m ago' }
   ];
 
   const dashLiveUpdates = [
-    { type:'optimization', user:'Creative Refresh — TikTok', avatar:'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'TikTok', text:'Injected 3 new UGC hooks into top of funnel.', time:'just now' },
+    { type:'optimization', user:'Creative Refresh, TikTok', avatar:'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&h=100&fit=crop', color:'var(--dash-teal)', platform:'TikTok', text:'Injected 3 new UGC hooks into top of funnel.', time:'just now' },
     { type:'result', user:'CPA Dropped by 14%', avatar:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=100&h=100&fit=crop', color:'var(--gold)', platform:'Meta', text:'Algorithm stabilized. Acquisition cost dropping.', time:'just now' }
   ];
 
@@ -458,7 +458,7 @@ if (clientGrid) {
       dashRenderFeed([newItem], true);
 
       if (newItem.type === 'result') {
-        dashShowToast(icons.star, 'Conversion Logged', 'New conversion tracked — Meta retargeting campaign', 'var(--gold)');
+        dashShowToast(icons.star, 'Conversion Logged', 'New conversion tracked, Meta retargeting campaign', 'var(--gold)');
       }
     }, 7000);
 
@@ -671,10 +671,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
-          // Booked — send the visitor to the premium consultation thank-you page.
+          // Booked - send the visitor to the premium consultation thank-you page.
           // Relative path resolves to /thank-you-hire regardless of the clean URL.
           redirecting = true;
-          submitBtn.innerHTML = 'Booking confirmed — redirecting…';
+          submitBtn.innerHTML = 'Booking confirmed, redirecting…';
           window.location.href = 'thank-you-hire';
           return;
         } else {
@@ -717,7 +717,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ============================================================
-// MOBILE NAVIGATION — moved to shared js/nav-drawer.js
+// MOBILE NAVIGATION - moved to shared js/nav-drawer.js
 // (canonical drawer engine, mirrors the Insights page)
 // ============================================================
 
