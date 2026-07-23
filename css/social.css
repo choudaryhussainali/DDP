@@ -9,7 +9,11 @@
 /* ---------------- Floating side tray (desktop) ---------------- */
 .social-tray {
   position: fixed;
-  left: 22px;
+  /* Sit in the left gutter of the 1200px content column holding a ~30px gap
+     from it (never crowds content). clamp() floors it at 8px so it can't clip
+     off-screen at the narrow end, and caps it at 64px on wide screens so it
+     hugs the edge (aligned to the logo) instead of drifting toward center. */
+  left: clamp(8px, calc((100vw - 1200px) / 2 - 72px), 64px);
   top: 50%;
   transform: translateY(-50%);
   z-index: 800;
@@ -112,8 +116,9 @@
   transform: translateY(-50%) translateX(0);
 }
 
-/* The fixed rail would crowd content on tablet/phone; footer icons cover those */
-@media (max-width: 1023px) {
+/* Below ~1360px the gutter beside the 1200px column is too narrow for the
+   rail, so hide it — the footer icons cover tablet and phone. */
+@media (max-width: 1359px) {
   .social-tray { display: none; }
 }
 
