@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You — Enrollment Received | Dani Digital Pro Academy</title>
+  <meta name="description" content="Your enrollment application to the Dani Digital Pro Academy has been received. Our admissions team will be in touch within 24 hours with your onboarding details." />
+  <link rel="canonical" href="https://danidigitalpro.com/thank-you-enroll" />
+  <meta name="robots" content="noindex, follow" />
+  <meta name="author" content="Dani Digital Pro" />
+  <meta name="theme-color" content="#080808" />
+
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="favicon.png" sizes="512x512" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Dani Digital Pro" />
+  <meta property="og:title" content="Thank You — Enrollment Received | Dani Digital Pro Academy" />
+  <meta property="og:description" content="Your enrollment application has been received. Our admissions team will reach out within 24 hours." />
+  <meta property="og:url" content="https://danidigitalpro.com/thank-you-enroll" />
+  <meta property="og:image" content="https://danidigitalpro.com/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <link rel="stylesheet" href="css/trainings.css">
+  <link rel="stylesheet" href="css/nav-drawer.css">
+  <link rel="stylesheet" href="css/scroll-top.css">
+  <link rel="stylesheet" href="css/nav-dropdown.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+  /* ============================================================
+     THANK-YOU / ENROLLMENT CONFIRMATION  (page-specific only)
+     Reuses trainings.css tokens + components. All classes ty-*.
+  ============================================================ */
+  .ty-hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 168px 24px 96px;
+    position: relative; overflow: hidden;
+  }
+  .ty-hero::before {
+    content: ''; position: absolute; top: -12%; left: 50%; transform: translateX(-50%);
+    width: 940px; height: 940px; max-width: 135vw;
+    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, rgba(201,168,76,0.045) 34%, transparent 68%);
+    pointer-events: none; z-index: 0;
+  }
+  .ty-inner { position: relative; z-index: 2; max-width: 900px; width: 100%; margin: 0 auto; }
+
+  /* entrance — CSS-driven so the message shows even if JS never runs */
+  .ty-anim { opacity: 0; transform: translateY(26px); animation: tyUp 0.95s cubic-bezier(0.19,1,0.22,1) forwards; }
+  @keyframes tyUp { to { opacity: 1; transform: none; } }
+
+  /* status badge */
+  .ty-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 9px 20px; border: 1px solid var(--gold-border);
+    border-radius: 100px; background: var(--gold-dim);
+    font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold2);
+    margin-bottom: 42px;
+  }
+  .ty-badge .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--gold);
+    animation: tyPulse 2s infinite;
+  }
+  @keyframes tyPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
+    70%  { box-shadow: 0 0 0 12px rgba(201,168,76,0); }
+    100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+  }
+
+  /* checkmark seal */
+  .ty-seal { position: relative; width: 128px; height: 128px; margin: 0 auto 46px; }
+  .ty-seal-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--gold-border); }
+  .ty-seal-ring.r2 { inset: -18px; animation: tyRing 3s ease-out infinite; }
+  .ty-seal-ring.r3 { inset: -18px; animation: tyRing 3s ease-out infinite 1.5s; }
+  @keyframes tyRing {
+    0%   { transform: scale(0.82); opacity: 0.55; }
+    100% { transform: scale(1.28); opacity: 0; }
+  }
+  .ty-seal-core {
+    position: absolute; inset: 14px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 22px 60px rgba(201,168,76,0.36), inset 0 2px 7px rgba(255,255,255,0.45);
+  }
+  .ty-seal-core svg {
+    width: 50px; height: 50px; fill: none; stroke: #0b0b0b; stroke-width: 3;
+    stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 26; stroke-dashoffset: 26;
+    animation: tyCheck 0.7s cubic-bezier(0.19,1,0.22,1) 0.4s forwards;
+  }
+  @keyframes tyCheck { to { stroke-dashoffset: 0; } }
+
+  /* headline + copy */
+  .ty-title {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4.6rem); line-height: 1.05;
+    color: var(--off); letter-spacing: -0.02em; margin-bottom: 26px;
+  }
+  .ty-title em { font-style: italic; color: var(--gold); }
+  .ty-sub {
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    font-size: clamp(1rem, 1.5vw, 1.18rem); line-height: 1.72;
+    color: var(--muted2); max-width: 640px; margin: 0 auto;
+  }
+  .ty-sub strong { color: var(--off); font-weight: 500; }
+
+  .ty-inbox {
+    display: inline-flex; align-items: center; gap: 11px; margin-top: 26px;
+    padding: 11px 20px; border: 1px solid var(--border2); border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    font-family: 'Syne', sans-serif; font-size: 0.82rem; color: var(--muted2);
+  }
+  .ty-inbox svg { width: 17px; height: 17px; stroke: var(--gold); fill: none; stroke-width: 2; flex-shrink: 0; }
+  .ty-inbox b { color: var(--off); font-weight: 600; }
+
+  /* next steps */
+  .ty-eyebrow {
+    font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted);
+    margin: 70px 0 26px;
+  }
+  .ty-steps {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    max-width: 920px; margin: 0 auto 60px; text-align: left;
+  }
+  .ty-step {
+    position: relative; padding: 30px 26px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.032), rgba(255,255,255,0.008));
+    border: 1px solid var(--border); border-radius: 18px;
+    transition: transform 0.5s cubic-bezier(0.19,1,0.22,1), border-color 0.5s;
+  }
+  .ty-step:hover { transform: translateY(-6px); border-color: var(--gold-border); }
+  .ty-step-num {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.8rem;
+    letter-spacing: 0.08em; color: var(--gold);
+  }
+  .ty-step-ico {
+    width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+    background: var(--gold-dim); border: 1px solid var(--gold-border);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .ty-step-ico svg { width: 19px; height: 19px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ty-step h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--off); margin-bottom: 10px; }
+  .ty-step p { font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 0.9rem; line-height: 1.62; color: var(--muted2); }
+
+  /* CTAs */
+  .ty-cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .ty-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 34px; border-radius: 100px; cursor: pointer;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.8rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.19,1,0.22,1);
+  }
+  .ty-btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #0b0b0b; box-shadow: 0 8px 32px rgba(201,168,76,0.25); }
+  .ty-btn-gold:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(201,168,76,0.35); }
+  .ty-btn-ghost { background: transparent; color: var(--off); border: 1px solid var(--border2); }
+  .ty-btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .ty-btn .arrow { transition: transform 0.4s cubic-bezier(0.19,1,0.22,1); }
+  .ty-btn:hover .arrow { transform: translateX(4px); }
+
+  /* focus visibility (no :focus-visible styles exist site-wide) */
+  .ty-btn:focus-visible { outline: 2px solid var(--gold2); outline-offset: 3px; }
+
+  /* responsive */
+  @media (max-width: 900px) { .ty-steps { grid-template-columns: 1fr; max-width: 460px; } }
+  @media (max-width: 560px) {
+    .ty-hero { padding: 132px 20px 76px; }
+    .ty-seal { width: 108px; height: 108px; }
+    .ty-cta-row { flex-direction: column; width: 100%; max-width: 360px; margin: 0 auto; }
+    .ty-btn { width: 100%; justify-content: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ty-anim, .ty-badge .dot, .ty-seal-ring.r2, .ty-seal-ring.r3, .ty-seal-core svg {
+      animation: none !important; opacity: 1 !important; transform: none !important;
+    }
+    .ty-seal-core svg { stroke-dashoffset: 0 !important; }
+  }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <canvas id="particles"></canvas>
+
+  <nav id="navbar">
+    <a href="./" class="nav-logo"><span>Dani Digital Pro</span></a>
+
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primaryNavigation" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="primaryNavigation">
+      <li class="nav-dropdown">
+        <a href="./#services" class="nav-dropdown-toggle">Services</a>
+        <button class="nav-dropdown-caret" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="servicesMenu" aria-label="Toggle Services menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="nav-dropdown-menu" id="servicesMenu" role="menu">
+          <a href="./#ai-search-ppc" class="nd-item" role="menuitem">
+            <span class="nd-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+            <span class="nd-text"><span class="nd-title">AI-Search &amp; PPC</span><span class="nd-desc">Google &amp; Bing Ads · AI bidding</span></span>
+            <span class="nd-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+          </a>
+          <a href="./#paid-social-funnels" class="nd-item" role="menuitem">
+            <span class="nd-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></span>
+            <span class="nd-text"><span class="nd-title">Paid Social Funnels</span><span class="nd-desc">Meta, TikTok, Snap &amp; X ad funnels</span></span>
+            <span class="nd-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+          </a>
+          <a href="./#social-media-management" class="nd-item" role="menuitem">
+            <span class="nd-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+            <span class="nd-text"><span class="nd-title">Social Media Management</span><span class="nd-desc">Organic brand building &amp; content</span></span>
+            <span class="nd-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+          </a>
+          <a href="./#ecommerce-scaling" class="nd-item" role="menuitem">
+            <span class="nd-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></span>
+            <span class="nd-text"><span class="nd-title">E-Commerce Scaling</span><span class="nd-desc">Shopify funnels · retargeting · CRO</span></span>
+            <span class="nd-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+          </a>
+        </div>
+      </li>
+      <li><a href="trainings">Trainings</a></li>
+      <li><a href="./#results">Results</a></li>
+      <li><a href="./#about">About</a></li>
+      <li><a href="insights">Insights</a></li>
+
+      <li class="nav-mobile-cta-item">
+        <a href="#apply" class="nav-mobile-cta"><span>Book Strategy Call</span></a>
+      </li>
+    </ul>
+
+    <a href="#apply" class="nav-cta"><span>Book Strategy Call</span></a>
+  </nav>
+
+  <main class="ty-hero">
+    <div class="ty-inner">
+
+      <div class="ty-badge ty-anim" style="animation-delay:0.05s">
+        <span class="dot"></span> Enrollment Received
+      </div>
+
+      <div class="ty-seal ty-anim" style="animation-delay:0.12s">
+        <span class="ty-seal-ring"></span>
+        <span class="ty-seal-ring r2"></span>
+        <span class="ty-seal-ring r3"></span>
+        <span class="ty-seal-core">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </span>
+      </div>
+
+      <h1 class="ty-title ty-anim" style="animation-delay:0.2s">Thank You for Your <em>Enrollment.</em></h1>
+
+      <p class="ty-sub ty-anim" style="animation-delay:0.3s">
+        Your application to the <strong>Dani Digital Pro Academy</strong> has been received. Our admissions
+        team personally reviews every application and will reach out within <strong>24 hours</strong> with
+        your onboarding details, start date, and payment plan.
+      </p>
+
+      <div class="ty-inbox ty-anim" style="animation-delay:0.4s">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span>Keep an eye on your inbox — onboarding details are on the way to the email you provided.</span>
+      </div>
+
+      <div class="ty-eyebrow ty-anim" style="animation-delay:0.5s">What Happens Next</div>
+
+      <div class="ty-steps">
+        <div class="ty-step ty-anim" style="animation-delay:0.56s">
+          <div class="ty-step-num">
+            <span class="ty-step-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path><rect x="9" y="3" width="6" height="4" rx="1"></rect><path d="M9 14l2 2 4-4"></path></svg></span>
+            01
+          </div>
+          <h3>Application Review</h3>
+          <p>Our admissions team personally reviews your application to confirm the right program fit — usually within 24 hours.</p>
+        </div>
+        <div class="ty-step ty-anim" style="animation-delay:0.64s">
+          <div class="ty-step-num">
+            <span class="ty-step-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></span>
+            02
+          </div>
+          <h3>Onboarding Email</h3>
+          <p>You'll receive your onboarding details, secure payment plan, and cohort start date straight to your inbox.</p>
+        </div>
+        <div class="ty-step ty-anim" style="animation-delay:0.72s">
+          <div class="ty-step-num">
+            <span class="ty-step-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10L12 5 2 10l10 5 10-5z"></path><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"></path></svg></span>
+            03
+          </div>
+          <h3>Start Learning</h3>
+          <p>Unlock lifetime curriculum access, live mentorship, campaign feedback, and the private alumni network.</p>
+        </div>
+      </div>
+
+      <div class="ty-cta-row ty-anim" style="animation-delay:0.8s">
+        <a href="trainings" class="ty-btn ty-btn-gold">Explore More Courses <span class="arrow">→</span></a>
+        <a href="./" class="ty-btn ty-btn-ghost">Back to Home</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="./" class="footer-logo">
+        <img src="images/ddp-logo.png" alt="DDP Mark" class="footer-img-logo">
+        <span>Dani Digital Pro</span>
+      </a>
+      <div class="footer-links">
+        <a href="./#services">Services</a>
+        <a href="./#results">Results</a>
+        <a href="./#about">About</a>
+        <a href="./#insights">Insights</a>
+        <a href="#apply">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 Dani Digital Pro. Lahore, Pakistan.</div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       CONTACT / STRATEGY-CALL MODAL
+       Opened in-page by the header + footer "Book Strategy Call" /
+       "Contact" CTAs (a[href="#apply"]). Mirrors the other pages.
+  ============================================================ -->
+  <div class="ddp-contact-modal-overlay" id="contactModal" aria-hidden="true">
+    <div class="ddp-contact-backdrop" id="contactModalBackdrop"></div>
+
+    <div class="ddp-contact-modal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+      <button class="ddp-modal-close" id="closeContactModal" aria-label="Close contact form">&times;</button>
+
+      <div class="ddp-contact-grid">
+
+        <div class="ddp-contact-left">
+          <div class="ddp-modal-badge">Initiate System</div>
+          <h2 class="ddp-modal-title" id="contactModalTitle">Book a 30 min<br><em>Strategy Call</em></h2>
+          <p class="ddp-modal-desc">Tell us about your current revenue bottleneck. If we are a fit, we will architect a custom growth roadmap.</p>
+
+          <div class="contact-trust-info">
+            <div class="ct-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <a href="mailto:daniidigitalpro@gmail.com">daniidigitalpro@gmail.com</a>
+            </div>
+            <div class="ct-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <a href="tel:+923244859790">+92 324 485 9790</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ddp-contact-right">
+
+          <form id="ddpStrategyForm" action="https://formspree.io/f/mvzeaded" method="POST">
+            <div class="form-row-2">
+              <div class="input-group">
+                <label for="frmName">Full Name</label>
+                <input type="text" id="frmName" name="name" required placeholder="John Doe">
+              </div>
+              <div class="input-group">
+                <label for="frmEmail">Work Email</label>
+                <input type="email" id="frmEmail" name="email" required placeholder="john@company.com">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="input-group">
+                <label for="frmPhone">Phone Number</label>
+                <input type="tel" id="frmPhone" name="phone" placeholder="+1 (555) 000-0000">
+              </div>
+              <div class="input-group">
+                <label for="frmService">Primary Interest</label>
+                <select id="frmService" name="service" required>
+                  <option value="" disabled selected>Select an architecture...</option>
+                  <option value="Google Ads &amp; SEM">AI-Search &amp; PPC Operations</option>
+                  <option value="Meta Ads &amp; Social">Paid Social Funnel Scaling</option>
+                  <option value="E-Commerce Growth">E-Commerce Scaling</option>
+                  <option value="Organic Management">Elite Brand Management</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="frmBusinessType">Business Type</label>
+              <select id="frmBusinessType" name="business_type" required>
+                <option value="" disabled selected>Select your business type...</option>
+                <option value="Service Based">Service Based</option>
+                <option value="E-Commerce">E-Commerce</option>
+                <option value="SaaS (B2B)">SaaS (B2B)</option>
+                <option value="Personal Brand">Personal Brand</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="frmDesc">Project Brief &amp; Revenue Goals</label>
+              <textarea id="frmDesc" name="message" rows="4" required placeholder="Enter your website &amp; your biggest challenge."></textarea>
+            </div>
+
+            <button type="submit" class="ddp-btn ddp-btn-primary form-submit-btn" id="frmSubmitBtn" style="width: 100%; justify-content: center; margin-top: 16px;">
+              <span>Book Strategy Call <span class="arrow">→</span></span>
+            </button>
+          </form>
+
+          <div class="form-success-state" id="formSuccessState">
+            <div class="success-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3 class="success-title">Application Secured.</h3>
+            <p class="success-desc">Our architecture team has received your data. We will review your current infrastructure and contact you within 24 hours.</p>
+            <button type="button" class="ddp-btn ddp-btn-outline" id="contactSuccessClose" style="margin-top: 24px;">Close Portal</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/trainings.js"></script>
+  <script src="js/nav-drawer.js"></script>
+  <script src="js/scroll-top.js"></script>
+  <script src="js/nav-dropdown.js"></script>
+</body>
+</html>

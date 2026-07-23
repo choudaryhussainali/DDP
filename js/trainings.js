@@ -236,6 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.style.opacity = '0.7';
         submitBtn.style.pointerEvents = 'none';
       }
+      let redirecting = false;
       try {
         const response = await fetch(form.action, {
           method: form.method,
@@ -243,15 +244,20 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Accept': 'application/json' }
         });
         if (response.ok) {
-          if (successState) successState.classList.add('active');
-          if (successClose) successClose.focus();
+          // On success, send the applicant to the premium thank-you page.
+          // Relative path resolves to /thank-you-enroll (served from
+          // thank-you-enroll.html) regardless of the current clean URL.
+          redirecting = true;
+          if (submitBtn) submitBtn.innerHTML = '<span>Application received — redirecting…</span>';
+          window.location.href = 'thank-you-enroll';
+          return;
         } else {
           alert('Something went wrong submitting your application. Please email us directly at daniidigitalpro@gmail.com.');
         }
       } catch (err) {
         alert('Could not connect. Please email us directly at daniidigitalpro@gmail.com.');
       } finally {
-        if (submitBtn) {
+        if (!redirecting && submitBtn) {
           submitBtn.innerHTML = originalText;
           submitBtn.style.opacity = '1';
           submitBtn.style.pointerEvents = 'auto';
