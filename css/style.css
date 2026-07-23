@@ -3049,7 +3049,7 @@ footer {
 .dash-icon-lav  { background: var(--dash-lav-dim); color: var(--dash-lav); }
 
 .dash-kpi-value {
-  font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; line-height: 1;
+  font-family: 'Playfair Display', serif; font-size: 2.15rem; font-weight: 700; line-height: 1;
   margin-bottom: 12px; color: var(--off); letter-spacing: -0.02em;
 }
 .dash-kpi-gold .dash-kpi-value { color: var(--gold); }
