@@ -1,0 +1,188 @@
+/* ============================================================
+   PREMIUM SOCIAL COMPONENTS  (shared across every page)
+   - .social-tray   : fixed desktop/laptop side-rail (>= 1024px)
+   - .footer-social : centered icon row inside the footer (all devices)
+   Design tokens (--gold, --off, --muted*, --border*, --surface) come
+   from each page's own stylesheet :root, so this file stays portable.
+============================================================ */
+
+/* ---------------- Floating side tray (desktop) ---------------- */
+.social-tray {
+  position: fixed;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: socialTrayIn 0.9s cubic-bezier(0.19, 1, 0.22, 1) 0.6s forwards;
+}
+@keyframes socialTrayIn {
+  from { opacity: 0; transform: translateY(-50%) translateX(-18px); }
+  to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+
+.social-tray-top {
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+  margin-bottom: 2px;
+}
+.social-tray-follow {
+  writing-mode: vertical-rl;
+  margin-top: 6px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.social-tray-link {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border2);
+  color: var(--muted2);
+  text-decoration: none;
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1),
+              background 0.45s ease, border-color 0.45s ease,
+              color 0.45s ease, box-shadow 0.45s ease;
+}
+.social-tray-link svg { width: 17px; height: 17px; display: block; }
+
+.social-tray-link:hover,
+.social-tray-link:focus-visible {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  border-color: var(--gold);
+  color: #0b0b0b;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(201, 168, 76, 0.32);
+}
+.social-tray-link:focus-visible {
+  outline: 2px solid var(--gold2);
+  outline-offset: 3px;
+}
+
+/* Slide-out handle tooltip */
+.st-tip {
+  position: absolute;
+  left: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-8px);
+  white-space: nowrap;
+  padding: 7px 13px;
+  border-radius: 9px;
+  background: var(--surface);
+  border: 1px solid var(--gold-border);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--off);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition: opacity 0.35s cubic-bezier(0.19, 1, 0.22, 1),
+              transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.st-tip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: var(--gold-border);
+}
+.social-tray-link:hover .st-tip,
+.social-tray-link:focus-visible .st-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* The fixed rail would crowd content on tablet/phone; footer icons cover those */
+@media (max-width: 1023px) {
+  .social-tray { display: none; }
+}
+
+/* ---------------- Footer social row (every device) ---------------- */
+.footer-social {
+  max-width: 1200px;
+  margin: 0 auto 34px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+}
+.footer-social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.footer-social-icons a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border2);
+  color: var(--muted2);
+  text-decoration: none;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1),
+              background 0.4s ease, border-color 0.4s ease,
+              color 0.4s ease, box-shadow 0.4s ease;
+}
+.footer-social-icons a svg { width: 17px; height: 17px; display: block; }
+.footer-social-icons a:hover,
+.footer-social-icons a:focus-visible {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  border-color: var(--gold);
+  color: #0b0b0b;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(201, 168, 76, 0.3);
+}
+.footer-social-icons a:focus-visible {
+  outline: 2px solid var(--gold2);
+  outline-offset: 3px;
+}
+.footer-social-handle {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.footer-social-handle b { color: var(--gold2); font-weight: 700; }
+
+@media (max-width: 600px) {
+  .footer-social { margin-bottom: 28px; padding-bottom: 26px; gap: 14px; }
+  .footer-social-icons { gap: 12px; }
+  .footer-social-icons a { width: 40px; height: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-tray { animation: none; opacity: 1; }
+  .social-tray-link,
+  .footer-social-icons a,
+  .st-tip { transition: none; }
+}
