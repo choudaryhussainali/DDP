@@ -50,7 +50,7 @@ body.loading-lock { overflow: hidden; height: 100vh; }
   display: flex; flex-direction: column; align-items: center;
 }
 
-/* --- The SVG Vector Assembly --- */
+/* --- The Brand Mark (exact logo; gold fills bottom-up with the load) --- */
 .ddp-logo-anim-wrapper {
   position: relative;
   width: 140px;
@@ -60,40 +60,55 @@ body.loading-lock { overflow: hidden; height: 100vh; }
   align-items: center;
   justify-content: center;
 }
-
-.ddp-vector-logo {
-  width: 100%;
-  height: 100%;
-  color: var(--gold);
-  filter: drop-shadow(0 0 10px rgba(201, 168, 76, 0.4));
-  position: absolute;
-  z-index: 2;
+/* ambient gold aura behind the mark */
+.ddp-logo-anim-wrapper::before {
+  content: '';
+  position: absolute; inset: -34%;
+  background: radial-gradient(circle, rgba(201,168,76,0.20) 0%, transparent 62%);
+  pointer-events: none;
+  animation: ddpAura 2.8s ease-in-out infinite;
+}
+@keyframes ddpAura {
+  0%, 100% { opacity: 0.55; transform: scale(0.94); }
+  50%      { opacity: 1;    transform: scale(1.06); }
 }
 
-/* The Drawing Physics */
-/* The Drawing Physics (JS Controlled) */
-.ddp-path {
-  /* Start hidden on the very first paint (CSS is render-blocking, so this
-     applies before main.js runs). Prevents the logo from flashing fully-drawn
-     for a frame before the draw-on animation kicks in. JS then sets each path's
-     exact length and animates strokeDashoffset from length -> 0. */
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  /* No hardcoded transitions here; JS controls the exact frame-by-frame offset */
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* The Final Image Crossfade */
-.ddp-final-logo-img {
+.ddp-logo-ghost,
+.ddp-logo-fill {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: contain;
+  display: block;
+}
+/* dim silhouette of the same mark so the shape reads before it fills */
+.ddp-logo-ghost {
+  z-index: 2;
+  opacity: 0.13;
+  filter: grayscale(1) brightness(2);
+}
+/* the real gold mark, revealed bottom-up by JS via clip-path.
+   Starts clipped here (CSS is render-blocking) so it can never flash
+   fully-drawn for a frame before the animation begins. */
+.ddp-logo-fill {
   z-index: 3;
-  opacity: 0; /* Hidden while drawing */
-  transform: scale(0.95);
-  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  clip-path: inset(100% 0 0 0);
+  filter: drop-shadow(0 0 14px rgba(201,168,76,0.42));
+  transition: clip-path 0.18s linear,
+              transform 0.9s cubic-bezier(0.19, 1, 0.22, 1),
+              filter 0.9s ease;
+}
+/* specular sweep, masked to the exact logo silhouette */
+.ddp-logo-shine {
+  position: absolute; inset: 0; z-index: 4;
+  pointer-events: none; opacity: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.9) 50%, transparent 60%);
+  background-size: 260% 100%;
+  background-position: 130% 0;
+  -webkit-mask-image: url('../favicon.png'); mask-image: url('../favicon.png');
+  -webkit-mask-size: contain; mask-size: contain;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center; mask-position: center;
+  mix-blend-mode: screen;
 }
 
 /* --- Brand Typography --- */
@@ -121,15 +136,27 @@ body.loading-lock { overflow: hidden; height: 100vh; }
   transform: translateY(0);
 }
 
-/* Activate Final Image (Fired by JS at 100%) */
-.preloader-container.image-active .ddp-final-logo-img {
-  opacity: 1;
-  transform: scale(1.1); /* Cinematic slow push */
-  filter: drop-shadow(0px 10px 30px rgba(201, 168, 76, 0.3));
+/* Final flourish at 100% (fired by JS) */
+.preloader-container.image-active .ddp-logo-fill {
+  transform: scale(1.06);
+  filter: drop-shadow(0 12px 34px rgba(201,168,76,0.5));
 }
-.preloader-container.image-active .ddp-vector-logo {
-  opacity: 0; /* Fade out the vector wires */
-  transition: opacity 0.4s ease;
+.preloader-container.image-active .ddp-logo-ghost {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.preloader-container.image-active .ddp-logo-shine {
+  animation: ddpShine 1.05s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+@keyframes ddpShine {
+  0%   { opacity: 0; background-position: 130% 0; }
+  18%  { opacity: 1; }
+  100% { opacity: 0; background-position: -70% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ddp-logo-anim-wrapper::before { animation: none; }
+  .ddp-logo-shine { display: none; }
 }
 
 /* --- Telemetry Metrics --- */

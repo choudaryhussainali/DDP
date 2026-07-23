@@ -6,25 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const preloader = document.getElementById('premium-preloader');
   const countEl = document.getElementById('loader-count');
   const barEl = document.getElementById('loader-bar');
-  const paths = document.querySelectorAll('.ddp-path');
-  const svgCanvas = document.querySelector('.ddp-vector-logo');
-  
-  if (preloader && countEl && paths.length > 0) {
-    document.body.classList.add('loading-lock'); 
-    
+  const logoFill = document.getElementById('preloaderLogo');
+
+  if (preloader && countEl) {
+    document.body.classList.add('loading-lock');
+
     setTimeout(() => { preloader.classList.add('text-active'); }, 100);
-    
-    const pathData = Array.from(paths).map(path => {
-      const length = path.getTotalLength();
-      path.style.strokeDasharray = length;
-      path.style.strokeDashoffset = length; 
-      return { el: path, length: length };
-    });
 
     let progress = 0;
 
     const interval = setInterval(() => {
-      progress += Math.floor(Math.random() * 2) + 1; 
+      progress += Math.floor(Math.random() * 2) + 1;
       if (progress > 100) progress = 100;
 
       countEl.innerText = progress;
@@ -32,30 +24,32 @@ document.addEventListener("DOMContentLoaded", () => {
       // Fill the progress bar in perfect lockstep with the counter (0 -> 100%).
       if (barEl) barEl.style.width = progress + '%';
 
-      const drawProgress = Math.min(progress / 86, 1);
-      
-      pathData.forEach(item => {
-        item.el.style.strokeDashoffset = item.length - (item.length * drawProgress);
-      });
+      // Gold fills the exact brand mark from the bottom up, in step with load.
+      // Completes slightly ahead of the counter so the flourish lands on 100.
+      const fill = Math.min(progress / 86, 1);
+      if (logoFill) {
+        logoFill.style.clipPath = 'inset(' + (100 - fill * 100).toFixed(2) + '% 0 0 0)';
+      }
 
       if (progress === 100) {
         clearInterval(interval);
-        
-        if (svgCanvas) { svgCanvas.classList.add('filled'); }
-        
+
+        // Final flourish: mark settles + specular sweep across the silhouette.
+        preloader.classList.add('image-active');
+
         setTimeout(() => {
           preloader.classList.add('loaded');
-          
+
           const heroElements = document.querySelectorAll('.hero-elem');
           heroElements.forEach(el => el.classList.add('animate'));
-          
+
           setTimeout(() => {
             document.body.classList.remove('loading-lock');
-          }, 800); 
-          
-        }, 1100); 
+          }, 800);
+
+        }, 1100);
       }
-    }, 35); 
+    }, 35);
   }
 
   // ============================================================
