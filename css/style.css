@@ -5998,13 +5998,39 @@ footer {
   border-radius: var(--r2);
 }
 
-/* Dark, on-brand placeholder tint until the iframe swaps in (removed by JS). */
+/* Loading skeleton: an opaque shimmer cover + a gold spinner sit over each card
+   until its Instagram iframe actually renders, so the raw fallback link never
+   flashes as a "broken link". Both vanish the instant .is-loaded is added. */
+.reel-card:not(.is-loaded) .reel-inner::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 3;
+  background-color: var(--surface);
+  background-image: linear-gradient(100deg, transparent 30%, rgba(201,168,76,0.07) 50%, transparent 70%);
+  background-size: 220% 100%;
+  animation: reelShimmer 1.5s ease-in-out infinite;
+}
+@keyframes reelShimmer {
+  0%   { background-position: 150% 0; }
+  100% { background-position: -150% 0; }
+}
 .reel-card:not(.is-loaded) .reel-inner::after {
   content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.008));
-  pointer-events: none;
-  z-index: 1;
+  position: absolute; top: 50%; left: 50%; z-index: 4;
+  width: 34px; height: 34px; margin: -17px 0 0 -17px;
+  border: 2px solid var(--gold-border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: reelSpin 0.8s linear infinite;
+}
+@keyframes reelSpin { to { transform: rotate(360deg); } }
+
+/* If an embed stalls (never renders), stop the loader and reveal its working
+   fallback link, centred, instead of spinning forever. */
+.reel-card.reel-stalled .reel-inner::before { animation: none; }
+.reel-card.reel-stalled .reel-inner::after { display: none; }
+.reel-card.reel-stalled .instagram-media {
+  position: absolute; inset: 0; z-index: 4;
+  display: flex; align-items: center; justify-content: center; text-align: center; padding: 28px;
 }
 
 /* Make Instagram's markup fill the themed card instead of enforcing its own
@@ -6018,15 +6044,14 @@ footer {
   box-shadow: none !important;
   background: var(--surface) !important;
 }
-/* On-brand fallback link shown only in the split second before embed.js
-   swaps the blockquote for the reel iframe (avoids a browser-blue flash). */
+/* Instagram's no-JS fallback link. It sits beneath the loading skeleton, so it
+   only becomes visible if the embed stalls (see .reel-stalled above). */
 .reel-card .instagram-media a {
   color: var(--gold2);
   text-decoration: none;
-  padding: 20px 22px;
-  display: inline-block;
   font-family: 'Syne', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .reels-cta { margin-top: 44px; text-align: center; }
@@ -6082,4 +6107,6 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .reel-inner { transition: none; }
   .reel-card:hover .reel-inner { transform: none; }
+  .reel-card:not(.is-loaded) .reel-inner::before,
+  .reel-card:not(.is-loaded) .reel-inner::after { animation: none; }
 }

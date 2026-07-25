@@ -1,8 +1,11 @@
 // ============================================================
 // INSTAGRAM REELS
-// Loads Instagram's official embed.js ONCE, and only when the
-// section approaches the viewport, so the heavy third-party script
-// never blocks initial page load. Scoped IIFE, no globals leaked.
+// Loads Instagram's official embed.js ONCE. To avoid the reels showing
+// raw fallback links for a few seconds, we (a) warm the connection with a
+// <link rel=preconnect> in the head, (b) start the fetch while the page is
+// idle so it is usually ready before the user scrolls down, and (c) also
+// trigger well before the section enters view. A per-card loading skeleton
+// (CSS) covers each card until its iframe actually renders. Scoped IIFE.
 // ============================================================
 (function () {
   var section = document.getElementById('instagram-reels');
@@ -10,62 +13,69 @@
 
   var EMBED_SRC = 'https://www.instagram.com/embed.js';
   var requested = false;
+  var STALL_MS = 12000; // if an embed never renders, reveal its fallback link
 
-  // Ask Instagram to (re)scan the page and swap each blockquote for an iframe.
   function process() {
     if (window.instgrm && window.instgrm.Embeds) {
       try { window.instgrm.Embeds.process(); } catch (e) {}
     }
   }
 
-  // Once a card's blockquote has been replaced by an <iframe>, flag the card
-  // so its dark placeholder tint is dropped. Bounded poll so it can't run
-  // forever if an embed fails (e.g. a deleted post, or offline).
-  function watchForIframes() {
-    var cards = section.querySelectorAll('.reel-card');
-    var ticks = 0;
-    var timer = setInterval(function () {
-      var pending = 0;
-      cards.forEach(function (card) {
-        if (card.querySelector('iframe')) card.classList.add('is-loaded');
-        else pending++;
+  // Flag each card the instant Instagram swaps its blockquote for an <iframe>
+  // (MutationObserver = no polling lag, so the skeleton lifts immediately).
+  function watchCard(card) {
+    if (card.querySelector('iframe')) { card.classList.add('is-loaded'); return; }
+    var mo = new MutationObserver(function () {
+      if (card.querySelector('iframe')) { card.classList.add('is-loaded'); mo.disconnect(); }
+    });
+    mo.observe(card, { childList: true, subtree: true });
+  }
+
+  function watchAll() {
+    section.querySelectorAll('.reel-card').forEach(watchCard);
+    // Safety net: anything still not rendered after STALL_MS shows its
+    // (working) fallback link instead of an endless spinner.
+    setTimeout(function () {
+      section.querySelectorAll('.reel-card:not(.is-loaded)').forEach(function (card) {
+        card.classList.add('reel-stalled');
       });
-      if (pending === 0 || ++ticks > 60) clearInterval(timer);
-    }, 300);
+    }, STALL_MS);
   }
 
   function loadEmbedScript() {
     if (requested) return;
     requested = true;
+    watchAll();
 
-    // Already available (or injected elsewhere): just process.
-    if (window.instgrm && window.instgrm.Embeds) { process(); watchForIframes(); return; }
+    if (window.instgrm && window.instgrm.Embeds) { process(); return; }
+
     var existing = document.querySelector('script[src*="instagram.com/embed.js"]');
-    if (existing) {
-      existing.addEventListener('load', function () { process(); watchForIframes(); });
-      process(); watchForIframes();
-      return;
-    }
+    if (existing) { existing.addEventListener('load', process); process(); return; }
 
     var s = document.createElement('script');
     s.async = true;
     s.src = EMBED_SRC;
-    s.onload = function () { process(); watchForIframes(); };
+    s.onload = process;
     document.body.appendChild(s);
   }
 
-  // Defer the fetch until the section is ~400px from entering the viewport.
+  // 1) Trigger well before the section scrolls into view.
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) { loadEmbedScript(); obs.disconnect(); }
-      });
-    }, { rootMargin: '400px 0px' });
+      entries.forEach(function (e) { if (e.isIntersecting) { loadEmbedScript(); obs.disconnect(); } });
+    }, { rootMargin: '1200px 0px' });
     io.observe(section);
-  } else {
-    loadEmbedScript();
   }
 
-  // Safety net: if embed.js finished after our first process() call, re-run.
+  // 2) Also fetch it while the browser is idle after load, so the reels are
+  //    usually ready by the time the user reaches them - without competing
+  //    with the initial render.
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadEmbedScript, { timeout: 2500 });
+  } else {
+    window.addEventListener('load', function () { setTimeout(loadEmbedScript, 1200); });
+  }
+
+  // Re-process in case embed.js finished after our first process() call.
   window.addEventListener('load', process);
 })();
