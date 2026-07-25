@@ -5966,12 +5966,14 @@ footer {
   overflow: hidden;
   /* reserve vertical space so the embeds don't shift the page as they render */
   min-height: 600px;
-  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-              border-color 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+  /* No transform on hover: these cards wrap an Instagram iframe, and moving
+     the card under the cursor makes :hover toggle on/off against the iframe's
+     hit-testing (the "shaking" flicker). A motion-free border + glow hover
+     changes no geometry, so it can't flicker. */
+  transition: border-color 0.5s cubic-bezier(0.19, 1, 0.22, 1),
               box-shadow 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 .reel-card:hover {
-  transform: translateY(-8px);
   border-color: var(--gold-border);
   box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
 }
@@ -6058,5 +6060,4 @@ footer {
 
 @media (prefers-reduced-motion: reduce) {
   .reel-card { transition: none; }
-  .reel-card:hover { transform: none; }
 }
