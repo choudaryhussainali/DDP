@@ -5933,3 +5933,130 @@ footer {
     transform: none !important;
   }
 }
+
+/* ============================================================
+   INSTAGRAM REELS  (Option B - official embeds)
+   Frame, heading and spacing follow the site theme; the embed
+   interior is Instagram-controlled. Colours are theme tokens; the
+   only literals are rgba(0,0,0,...) shadow/scrim, as permitted.
+============================================================ */
+.reels-handle {
+  color: var(--gold);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.reels-handle:hover { color: var(--gold2); }
+
+.reels-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.reel-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  overflow: hidden;
+  /* reserve vertical space so the embeds don't shift the page as they render */
+  min-height: 600px;
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+              border-color 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+              box-shadow 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.reel-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--gold-border);
+  box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
+}
+
+/* Dark, on-brand placeholder tint until the iframe swaps in (removed by JS). */
+.reel-card:not(.is-loaded)::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.008));
+  pointer-events: none;
+}
+
+/* Make Instagram's markup fill the themed card instead of enforcing its own
+   min-width / margins / white card (which would overflow the grid cells). */
+.reel-card .instagram-media {
+  min-width: 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: var(--r2) !important;
+  box-shadow: none !important;
+  background: var(--surface) !important;
+}
+/* On-brand fallback link shown only in the split second before embed.js
+   swaps the blockquote for the reel iframe (avoids a browser-blue flash). */
+.reel-card .instagram-media a {
+  color: var(--gold2);
+  text-decoration: none;
+  padding: 20px 22px;
+  display: inline-block;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.82rem;
+}
+
+.reels-cta { margin-top: 44px; text-align: center; }
+
+/* Focus ring matches the style introduced across the site (social.css). */
+.reels-handle:focus-visible,
+.reels-follow:focus-visible,
+.reel-card a:focus-visible {
+  outline: 2px solid var(--gold2);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --- Tablet: 2-up (site breakpoint 1024) --- */
+@media (max-width: 1024px) {
+  .reels-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+}
+
+/* --- Mobile: horizontal scroll-snap carousel that bleeds past the 32px
+   section gutter so the next card peeks (site breakpoint 768) --- */
+@media (max-width: 768px) {
+  .reels-grid {
+    display: flex;
+    grid-template-columns: none;
+    max-width: none;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-left: -32px;
+    margin-right: -32px;
+    padding: 6px 32px 20px;
+    scroll-padding-left: 32px;
+  }
+  .reels-grid::-webkit-scrollbar { display: none; }
+  .reel-card {
+    scroll-snap-align: start;
+    flex: 0 0 78%;
+    max-width: 340px;
+    min-height: 540px;
+  }
+}
+@media (max-width: 480px) {
+  .reel-card { flex-basis: 84%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-card { transition: none; }
+  .reel-card:hover { transform: none; }
+}
