@@ -5958,32 +5958,53 @@ footer {
   align-items: start;
 }
 
+/* .reel-card is only the hover-target wrapper: it never moves, so hovering can
+   never flicker. The visual card and the lift live on .reel-inner. */
 .reel-card {
   position: relative;
+  list-style: none;
+}
+
+.reel-inner {
+  position: relative;
+  display: block;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r2);
   overflow: hidden;
   /* reserve vertical space so the embeds don't shift the page as they render */
   min-height: 600px;
-  /* No transform on hover: these cards wrap an Instagram iframe, and moving
-     the card under the cursor makes :hover toggle on/off against the iframe's
-     hit-testing (the "shaking" flicker). A motion-free border + glow hover
-     changes no geometry, so it can't flicker. */
-  transition: border-color 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+              border-color 0.5s cubic-bezier(0.19, 1, 0.22, 1),
               box-shadow 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.reel-card:hover {
+/* Lift the inner on hover. Because the hovered box (.reel-card) stays put, the
+   pointer never leaves it: the premium lift returns with zero shaking. */
+.reel-card:hover .reel-inner {
+  transform: translateY(-8px);
   border-color: var(--gold-border);
   box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
 }
 
+/* Transparent overlay above Instagram's iframe. The iframe would otherwise
+   swallow the pointer (freezing the custom cursor and stealing :hover); this
+   keeps the pointer on a normal element, so the custom cursor tracks and the
+   hover is stable. Clicking it opens the reel on Instagram. */
+.reel-link {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: block;
+  border-radius: var(--r2);
+}
+
 /* Dark, on-brand placeholder tint until the iframe swaps in (removed by JS). */
-.reel-card:not(.is-loaded)::after {
+.reel-card:not(.is-loaded) .reel-inner::after {
   content: '';
   position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.008));
   pointer-events: none;
+  z-index: 1;
 }
 
 /* Make Instagram's markup fill the themed card instead of enforcing its own
@@ -6051,13 +6072,14 @@ footer {
     scroll-snap-align: start;
     flex: 0 0 78%;
     max-width: 340px;
-    min-height: 540px;
   }
+  .reel-inner { min-height: 540px; }
 }
 @media (max-width: 480px) {
   .reel-card { flex-basis: 84%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reel-card { transition: none; }
+  .reel-inner { transition: none; }
+  .reel-card:hover .reel-inner { transform: none; }
 }
