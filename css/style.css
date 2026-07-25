@@ -5986,18 +5986,6 @@ footer {
   box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
 }
 
-/* Transparent overlay above Instagram's iframe. The iframe would otherwise
-   swallow the pointer (freezing the custom cursor and stealing :hover); this
-   keeps the pointer on a normal element, so the custom cursor tracks and the
-   hover is stable. Clicking it opens the reel on Instagram. */
-.reel-link {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  display: block;
-  border-radius: var(--r2);
-}
-
 /* Loading skeleton: an opaque shimmer cover + a gold spinner sit over each card
    until its Instagram iframe actually renders, so the raw fallback link never
    flashes as a "broken link". Both vanish the instant .is-loaded is added. */
