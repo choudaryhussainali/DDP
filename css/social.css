@@ -194,17 +194,16 @@
 
 
 /* ---------------- Developer credit watermark (all pages) ---------------- */
+/* Plain centered inline text (NOT flex): the badge flows as inline content, so
+   on any width it simply wraps to the next line and stays centered - it can
+   never overflow or clip, regardless of the loaded font's width. */
 .footer-credit {
   max-width: 1200px;
   margin: 24px auto 0;
   padding: 20px 16px 0;
   border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
   text-align: center;
+  line-height: 2;
   font-family: 'Syne', sans-serif;
   font-size: 0.58rem;
   font-weight: 600;
@@ -215,6 +214,8 @@
 .footer-credit-link {
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
+  margin-left: 8px;
   text-decoration: none;
   transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
