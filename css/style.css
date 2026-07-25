@@ -5935,20 +5935,20 @@ footer {
 }
 
 /* ============================================================
-   INSTAGRAM REELS  (Option B - official embeds)
-   Frame, heading and spacing follow the site theme; the embed
-   interior is Instagram-controlled. Colours are theme tokens; the
-   only literals are rgba(0,0,0,...) shadow/scrim, as permitted.
+   LINKEDIN POSTS  (official post embeds - direct iframes)
+   Frame, heading and spacing follow the site theme. The embed
+   interior is LinkedIn-controlled. Colours are theme tokens; the
+   only literal is the rgba(0,0,0,...) hover shadow, as permitted.
 ============================================================ */
-.reels-handle {
+.li-handle {
   color: var(--gold);
   font-weight: 500;
   text-decoration: none;
   transition: color 0.3s ease;
 }
-.reels-handle:hover { color: var(--gold2); }
+.li-handle:hover { color: var(--gold2); }
 
-.reels-grid {
+.li-grid {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -5958,143 +5958,55 @@ footer {
   align-items: start;
 }
 
-/* .reel-card is only the hover-target wrapper: it never moves, so hovering can
-   never flicker. The visual card and the lift live on .reel-inner. */
-.reel-card {
+.li-card {
   position: relative;
-  list-style: none;
-}
-
-.reel-inner {
-  position: relative;
-  display: block;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r2);
   overflow: hidden;
-  /* reserve vertical space so the embeds don't shift the page as they render */
-  min-height: 600px;
-  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-              border-color 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+  /* No transform on hover: the card wraps a LinkedIn iframe, and moving it
+     would flicker :hover against the iframe. A motion-free border + glow
+     hover changes no geometry, so it is smooth. */
+  transition: border-color 0.5s cubic-bezier(0.19, 1, 0.22, 1),
               box-shadow 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
-/* Lift the inner on hover. Because the hovered box (.reel-card) stays put, the
-   pointer never leaves it: the premium lift returns with zero shaking. */
-.reel-card:hover .reel-inner {
-  transform: translateY(-8px);
+.li-card:hover {
   border-color: var(--gold-border);
   box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
 }
-
-/* Loading skeleton: an opaque shimmer cover + a gold spinner sit over each card
-   until its Instagram iframe actually renders, so the raw fallback link never
-   flashes as a "broken link". Both vanish the instant .is-loaded is added. */
-.reel-card:not(.is-loaded) .reel-inner::before {
-  content: '';
-  position: absolute; inset: 0; z-index: 3;
-  background-color: var(--surface);
-  background-image: linear-gradient(100deg, transparent 30%, rgba(201,168,76,0.07) 50%, transparent 70%);
-  background-size: 220% 100%;
-  animation: reelShimmer 1.5s ease-in-out infinite;
-}
-@keyframes reelShimmer {
-  0%   { background-position: 150% 0; }
-  100% { background-position: -150% 0; }
-}
-.reel-card:not(.is-loaded) .reel-inner::after {
-  content: '';
-  position: absolute; top: 50%; left: 50%; z-index: 4;
-  width: 34px; height: 34px; margin: -17px 0 0 -17px;
-  border: 2px solid var(--gold-border);
-  border-top-color: var(--gold);
-  border-radius: 50%;
-  animation: reelSpin 0.8s linear infinite;
-}
-@keyframes reelSpin { to { transform: rotate(360deg); } }
-
-/* If an embed stalls (never renders), stop the loader and reveal its working
-   fallback link, centred, instead of spinning forever. */
-.reel-card.reel-stalled .reel-inner::before { animation: none; }
-.reel-card.reel-stalled .reel-inner::after { display: none; }
-.reel-card.reel-stalled .instagram-media {
-  position: absolute; inset: 0; z-index: 4;
-  display: flex; align-items: center; justify-content: center; text-align: center; padding: 28px;
+.li-embed {
+  display: block;
+  width: 100%;
+  height: 640px;
+  border: 0;
+  border-radius: var(--r2);
+  background: var(--surface);
 }
 
-/* Make Instagram's markup fill the themed card instead of enforcing its own
-   min-width / margins / white card (which would overflow the grid cells). */
-.reel-card .instagram-media {
-  min-width: 0 !important;
-  width: 100% !important;
-  margin: 0 !important;
-  border: 0 !important;
-  border-radius: var(--r2) !important;
-  box-shadow: none !important;
-  background: var(--surface) !important;
-}
-/* Instagram's no-JS fallback link. It sits beneath the loading skeleton, so it
-   only becomes visible if the embed stalls (see .reel-stalled above). */
-.reel-card .instagram-media a {
-  color: var(--gold2);
-  text-decoration: none;
-  font-family: 'Syne', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
+.li-cta { margin-top: 44px; text-align: center; }
 
-.reels-cta { margin-top: 44px; text-align: center; }
-
-/* Focus ring matches the style introduced across the site (social.css). */
-.reels-handle:focus-visible,
-.reels-follow:focus-visible,
-.reel-card a:focus-visible {
+.li-handle:focus-visible,
+.li-follow:focus-visible {
   outline: 2px solid var(--gold2);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-/* --- Tablet: 2-up (site breakpoint 1024) --- */
+/* Tablet: 2-up (site breakpoint 1024) */
 @media (max-width: 1024px) {
-  .reels-grid {
+  .li-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
-    max-width: 760px;
+    max-width: 860px;
     margin: 0 auto;
   }
 }
-
-/* --- Mobile: horizontal scroll-snap carousel that bleeds past the 32px
-   section gutter so the next card peeks (site breakpoint 768) --- */
-@media (max-width: 768px) {
-  .reels-grid {
-    display: flex;
-    grid-template-columns: none;
-    max-width: none;
-    gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin-left: -32px;
-    margin-right: -32px;
-    padding: 6px 32px 20px;
-    scroll-padding-left: 32px;
-  }
-  .reels-grid::-webkit-scrollbar { display: none; }
-  .reel-card {
-    scroll-snap-align: start;
-    flex: 0 0 78%;
-    max-width: 340px;
-  }
-  .reel-inner { min-height: 540px; }
-}
-@media (max-width: 480px) {
-  .reel-card { flex-basis: 84%; }
+/* Mobile: single column, near-native embed width */
+@media (max-width: 720px) {
+  .li-grid { grid-template-columns: 1fr; max-width: 500px; }
+  .li-embed { height: 700px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reel-inner { transition: none; }
-  .reel-card:hover .reel-inner { transform: none; }
-  .reel-card:not(.is-loaded) .reel-inner::before,
-  .reel-card:not(.is-loaded) .reel-inner::after { animation: none; }
+  .li-card { transition: none; }
 }
