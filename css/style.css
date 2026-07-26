@@ -5960,15 +5960,6 @@ footer {
 
 .li-card {
   position: relative;
-  /* Crop window. LinkedIn paints a caption band on top and an author/name band
-     at the bottom, both INSIDE its cross-origin iframe (unreachable by our CSS
-     or JS). We hide them by sizing the card to the media band only and pulling
-     the iframe up, so both text bands fall outside this overflow:hidden window.
-     If a cut looks slightly off on the live post, nudge these three values. */
-  --li-h: 440px;        /* full height at which the compact embed renders */
-  --li-top: 42px;       /* caption band clipped off the top */
-  --li-bottom: 74px;    /* author/name band clipped off the bottom */
-  height: calc(var(--li-h) - var(--li-top) - var(--li-bottom));
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r2);
@@ -5984,13 +5975,11 @@ footer {
   box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
 }
 .li-embed {
-  position: absolute;
-  left: 0;
-  top: calc(var(--li-top) * -1);
   display: block;
   width: 100%;
-  height: var(--li-h);
+  height: 440px;
   border: 0;
+  border-radius: var(--r2);
   background: var(--surface);
 }
 
@@ -6003,7 +5992,7 @@ footer {
   border-radius: 4px;
 }
 
-/* Tablet: 2-up (site breakpoint 1024). Wider columns -> taller media. */
+/* Tablet: 2-up (site breakpoint 1024) */
 @media (max-width: 1024px) {
   .li-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -6011,12 +6000,11 @@ footer {
     max-width: 860px;
     margin: 0 auto;
   }
-  .li-card { --li-h: 455px; }
 }
-/* Mobile: single column, near-native embed width -> tallest media. */
+/* Mobile: single column, near-native embed width */
 @media (max-width: 720px) {
   .li-grid { grid-template-columns: 1fr; max-width: 500px; }
-  .li-card { --li-h: 470px; }
+  .li-embed { height: 440px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
